@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Api", "FootballNeighborhood.Api\FootballNeighborhood.Api.csproj", "{5A9EA502-7520-4549-845C-79450CCF7287}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Logic", "FootballNeighborhood.Logic\FootballNeighborhood.Logic.csproj", "{4FB85151-F4DE-4CAD-957B-39BBF080ADF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Domain", "FootballNeighborhood.Domain\FootballNeighborhood.Domain.csproj", "{21CF77DF-0DCB-475C-A85C-3F410F435EAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Infrastructure", "FootballNeighborhood.Infrastructure\FootballNeighborhood.Infrastructure.csproj", "{E4A47199-01CF-4471-B311-B1B3D94FA16E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Services", "FootballNeighborhood.Services\FootballNeighborhood.Services.csproj", "{D69C546E-93A5-4880-8003-8DEFA7A638C9}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FootballNeighborhood.Frontend", "FootballNeighborhood.Frontend\", "{9475D371-8A7F-4046-9B27-F6E0894D0D10}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50262"
+		Debug.AspNetCompiler.PhysicalPath = "FootballNeighborhood.Frontend\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50262\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50262"
+		Release.AspNetCompiler.PhysicalPath = "FootballNeighborhood.Frontend\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50262\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50262"
+		SlnRelativePath = "FootballNeighborhood.Frontend\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A9EA502-7520-4549-845C-79450CCF7287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A9EA502-7520-4549-845C-79450CCF7287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A9EA502-7520-4549-845C-79450CCF7287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A9EA502-7520-4549-845C-79450CCF7287}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FB85151-F4DE-4CAD-957B-39BBF080ADF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB85151-F4DE-4CAD-957B-39BBF080ADF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB85151-F4DE-4CAD-957B-39BBF080ADF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB85151-F4DE-4CAD-957B-39BBF080ADF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21CF77DF-0DCB-475C-A85C-3F410F435EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21CF77DF-0DCB-475C-A85C-3F410F435EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21CF77DF-0DCB-475C-A85C-3F410F435EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21CF77DF-0DCB-475C-A85C-3F410F435EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4A47199-01CF-4471-B311-B1B3D94FA16E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4A47199-01CF-4471-B311-B1B3D94FA16E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4A47199-01CF-4471-B311-B1B3D94FA16E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4A47199-01CF-4471-B311-B1B3D94FA16E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D69C546E-93A5-4880-8003-8DEFA7A638C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D69C546E-93A5-4880-8003-8DEFA7A638C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D69C546E-93A5-4880-8003-8DEFA7A638C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D69C546E-93A5-4880-8003-8DEFA7A638C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9475D371-8A7F-4046-9B27-F6E0894D0D10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9475D371-8A7F-4046-9B27-F6E0894D0D10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9475D371-8A7F-4046-9B27-F6E0894D0D10}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9475D371-8A7F-4046-9B27-F6E0894D0D10}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3E6C075-F4C8-4445-9312-CB00B836177D}
+	EndGlobalSection
+EndGlobal
