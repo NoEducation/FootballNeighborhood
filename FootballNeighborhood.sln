@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Api", "FootballNeighborhood.Api\FootballNeighborhood.Api.csproj", "{5A9EA502-7520-4549-845C-79450CCF7287}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballNeighborhood.Api", "FootballNeighborhood.Api\FootballNeighborhood.Api.csproj", "{5A9EA502-7520-4549-845C-79450CCF7287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Logic", "FootballNeighborhood.Logic\FootballNeighborhood.Logic.csproj", "{4FB85151-F4DE-4CAD-957B-39BBF080ADF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballNeighborhood.Logic", "FootballNeighborhood.Logic\FootballNeighborhood.Logic.csproj", "{4FB85151-F4DE-4CAD-957B-39BBF080ADF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Domain", "FootballNeighborhood.Domain\FootballNeighborhood.Domain.csproj", "{21CF77DF-0DCB-475C-A85C-3F410F435EAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballNeighborhood.Domain", "FootballNeighborhood.Domain\FootballNeighborhood.Domain.csproj", "{21CF77DF-0DCB-475C-A85C-3F410F435EAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Infrastructure", "FootballNeighborhood.Infrastructure\FootballNeighborhood.Infrastructure.csproj", "{E4A47199-01CF-4471-B311-B1B3D94FA16E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballNeighborhood.Infrastructure", "FootballNeighborhood.Infrastructure\FootballNeighborhood.Infrastructure.csproj", "{E4A47199-01CF-4471-B311-B1B3D94FA16E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Services", "FootballNeighborhood.Services\FootballNeighborhood.Services.csproj", "{D69C546E-93A5-4880-8003-8DEFA7A638C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballNeighborhood.Services", "FootballNeighborhood.Services\FootballNeighborhood.Services.csproj", "{D69C546E-93A5-4880-8003-8DEFA7A638C9}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FootballNeighborhood.Frontend", "FootballNeighborhood.Frontend\", "{9475D371-8A7F-4046-9B27-F6E0894D0D10}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -33,6 +33,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FootballNeighborhood.Fronte
 		VWDPort = "50262"
 		SlnRelativePath = "FootballNeighborhood.Frontend\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.DbMigrator", "FootballNeighborhood.DbMigrator\FootballNeighborhood.DbMigrator.csproj", "{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,10 @@ Global
 		{9475D371-8A7F-4046-9B27-F6E0894D0D10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9475D371-8A7F-4046-9B27-F6E0894D0D10}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{9475D371-8A7F-4046-9B27-F6E0894D0D10}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
