@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FootballNeighborhood.Domain\FootballNeighborhood.Domain.csproj" />
+    <ProjectReference Include="..\FootballNeighborhood.Infrastructure\FootballNeighborhood.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

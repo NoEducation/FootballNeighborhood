@@ -1,4 +1,5 @@
 ﻿using FootballNeighborhood.Domain.Entities.Common;
+using FootballNeighborhood.Domain.Entities.Matches;
 using FootballNeighborhood.Domain.Entities.Roles;
 using FootballNeighborhood.Domain.Enums.Users;
 
@@ -19,4 +20,5 @@ public class User : EntityWithAdditionalUserInfo
     public Gender Gender { get; set; }
     public string? Description { get; set; }
     public virtual Role? Role { get; set; }
+    public virtual ICollection<Match>? Matches { get; set; }
 }

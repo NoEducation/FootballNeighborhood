@@ -28,4 +28,6 @@ public class Match : EntityWithAdditionalUserInfo
     public bool ShowPhoneNumber { get; set; }
 
     public virtual User? Owner { get; set; }
+
+    public virtual ICollection<MatchPlayer>? MatchPlayers { get; set; }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -8,7 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FootballNeighborhood.Domain\FootballNeighborhood.Domain.csproj" />
+    <ProjectReference Include="..\FootballNeighborhood.Infrastructure\FootballNeighborhood.Infrastructure.csproj" />
+    <ProjectReference Include="..\FootballNeighborhood.Logic\FootballNeighborhood.Logic.csproj" />
+    <ProjectReference Include="..\FootballNeighborhood.Services\FootballNeighborhood.Services.csproj" />
   </ItemGroup>
 
 </Project>
