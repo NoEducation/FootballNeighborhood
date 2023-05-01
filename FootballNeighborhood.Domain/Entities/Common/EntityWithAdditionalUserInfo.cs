@@ -1,19 +1,23 @@
 ﻿namespace FootballNeighborhood.Domain.Entities.Common;
 
-public abstract class EntityWithAdditionalUserInfo : Entity<int>
+public abstract class EntityWithAdditionalUserInfo : EntityWithAdditionalUserInfo<int>
+{
+}
+
+public abstract class EntityWithAdditionalUserInfo<T> : Entity<T>
 {
     public int? AddedByUserId { get; private set; }
     public DateTimeOffset AddedDate { get; private set; }
     public int? ModifiedByUserId { get; private set; }
     public DateTimeOffset? ModifiedDate { get; private set; }
 
-    protected void SetModificationInfo(int modifiedByUserId, DateTimeOffset? modificationDateTime = null)
+    public void SetModificationInfo(int modifiedByUserId, DateTimeOffset? modificationDateTime = null)
     {
         ModifiedByUserId = modifiedByUserId;
         ModifiedDate = modificationDateTime ?? DateTimeOffset.Now;
     }
 
-    protected void SetAdditionInfo(int? addedByUserId = null, DateTimeOffset? addedDate = null)
+    public void SetAdditionInfo(int? addedByUserId = null, DateTimeOffset? addedDate = null)
     {
         AddedByUserId = addedByUserId;
         AddedDate = addedDate ?? DateTimeOffset.Now;

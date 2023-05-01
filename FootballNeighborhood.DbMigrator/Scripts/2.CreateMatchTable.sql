@@ -5,14 +5,14 @@ CREATE TABLE [Match](
 	[IsFinished] BIT NOT NULL,
 	[StartTime] DATETIMEOFFSET(7),
 	[City] NVARCHAR(256) NOT NULL,
-	[AdressLine1] NVARCHAR(256) NOT NULL,
+	AddressLine NVARCHAR(256) NOT NULL,
 	[AllowedPlayers] SMALLINT NOT NULL,
 	[MinPlayers] SMALLINT NULL,
 	[ShowEmailAdress] BIT NOT NULL,
 	[ShowPhoneNumber] BIT NOT NULL,
     AddedDate DATETIMEOFFSET(7) NOT NULL,
 	AddedByUserId INT NULL,
-	ModifedDate DATETIMEOFFSET(7) NULL,
+	ModifiedDate DATETIMEOFFSET(7) NULL,
 	ModifiedByUserId INT NULL,
 
 	CONSTRAINT UQ_MatchName UNIQUE([Name]),
@@ -27,6 +27,7 @@ CREATE TABLE [Match](
 
 CREATE TABLE MatchPlayer(
 	Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	MatchId INT NOT NULL,
 	UserId INT NOT NULL,
 	PlayerType SMALLINT NOT NULL,
 	AddedDate DATETIMEOFFSET(7) NOT NULL,
@@ -34,6 +35,8 @@ CREATE TABLE MatchPlayer(
 	ModifedDate DATETIMEOFFSET(7) NULL,
 	ModifiedByUserId INT NULL,
 
+	CONSTRAINT FK_Match_MatchPlayer FOREIGN KEY(MatchId) 
+		REFERENCES [Match](Id),
 	CONSTRAINT FK_User_MatchPlayer FOREIGN KEY(UserId) 
 		REFERENCES [User](Id),
 	CONSTRAINT FK_User_MatchPlayer_AddedByUserId FOREIGN KEY(AddedByUserId) 
