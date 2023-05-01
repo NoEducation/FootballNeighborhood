@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
@@ -14,6 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FootballNeighborhood.Domain\FootballNeighborhood.Domain.csproj" />
+    <ProjectReference Include="..\FootballNeighborhood.Logic\FootballNeighborhood.Logic.csproj" />
+    <ProjectReference Include="..\FootballNeighborhood.Services\FootballNeighborhood.Services.csproj" />
   </ItemGroup>
 
 </Project>

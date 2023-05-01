@@ -1,20 +1,15 @@
-using FootballNeighborhood.Infrastructure.Contexts;
+using FootballNeighborhood.Infrastructure.Dependency;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddScoped(x => new Context(builder.Configuration
-    .GetConnectionString("DefaultConnection") ?? throw new ArgumentException("Connection string not provided !")));
+builder.Services.AddContext(builder.Configuration);
+builder.Services.AddCqrs();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
