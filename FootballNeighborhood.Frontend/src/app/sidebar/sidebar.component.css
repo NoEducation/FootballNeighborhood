@@ -1,0 +1,39 @@
+.container-size {
+    border-radius: 12px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+@media only screen and (min-height: 925px) {
+    .copyright-style {
+        position: absolute;
+        bottom: 1rem;
+    }
+}
+
+.mat-list-base .mat-list-item {
+    color: #525A6E;
+}
+
+.progress-bar {
+    position: fixed;
+    bottom: 0;
+}
+
+.sidenav-style {
+    width: 20%;
+}
+
+.logo-image-custom {
+    margin-bottom: 9vh;
+}
+
+.other-margin-top {
+    margin-top: 8vh;
+}
+
+.mat-select {
+    width: initial;
+}

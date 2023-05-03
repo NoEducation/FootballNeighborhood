@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>{{'CreateAccount' | translate}}</h1>
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="mt-1">
+    <input matInput class="color-dark-blue" placeholder="{{'Username' | translate}}" formControlName="username"
+      required>
+    <mat-error>
+      {{'UsernameValidation' | translate}}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="password" placeholder="{{'Password' | translate}}" formControlName="password" required>
+    <mat-error>
+      {{'PasswordValidation' | translate}}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="email" placeholder="{{'Email' | translate}}" formControlName="emailAddress" required>
+    <mat-error>
+      {{'EmailValidation' | translate}}
+    </mat-error>
+  </mat-form-field>
+  <div mat-dialog-actions class="button-spacing">
+    <button mat-button mat-dialog-close class="background-color-gray" [disabled]="dataLoading"
+      (click)="closeSignUpDialog()">{{'Close' | translate}}</button>
+    <button mat-raised-button [disabled]="dataLoading || !signUpForm.valid" color="primary">{{'SignUp' |
+      translate}}</button>
+  </div>
+</form>

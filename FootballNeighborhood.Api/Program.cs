@@ -1,4 +1,4 @@
-using FootballNeighborhood.Infrastructure.Dependency;
+using FootballNeighborhood.Infrastructure.Dependencies;
 
 var builder = WebApplication.CreateBuilder(args);
 

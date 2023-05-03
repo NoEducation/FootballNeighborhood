@@ -1,0 +1,57 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav class="background-color-light-gray border-0 sidenav-style" mode="side" #sidenav opened
+        position="start">
+        <img src="./assets/images/logo.svg" class="logo-image ml-2 mt-2 logo-image-custom" alt="CaseFlowLogo">
+        <mat-nav-list class="mx-1">
+            <span class="ml-1 color-gray font-size-14 user-select-none">General</span>
+            <mat-list-item *ngFor="let link of generalLinks" [routerLink]="link.path" class="my-1"
+                [routerLinkActive]="['color-router-link-active']" #rla="routerLinkActive">
+                <mat-icon [ngClass]="rla.isActive ? 'material-symbols-round' : 'material-symbols-outlined'">
+                    {{link.icon}}</mat-icon>
+                <span [ngClass]="rla.isActive ? 'font-weight-bold user-select-none': 'user-select-none'">
+                    &nbsp;link.label</span>
+            </mat-list-item>
+        </mat-nav-list>
+        <mat-nav-list class="mx-1 other-margin-top">
+            <hr>
+            <span class="ml-1 color-gray font-size-14 user-select-none">Other</span>
+            <mat-list-item *ngFor="let link of otherLinks" [routerLink]="link.path" class="my-1"
+                [routerLinkActive]="['color-router-link-active']" #rla="routerLinkActive">
+                <mat-icon [ngClass]="rla.isActive ? 'material-symbols-round' : 'material-symbols-outlined'">
+                    {{link.icon}}</mat-icon>
+                <span [ngClass]="rla.isActive ? 'font-weight-bold user-select-none': 'user-select-none'">
+                    &nbsp;{{link.label }}</span>
+            </mat-list-item>
+        </mat-nav-list>
+        <mat-nav-list class="pt-0 mx-1">
+            <mat-list-item (click)="userPreferences.open()">
+                <mat-label class="d-flex w-100 align-items-center"><img src="./assets/images/default_profile_image.svg"
+                        class="profile-image-xsmall" alt="ProfileImage" draggable="false"><span class="ml-05">
+                          <!-- {{loggedInEmployeeDisplayName }} -->
+                        </span></mat-label>
+                <mat-select #userPreferences>
+                    <!-- <mat-option (click)="displayEmployeeWritePage()">
+                        <mat-icon class="material-symbols-outlined">person</mat-icon>
+                        <span class="user-select-none">&nbsp;{{'EditProfile' | translate}}</span>
+                    </mat-option> -->
+                    <!-- <mat-option (click)="switchLanguage()">
+                        <mat-icon class="material-symbols-outlined">translate</mat-icon>
+                        <span class="user-select-none">&nbsp;{{translateService.currentLang | translate}}</span>
+                    </mat-option> -->
+                    <!-- <mat-option (click)="logOut()">
+                        <mat-icon class="material-symbols-outlined">logout</mat-icon>
+                        <span class="user-select-none">&nbsp;{{'LogOut' | translate}}</span>
+                    </mat-option> -->
+                </mat-select>
+            </mat-list-item>
+        </mat-nav-list>
+        <p class="ml-1 copyright-style"><small class="color-gray user-select-none">Copyright © CaseFlow 2023</small>
+        </p>
+    </mat-sidenav>
+    <mat-sidenav-content class="background-color-light-gray">
+        <div class="background-color-white container-size">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- <mat-progress-bar *ngIf="dataLoading" class="progress-bar" mode="indeterminate"></mat-progress-bar> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>

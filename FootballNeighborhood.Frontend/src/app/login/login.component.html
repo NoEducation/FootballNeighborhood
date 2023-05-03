@@ -1,0 +1,84 @@
+<div fxFill fxLayout="column">
+    <div fxLayout="row" fxFlex>
+        <div fxFill fxFlex="30" fxLayoutAlign="center">
+            <div class="w-75 flex-container">
+                <img src="./assets/images/logo.svg" class="logo-image mt-2" alt="CaseFlowLogo" draggable="false">
+                <form *ngIf="!forgotPassword" [formGroup]="loginForm" (ngSubmit)="logIn()" #formDirective="ngForm"
+                    class="mb-auto mt-auto">
+                    <h2 class="mb-4 color-dark-blue letter-spacing-s user-select-none">
+                        <b>{{ 'HiWelcomeBack' | translate }} <span class="wave">👋</span></b>
+                    </h2>
+                    <mat-form-field floatLabel="always" class="my-1">
+                        <input #usernameInput="matInput" matInput class="color-dark-blue"
+                            placeholder="{{ 'Username' | translate }}" formControlName="username" required autofocus>
+                        <mat-error>
+                            {{ 'UsernameIsRequired' | translate }}
+                        </mat-error>
+                        <mat-icon matSuffix class="color-gray material-symbols-outlined"
+                            [color]="usernameInput.errorState ? 'warn' : ''">person</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field floatLabel="always" class="my-1">
+                        <span class="color-indigo forgot-password-style" (click)="showForgotPasswordForm()">
+                            <u>{{ 'ForgotMyPassword' | translate }}</u>
+                        </span>
+                        <input #passwordInput="matInput" matInput type="password"
+                            placeholder="{{ 'Password' | translate }}" formControlName="password" required>
+                        <mat-error>
+                            {{ 'PasswordIsRequired' | translate }}
+                        </mat-error>
+                        <mat-icon matSuffix class="color-gray material-symbols-outlined"
+                            [color]="passwordInput.errorState ? 'warn' : ''">key</mat-icon>
+                    </mat-form-field>
+                    <mat-slide-toggle class="mb-1 color-gray" [checked]="stayLoggedIn"
+                        (change)="toggleLogInSettings($event)">
+                        <small>{{ 'StayLoggedIn' | translate }}</small>
+                    </mat-slide-toggle>
+                    <button type="submit" class="w-100" mat-raised-button [disabled]="dataLoading || !loginForm.valid"
+                        color="primary">
+                        <mat-icon class="material-symbols-outlined">lock</mat-icon>{{ 'Login' | translate }}
+                    </button>
+                </form>
+                <form *ngIf="forgotPassword" [formGroup]="forgotPasswordForm" (ngSubmit)="resetPassword()"
+                    #formDirective="ngForm" class="mb-auto mt-auto">
+                    <div class="mb-4">
+                        <h2 class="color-dark-blue letter-spacing-s user-select-none mb-05">
+                            <b>{{ 'ForgotPassword' | translate }}</b>
+                        </h2>
+                        <small class="color-gray">{{ 'ForgotPasswordDescription' | translate }}</small>
+                    </div>
+                    <mat-form-field floatLabel="always" class="my-1">
+                        <input #emailInput="matInput" type="email" matInput class="color-dark-blue"
+                            placeholder="{{ 'Email' | translate }}" formControlName="email" required autofocus>
+                        <mat-error>
+                            {{ 'EmailIsRequired' | translate }}
+                        </mat-error>
+                        <mat-icon matSuffix class="color-gray material-symbols-outlined"
+                            [color]="emailInput.errorState ? 'warn' : ''">email</mat-icon>
+                    </mat-form-field>
+                    <div class="button-spacing flex-row">
+                        <button type="button" class="w-50 mr-1" mat-raised-button (click)="showLoginForm()">
+                            {{ 'BackToLogIn' | translate }}
+                        </button>
+                        <button type="submit" class="w-50 ml-1" mat-raised-button
+                            [disabled]="dataLoading || !forgotPasswordForm.valid" color="primary">
+                            {{ 'ResetPassword' | translate }}
+                        </button>
+                    </div>
+                </form>
+                <div class="login-footer-style color-gray text-center">
+                    <p>
+                        <span class="mr-1" (click)="utilityService.openSupportPage()">{{ 'Support' | translate }}</span>
+                        <span class="mr-1" (click)="utilityService.openPrivacyPolicyPage()">{{ 'PrivacyPolicy' | translate }}</span>
+                        <mat-icon class="translate-icon" (click)="utilityService.switchLanguage()">translate</mat-icon>
+                    </p>
+                    <p><small class="user-select-none">Copyright © CaseFlow 2023</small></p>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="70" fxLayoutAlign="end none" class="background-color-dark-blue border-radius m-05">
+            <img class="border-radius login-image-style" draggable="false" src="./assets/login/login.svg"
+                draggable="false">
+        </div>
+    </div>
+</div>
+<mat-progress-bar *ngIf="dataLoading" class="progress-bar" mode="indeterminate"></mat-progress-bar>
