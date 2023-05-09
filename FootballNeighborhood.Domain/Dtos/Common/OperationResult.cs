@@ -1,70 +1,81 @@
-﻿namespace FootballNeighborhood.Domain.Dtos.Common
+﻿namespace FootballNeighborhood.Domain.Dtos.Common;
+
+public class OperationResult<T> : OperationResult
 {
-    public class OperationResult<T> : OperationResult
+    public OperationResult(T result)
     {
-        public T? Result { get; set; }
-
-        public OperationResult(T result)
-        {
-            Result = result;
-        }
-
-        public OperationResult() => Result = default;
+        Result = result;
     }
 
-    public class OperationResult
+    public OperationResult()
     {
-        public bool Success => Error is null;
+        Result = default;
+    }
 
-        public OperationError? Error { get; private set; }
+    public T? Result { get; set; }
+}
 
-        public OperationResult()
-        { }
+public class OperationResult
+{
+    public OperationResult()
+    {
+    }
 
-        public OperationResult(string error, string? key = null)
-        {
-            AddError(error, key);
-        }
+    public OperationResult(string error, string? key = null)
+    {
+        AddError(error, key);
+    }
 
-        public OperationResult(OperationError error)
-        {
-            AddError(error);
-        }
+    public OperationResult(OperationError error)
+    {
+        AddError(error);
+    }
 
-        public OperationResult(OperationResult operationResult)
-        {
-            AddErrors(operationResult);
-        }
+    public OperationResult(OperationResult operationResult)
+    {
+        AddErrors(operationResult);
+    }
 
-        public void AddError(string reason, string? key = null)
-        {
-            if(Error is not null)
-                throw new ArgumentException("In OperationResult error is already defined",nameof(reason))
+    public bool Success => Error is null;
 
-            Error = new OperationError(reason, key);
-        }
+    public OperationError? Error { get; private set; }
 
-        public void AddError(OperationError reason)
-        {
-            if (Error is not null)
-                throw new ArgumentException("In OperationResult error is already defined", nameof(reason))
+    public void AddError(string reason, string? key = null)
+    {
+        if (Error is not null)
+            throw new ArgumentException("In OperationResult error is already defined", nameof(reason));
 
-            Error = reason;
-        }
+        Error = new OperationError(reason, key);
+    }
 
-        public void AddErrors(OperationResult operationResult)
-        {
-            if (operationResult.Error is null)
-                throw new ArgumentException("Operation result has not defined error", nameof(operationResult));
+    public void AddError(OperationError reason)
+    {
+        if (Error is not null)
+            throw new ArgumentException("In OperationResult error is already defined", nameof(reason));
 
-            AddError(operationResult.Error);
-        }
+        Error = reason;
+    }
 
-        public static OperationResult Yes() => new OperationResult();
+    public void AddErrors(OperationResult operationResult)
+    {
+        if (operationResult.Error is null)
+            throw new ArgumentException("Operation result has not defined error", nameof(operationResult));
 
-        public static OperationResult No(string error, string? key = null) => new OperationResult(error, key);
+        AddError(operationResult.Error);
+    }
 
-        public static OperationResult No(OperationError error) => new OperationResult(error);
+    public static OperationResult Yes()
+    {
+        return new();
+    }
 
-    };
+    public static OperationResult No(string error, string? key = null)
+    {
+        return new(error, key);
+    }
+
+    public static OperationResult No(OperationError error)
+    {
+        return new(error);
+    }
 }

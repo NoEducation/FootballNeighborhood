@@ -14,10 +14,10 @@ public class User : EntityWithAdditionalUserInfo
     public string? Phone { get; set; }
     public bool IsActive { get; set; }
     public bool IsConfirmed { get; set; }
-    public string Name { get; set; } = default!;
-    public string Surname { get; set; } = default!;
-    public DateTime BirthDate { get; set; }
-    public Gender Gender { get; set; }
+    public string? Name { get; set; }
+    public string? Surname { get; set; }
+    public DateTime? BirthDate { get; set; }
+    public Gender? Gender { get; set; }
     public string? Description { get; set; }
     public virtual Role? Role { get; set; }
     public virtual ICollection<Match>? Matches { get; set; }

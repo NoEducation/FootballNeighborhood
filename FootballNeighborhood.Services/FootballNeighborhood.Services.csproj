@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -8,17 +8,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FootballNeighborhood.Domain\FootballNeighborhood.Domain.csproj" />
+    <ProjectReference Include="..\FootballNeighborhood.Resources\FootballNeighborhood.Resources.csproj" />
   </ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="MediatR" Version="12.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="7.0.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Authentications\" />
 	</ItemGroup>
 
 </Project>

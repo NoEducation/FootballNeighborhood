@@ -34,7 +34,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FootballNeighborhood.Fronte
 		SlnRelativePath = "FootballNeighborhood.Frontend\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.DbMigrator", "FootballNeighborhood.DbMigrator\FootballNeighborhood.DbMigrator.csproj", "{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballNeighborhood.DbMigrator", "FootballNeighborhood.DbMigrator\FootballNeighborhood.DbMigrator.csproj", "{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballNeighborhood.Resources", "FootballNeighborhood.Resources\FootballNeighborhood.Resources.csproj", "{54C7D87A-E415-4197-B44B-90162A728ED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +72,10 @@ Global
 		{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53449F80-EE77-4C29-9BCF-AF71DF6CA4F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54C7D87A-E415-4197-B44B-90162A728ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C7D87A-E415-4197-B44B-90162A728ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C7D87A-E415-4197-B44B-90162A728ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C7D87A-E415-4197-B44B-90162A728ED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

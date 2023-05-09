@@ -7,3 +7,9 @@ public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, Operat
     where TCommand : IRequest<OperationResult>
 {
 }
+
+public interface ICommandHandler<in TCommand, TResult> : IRequestHandler<TCommand, OperationResult<TResult>>
+    where TCommand : IRequest<OperationResult<TResult>>
+    where TResult : SuccessMessage
+{
+}
