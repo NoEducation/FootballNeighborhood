@@ -1,9 +1,11 @@
-﻿using FootballNeighborhood.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using FootballNeighborhood.Domain.Entities.Common;
 using FootballNeighborhood.Domain.Entities.Permissions;
 using FootballNeighborhood.Domain.Entities.Users;
 
 namespace FootballNeighborhood.Domain.Entities.Roles;
 
+[Table("Role")]
 public class Role : Entity<int>
 {
     public string Name { get; set; } = default!;

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
+import { AuthenticationService } from 'src/app/sevices/authentication/authentication.service';
+import { RegisterUserRequest } from '../models/register-user-request.model';
+import { Roles } from 'src/app/models/common/roles.enum';
+import { NotificationService } from 'src/app/sevices/communication/notification.service';
+import { NotificationType } from 'src/app/models/common/notification-type.constraint';
 
 @Component({
   selector: 'app-sign-up-dialog',
@@ -12,12 +15,12 @@ import { UserService } from '../../services/user.service';
 export class SignUpDialogComponent implements OnInit {
   signUpForm: FormGroup;
   dataLoading = false;
-  newUser: User;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private readonly formBuilder: FormBuilder,
+    private readonly authenticationService: AuthenticationService,
+    private readonly notificationService: NotificationService,
     public signUpDialogReference: MatDialogRef<SignUpDialogComponent>,
-    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -33,13 +36,17 @@ export class SignUpDialogComponent implements OnInit {
       try {
         this.dataLoading = true;
         this.signUpForm.disable();
-        this.newUser = {
-          Username: this.signUpForm.get('username').value,
-          Password: this.signUpForm.get('password').value,
-          EmailAddress: this.signUpForm.get('emailAddress').value
-        };
-        this.userService.createAccount(this.newUser).subscribe({
-          next: () => {
+
+        const request : RegisterUserRequest = {
+          password : this.signUpForm.get('password')?.value,
+          login: this.signUpForm.get('username')?.value,
+          email: this.signUpForm.get('emailAddress')?.value,
+          role: Roles.Player
+        }
+
+        this.authenticationService.register(request).subscribe({
+          next: (reponse) => {
+            this.notificationService.displayNotification(reponse.result.message, NotificationType.SUCCESS);
             this.dataFetched();
           },
           error: () => {

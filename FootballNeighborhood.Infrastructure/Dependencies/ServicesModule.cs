@@ -9,6 +9,8 @@ public static class ServicesModule
     {
         services.AddScoped<IPasswordHasherService, PasswordHasherService>();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<ILoginService, LoginService>();
+
 
         return services;
     }

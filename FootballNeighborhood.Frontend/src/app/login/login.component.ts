@@ -4,11 +4,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Router } from '@angular/router';
 import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component';
+import { AuthenticationService } from '../sevices/authentication/authentication.service';
+import { NotificationService } from '../sevices/communication/notification.service';
+import { UserCredentials } from './models/user-credentials.model';
+import { NotificationType } from '../models/common/notification-type.constraint';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   @ViewChild('formDirective') private formDirective: NgForm;
@@ -24,8 +28,6 @@ export class LoginComponent implements OnInit {
     private notificationService: NotificationService,
     private dialog: MatDialog,
     private router: Router,
-    private employeeService: EmployeeService,
-    public utilityService: UtilityService
   ) { }
 
    ngOnInit(): void {
@@ -43,16 +45,21 @@ export class LoginComponent implements OnInit {
       try {
         this.dataLoading = true;
         this.loginForm.disable();
-        const username = this.loginForm.get('username').value;
-        const password = this.loginForm.get('password').value;
-        this.authenticationService.authenticate(username, password).subscribe(
+
+        const reqest : UserCredentials = {
+          login : this.loginForm.get('username')?.value,
+          password: this.loginForm.get('password')?.value
+        }
+
+        this.authenticationService.login(reqest).subscribe(
         {
-          next:  (result) => {
-            sessionStorage.setItem('token', result.Result.Token);
-            sessionStorage.setItem('roles', JSON.stringify(result.Result.Roles));
-            this.loadLoggedInEmployeeData(result.Result.UserName);
+          next: (response) => {
+            sessionStorage.setItem('token', response.result.token);
+            this.router.navigateByUrl('/dashboard');
           },
-          error : () => {
+          error : (error) => {
+            console.log(error);
+            this.notificationService.displayNotification(error, NotificationType.ERROR);
             this.dataFetched(false);
           }
         });
@@ -61,18 +68,6 @@ export class LoginComponent implements OnInit {
         this.dataFetched(false);
       }
     }
-  }
-
-  loadLoggedInEmployeeData(username: string) {
-    this.employeeService.getEmployees().subscribe((data) => {
-      this.utilityService.transformEmployeeData(data.Result.Employees);
-      const loggedInEmployee = data.Result.Employees.find(e => e.Username == username);
-      sessionStorage.setItem('loggedInEmployeeDisplayName', loggedInEmployee.DisplayName);
-      sessionStorage.setItem('loggedInEmployeeId', loggedInEmployee.EmployeeId.toString());
-
-      this.dataLoading = false;
-      this.router.navigateByUrl('/dashboard');
-    });
   }
 
   resetPassword(): void {

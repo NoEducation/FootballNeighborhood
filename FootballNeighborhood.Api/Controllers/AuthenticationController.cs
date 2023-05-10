@@ -19,10 +19,14 @@ public class AuthenticationController : BaseController
 
     [AllowAnonymous]
     [HttpPost("Login")]
-    public Task<OperationResult<UserLoggedDto>> Login([FromBody] UserCredentialsDto credentials,
+    public async Task<OperationResult<UserLoggedDto>> Login([FromBody] UserCredentialsDto credentials,
         CancellationToken cancellationToken)
     {
-        return _loginService.Login(credentials, cancellationToken);
+        var result = await _loginService.Login(credentials, cancellationToken);
+
+        if (!result.Success) Response.StatusCode = StatusCodes.Status401Unauthorized;
+
+        return result;
     }
 
     [AllowAnonymous]

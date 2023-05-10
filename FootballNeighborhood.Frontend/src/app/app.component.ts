@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,11 @@ export class AppComponent {
     '/privacy-policy'
   ];
 
-
-  constructor(public router: Router) {
-    const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-    // translateService.setDefaultLang(selectedLanguage);
-    // translateService.use(selectedLanguage);
+  constructor(public router: Router,
+    private readonly translateService: TranslateService) {
+    const selectedLanguage = localStorage.getItem('selectedLanguage') || 'pl';
+    translateService.setDefaultLang(selectedLanguage);
+    translateService.use(selectedLanguage);
    }
 
   checkUrlContainsRouteOutOfLayout(): boolean {

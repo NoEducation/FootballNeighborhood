@@ -1,15 +1,13 @@
-.forgot-password-style {
-    position: absolute;
-    bottom: -1.1rem;
-    right: -1.5rem;
+.forgot-password-span {
+
     font-size: 12px;
-    font-weight: 600;
-    z-index: 1;
+    font-weight: 400;
 }
 
-.forgot-password-style:hover {
-    color: #41C8ED !important;
+.forgot-password-span:hover {
+    color: #7b1fa2 !important;
     cursor: pointer !important;
+    font-weight: 500;
 }
 
 input::-ms-reveal,
@@ -23,20 +21,6 @@ input::-ms-clear {
     user-select: none !important;
     -webkit-user-select: none !important;
     /* iOS Safari */
-}
-
-.logo {
-    max-width: 8rem;
-}
-
-mat-card {
-    max-width: 400px;
-    margin: 19em auto;
-    text-align: center;
-}
-
-mat-form-field {
-    display: block;
 }
 
 .progress-bar {

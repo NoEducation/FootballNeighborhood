@@ -27,7 +27,7 @@ public class Dispatcher : IDispatcher
         return result;
     }
 
-    public async Task<OperationResult<SuccessMessage>> SendAsync<TResult>(ICommand<SuccessMessage> command,
+    public async Task<OperationResult<SuccessMessage>> SendAsync(ICommand<SuccessMessage> command,
         CancellationToken token = default)
     {
         var result = await _mediator.Send(command, token);
@@ -35,7 +35,7 @@ public class Dispatcher : IDispatcher
         return result;
     }
 
-    public async Task<OperationResult<SuccessMessageAndObjectId>> SendAsync<TResult>(
+    public async Task<OperationResult<SuccessMessageAndObjectId>> SendAsync(
         ICommand<SuccessMessageAndObjectId> command, CancellationToken token = default)
     {
         var result = await _mediator.Send(command, token);

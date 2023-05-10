@@ -1,30 +1,37 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
+import { RegisterUserRequest } from 'src/app/login/models/register-user-request.model';
+import { UserCredentials } from 'src/app/login/models/user-credentials.model';
+import { UserLogged } from 'src/app/login/models/user-logged.model';
+import { OperationResult } from 'src/app/models/infrastructure/operation-result.model';
+import { SuccessMessageAndObjectId } from 'src/app/models/infrastructure/success-message-and-object-id.model';
 import { environment } from 'src/environments/environment';
 
-
-const helper = new JwtHelperService();
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  authenticationLink = environment.apiUrl + 'authentication/';
+  authenticationLink = environment.apiUrl + 'Authentication/';
 
-  constructor(private http: HttpClient) { }
+  readonly helper : JwtHelperService;
 
-  authenticate(username: string, password: string): Observable<OperationResult<UserAuthenticated>> {
-    const authenticationData = JSON.stringify({ username, password, isappuser: true });
-    return this.http.post<OperationResult<UserAuthenticated>>(this.authenticationLink + 'authenticate/', authenticationData);
+  constructor(private http: HttpClient) {
+    this.helper = new JwtHelperService();
+  }
+
+  login(userCredentials: UserCredentials): Observable<OperationResult<UserLogged>> {
+    return this.http.post<OperationResult<UserLogged>>(this.authenticationLink + 'Login', userCredentials);
+  }
+
+  register(registerUserRequest: RegisterUserRequest) : Observable<OperationResult<SuccessMessageAndObjectId>>{
+    return this.http.post<OperationResult<SuccessMessageAndObjectId>>(this.authenticationLink + 'Register', registerUserRequest);
   }
 
   isAuthenticated(): boolean {
     const token = sessionStorage.getItem('token');
-    return !helper.isTokenExpired(token);
-  }
-
-  getAppConfiguration(): Observable<object> {
-    return this.http.get(this.authenticationLink + 'getConfiguration/');
+    return !this.helper.isTokenExpired(token);
   }
 }

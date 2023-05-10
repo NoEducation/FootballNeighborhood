@@ -1,10 +1,12 @@
-﻿using FootballNeighborhood.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using FootballNeighborhood.Domain.Entities.Common;
 using FootballNeighborhood.Domain.Entities.Matches;
 using FootballNeighborhood.Domain.Entities.Roles;
 using FootballNeighborhood.Domain.Enums.Users;
 
 namespace FootballNeighborhood.Domain.Entities.Users;
 
+[Table("User")]
 public class User : EntityWithAdditionalUserInfo
 {
     public string Login { get; set; } = default!;

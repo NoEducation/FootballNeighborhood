@@ -1,8 +1,10 @@
-﻿using FootballNeighborhood.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using FootballNeighborhood.Domain.Entities.Common;
 using FootballNeighborhood.Domain.Entities.Permissions;
 
 namespace FootballNeighborhood.Domain.Entities.Roles;
 
+[Table("RolePermission")]
 public class RolePermission : Entity<int>
 {
     public int RoleId { get; set; }
