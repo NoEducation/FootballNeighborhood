@@ -10,7 +10,7 @@ import { NotificationType } from 'src/app/models/common/notification-type.constr
 @Component({
   selector: 'app-sign-up-dialog',
   templateUrl: './sign-up-dialog.component.html',
-  styleUrls: ['../login.component.css']
+  styleUrls: ['../login.component.scss']
 })
 export class SignUpDialogComponent implements OnInit {
   signUpForm: FormGroup;

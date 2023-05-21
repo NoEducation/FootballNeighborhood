@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
           },
           error : (error) => {
             console.log(error);
-            this.notificationService.displayNotification(error, NotificationType.ERROR);
+            this.notificationService.displayNotification(error, NotificationType.SUCCESS);
             this.dataFetched(false);
           }
         });

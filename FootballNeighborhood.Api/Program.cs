@@ -1,4 +1,5 @@
 using System.Text;
+using FootballNeighborhood.Domain.Options;
 using FootballNeighborhood.Infrastructure.Dependencies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -47,7 +48,7 @@ app.Run();
 
 void AddAuthentication()
 {
-    var tokenKey = builder.Configuration.GetSection("Token")
+    var tokenKey = builder.Configuration.GetSection(TokenOptions.Key)
         .GetValue<string>("Secrete");
 
     var key = Encoding.ASCII.GetBytes(tokenKey ??

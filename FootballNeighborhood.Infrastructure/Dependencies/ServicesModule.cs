@@ -1,4 +1,5 @@
 ﻿using FootballNeighborhood.Services.Authentications;
+using FootballNeighborhood.Services.UserContext;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FootballNeighborhood.Infrastructure.Dependencies;
@@ -10,7 +11,7 @@ public static class ServicesModule
         services.AddScoped<IPasswordHasherService, PasswordHasherService>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<ILoginService, LoginService>();
-
+        services.AddScoped<IUserContext, UserContext>();
 
         return services;
     }

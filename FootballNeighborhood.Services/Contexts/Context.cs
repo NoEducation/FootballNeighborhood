@@ -1,4 +1,5 @@
 ﻿using FootballNeighborhood.Domain.Entities.Matches;
+using FootballNeighborhood.Domain.Entities.Permissions;
 using FootballNeighborhood.Domain.Entities.Roles;
 using FootballNeighborhood.Domain.Entities.Users;
 using FootballNeighborhood.Domain.EntityTypeConfigurations.Roles;
@@ -16,7 +17,7 @@ public class Context : DbContext
     {
         if (inMemoryDatabase == false && string.IsNullOrWhiteSpace(connectionString))
             throw new ArgumentNullException(nameof(connectionString),
-                "Error initializing context: connection string is empty !");
+                @"Error initializing context: connection string is empty !");
 
         _connectionString = connectionString;
         _inMemoryDatabase = inMemoryDatabase;
@@ -24,8 +25,9 @@ public class Context : DbContext
 
     public DbSet<User> Users { get; protected set; }
     public DbSet<Role> Roles { get; protected set; }
-    public DbSet<Role> Matches { get; protected set; }
+    public DbSet<Match> Matches { get; protected set; }
     public DbSet<MatchPlayer> MatchPlayers { get; protected set; }
+    public DbSet<Permission> Permissions { get; protected set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

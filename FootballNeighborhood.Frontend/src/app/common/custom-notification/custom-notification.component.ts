@@ -10,6 +10,8 @@ import {MatSnackBarRef, MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
 export class CustomNotificationComponent {
   snackBarRef = inject(MatSnackBarRef);
 
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
+    debugger;
+  }
 
 }

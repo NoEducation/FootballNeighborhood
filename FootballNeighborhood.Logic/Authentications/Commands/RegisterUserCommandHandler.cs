@@ -5,7 +5,7 @@ using FootballNeighborhood.Resources;
 using FootballNeighborhood.Services.Authentications;
 using FootballNeighborhood.Services.Contexts;
 
-namespace FootballNeighborhood.Logic.Authentications;
+namespace FootballNeighborhood.Logic.Authentications.Commands;
 
 public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, SuccessMessageAndObjectId>
 {

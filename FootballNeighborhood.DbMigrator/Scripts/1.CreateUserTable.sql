@@ -1,7 +1,9 @@
 CREATE TABLE Permission(
 	Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	[Name] NVARCHAR(256) NOT NULL,
-	[Description] NVARCHAR(1024) NULL
+	[Description] NVARCHAR(1024) NULL,
+
+	CONSTRAINT UQ_Permission_Name UNIQUE ([Name])
 );
 
 CREATE TABLE [Role](
@@ -41,8 +43,8 @@ CREATE TABLE [User](
 	ModifiedDate DATETIMEOFFSET(7) NULL,
 	ModifiedByUserId INT NULL,
 
-	CONSTRAINT UQ_UserLogin UNIQUE(Login),
-	CONSTRAINT UQ_UserEmail UNIQUE(Email),
+	CONSTRAINT UQ_User_Login UNIQUE(Login),
+	CONSTRAINT UQ_User_Email UNIQUE(Email),
 
 	CONSTRAINT FK_Role_User_AddedByUserId FOREIGN KEY(RoleId) 
 		REFERENCES [Role](Id),

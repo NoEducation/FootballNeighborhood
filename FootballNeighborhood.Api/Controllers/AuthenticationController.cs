@@ -1,7 +1,7 @@
 ﻿using FootballNeighborhood.Domain.Dtos.Authentications;
 using FootballNeighborhood.Domain.Dtos.Common;
 using FootballNeighborhood.Infrastructure.Cqrs;
-using FootballNeighborhood.Logic.Authentications;
+using FootballNeighborhood.Logic.Authentications.Commands;
 using FootballNeighborhood.Services.Authentications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

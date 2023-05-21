@@ -2,7 +2,7 @@
 using FootballNeighborhood.Domain.Enums.Roles;
 using FootballNeighborhood.Infrastructure.Cqrs;
 
-namespace FootballNeighborhood.Logic.Authentications;
+namespace FootballNeighborhood.Logic.Authentications.Commands;
 
 public record RegisterUserCommand : ICommand<SuccessMessageAndObjectId>
 {

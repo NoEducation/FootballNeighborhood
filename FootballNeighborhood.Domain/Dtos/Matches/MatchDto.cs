@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using FootballNeighborhood.Domain.Entities.Common;
-using FootballNeighborhood.Domain.Entities.Users;
+﻿namespace FootballNeighborhood.Domain.Dtos.Matches;
 
-namespace FootballNeighborhood.Domain.Entities.Matches;
-
-[Table("Match")]
-public class Match : EntityWithAdditionalUserInfo
+public class MatchDto
 {
     public int OwnerId { get; set; }
+
+    public string OwnerDisplayName { get; set; } = default!;
 
     public string Name { get; set; } = default!;
 
@@ -29,7 +26,5 @@ public class Match : EntityWithAdditionalUserInfo
 
     public bool ShowPhoneNumber { get; set; }
 
-    public virtual User? Owner { get; set; }
-
-    public virtual ICollection<MatchPlayer> MatchPlayers { get; set; } = default!;
+    public IEnumerable<MatchPlayerDto>? MatchPlayers { get; set; }
 }

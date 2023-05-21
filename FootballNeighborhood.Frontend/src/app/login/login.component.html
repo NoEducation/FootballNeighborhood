@@ -4,7 +4,7 @@
   <div class="text-center">
     <img src="./assets/images/logo.svg" class="logo-image mt-2" alt="logo" draggable="false">
   </div>
-  <h2 class="color-orange text-center font-weight-bold">Witaj ponownie ! <span class="wave">👋</span></h2>
+  <h2 class="color-green-light text-center font-weight-bold">Witaj ponownie ! <span class="wave">👋</span></h2>
   <form class="d-flex flex-column justify-content-center align-items-center" [formGroup]="loginForm" (ngSubmit)="logIn()" #formDirective="ngForm" >
     <mat-form-field floatLabel="always" class="my-2 w-25">
       <input #usernameInput="matInput" matInput
@@ -21,13 +21,11 @@
       <mat-error>
           {{ 'PasswordIsRequired' | translate }}
       </mat-error>
-      <span class="w-25 mb-2 color-orange forgot-password-span" (click)="resetPassword()">
-        Nie pamiętasz hasła ?
-      </span>
+
       <mat-icon matSuffix
           [color]="usernameInput.errorState ? 'warn' : ''">person</mat-icon>
     </mat-form-field>
-    <strong class="w-25 mb-2 color-orange text-center font-weight-bold forgot" (click)="resetPassword()">
+    <strong class="w-25 mb-2 color-green-light text-center font-weight-bold forgot-password-span" (click)="resetPassword()">
       Nie pamiętasz hasła ?
     </strong>
     <button class="w-25 my-2" type="submit" mat-stroked-button color="accent" [disabled]="dataLoading || !loginForm.valid">
