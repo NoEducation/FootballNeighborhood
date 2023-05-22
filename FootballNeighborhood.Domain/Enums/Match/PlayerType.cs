@@ -2,7 +2,6 @@
 
 public enum PlayerType
 {
-    Owner = 1,
-    Reserve = 2,
-    Playing = 3
+    Playing = 1,
+    Reserve = 2
 }

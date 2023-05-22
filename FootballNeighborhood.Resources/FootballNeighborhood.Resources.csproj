@@ -17,6 +17,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MatchesResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="MatchPlayersResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MatchPlayersResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +32,10 @@
     <EmbeddedResource Update="MatchesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MatchesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MatchPlayersResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MatchPlayersResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

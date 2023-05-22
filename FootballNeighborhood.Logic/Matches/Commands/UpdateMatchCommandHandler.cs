@@ -2,6 +2,7 @@
 using FootballNeighborhood.Domain.Dtos.Common;
 using FootballNeighborhood.Domain.Entities.Matches;
 using FootballNeighborhood.Infrastructure.Cqrs;
+using FootballNeighborhood.Resources;
 using FootballNeighborhood.Services.Contexts;
 using FootballNeighborhood.Services.UserContext;
 
@@ -34,7 +35,7 @@ public class UpdateMatchCommandHandler : ICommandHandler<UpdateMatchCommand, Suc
 
         result.Result = new SuccessMessage
         {
-            Message = ""
+            Message = MatchesResources.MatchHasBeenUpdated
         };
 
         return result;
@@ -43,17 +44,15 @@ public class UpdateMatchCommandHandler : ICommandHandler<UpdateMatchCommand, Suc
     private void SetProperties(UpdateMatchCommand command, Match match)
     {
         match.Name = command.Name;
-        match.Name = command.Name;
-        match.Name = command.Name;
-        match.Name = command.Name;
-        match.Name = command.Name;
-        match.Name = command.Name;
-        match.Name = command.Name;
-        match.Name = command.Name;
-        match.Name = command.Name;
-        match.Name = command.Name;
+        match.StartDateTime = command.StartDateTime;
+        match.EndDateTime = command.EndDateTime;
+        match.City = command.City;
+        match.AddressLine = command.AddressLine;
+        match.AllowedPlayers = command.AllowedPlayers;
+        match.MinPlayers = command.MinPlayers;
+        match.ShowEmailAddress = command.ShowEmailAddress;
+        match.ShowPhoneNumber = command.ShowPhoneNumber;
     }
-
 
     private async Task<OperationResult<SuccessMessage>> Validate(UpdateMatchCommand command)
     {
@@ -63,16 +62,13 @@ public class UpdateMatchCommandHandler : ICommandHandler<UpdateMatchCommand, Suc
 
         if (match is null)
         {
-            result.AddError("");
+            result.AddError(MatchesResources.MatchDoesNotExists_ErrorMessage);
             return result;
         }
 
         if (!await _userContext.UserHasPermission(Permissions.EditAnotherUserMatch)
             || _userContext.CurrentUserId != match.OwnerId)
-        {
-            result.AddError("");
-            return result;
-        }
+            result.AddError(MatchesResources.InsufficientPrivileges_ErrorMessage);
 
         return result;
     }

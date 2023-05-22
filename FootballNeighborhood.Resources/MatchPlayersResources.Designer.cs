@@ -22,14 +22,14 @@ namespace FootballNeighborhood.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class MatchesResources {
+    public class MatchPlayersResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MatchesResources() {
+        internal MatchPlayersResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FootballNeighborhood.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FootballNeighborhood.Resources.MatchesResources", typeof(MatchesResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FootballNeighborhood.Resources.MatchPlayersResources", typeof(MatchPlayersResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,29 @@ namespace FootballNeighborhood.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nie posiadasz praw do edycji tego spotkanie.
+        ///   Looks up a localized string similar to Jesteś już przypisany do tego spotkania..
         /// </summary>
-        public static string InsufficientPrivileges_ErrorMessage {
+        public static string UserAlreadyAssignedToMatch_ErrorMessage {
             get {
-                return ResourceManager.GetString("InsufficientPrivileges_ErrorMessage", resourceCulture);
+                return ResourceManager.GetString("UserAlreadyAssignedToMatch_ErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Spotkanie nie istnieje.
+        ///   Looks up a localized string similar to Zostałeś przypisany do tego spotkania.
         /// </summary>
-        public static string MatchDoesNotExists_ErrorMessage {
+        public static string UserHasBeenAssignedToMatch {
             get {
-                return ResourceManager.GetString("MatchDoesNotExists_ErrorMessage", resourceCulture);
+                return ResourceManager.GetString("UserHasBeenAssignedToMatch", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Spotkanie zostało utworzone.
+        ///   Looks up a localized string similar to Podany użytkownik nie jest przypisany do tego spotkania.
         /// </summary>
-        public static string MatchHasBeenCreated {
+        public static string UserIsNotAssignedToMatch_ErrorMessage {
             get {
-                return ResourceManager.GetString("MatchHasBeenCreated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Spotkanie zostało zaktualizowane.
-        /// </summary>
-        public static string MatchHasBeenUpdated {
-            get {
-                return ResourceManager.GetString("MatchHasBeenUpdated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Użytkownik z rolą zawodnik nie możę tworzyć spotkań.
-        /// </summary>
-        public static string PlayerCannotCreateMaches_ErrorMessage {
-            get {
-                return ResourceManager.GetString("PlayerCannotCreateMaches_ErrorMessage", resourceCulture);
+                return ResourceManager.GetString("UserIsNotAssignedToMatch_ErrorMessage", resourceCulture);
             }
         }
     }

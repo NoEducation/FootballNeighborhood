@@ -97,19 +97,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PlayerCannotCreateMaches_ErrorMessage" xml:space="preserve">
-    <value>Użytkownik z rolą zawodnik nie możę tworzyć spotkań</value>
+  <data name="UserAlreadyAssignedToMatch_ErrorMessage" xml:space="preserve">
+    <value>Jesteś już przypisany do tego spotkania.</value>
   </data>
-  <data name="MatchHasBeenCreated" xml:space="preserve">
-    <value>Spotkanie zostało utworzone</value>
+  <data name="UserIsNotAssignedToMatch_ErrorMessage" xml:space="preserve">
+    <value>Podany użytkownik nie jest przypisany do tego spotkania</value>
   </data>
-  <data name="MatchHasBeenUpdated" xml:space="preserve">
-    <value>Spotkanie zostało zaktualizowane</value>
-  </data>
-  <data name="MatchDoesNotExists_ErrorMessage" xml:space="preserve">
-    <value>Spotkanie nie istnieje</value>
-  </data>
-  <data name="InsufficientPrivileges_ErrorMessage" xml:space="preserve">
-    <value>Nie posiadasz praw do edycji tego spotkanie</value>
+  <data name="UserHasBeenAssignedToMatch" xml:space="preserve">
+    <value>Zostałeś przypisany do tego spotkania</value>
   </data>
 </root>
