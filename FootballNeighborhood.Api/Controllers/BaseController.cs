@@ -38,7 +38,7 @@ public abstract class BaseController : ControllerBase
         return result;
     }
 
-    protected async Task<OperationResult<SuccessMessage>> DispatchAsync<TResult>(ICommand<SuccessMessage> command,
+    protected async Task<OperationResult<SuccessMessage>> DispatchAsync(ICommand<SuccessMessage> command,
         CancellationToken cancellationToken = default)
     {
         var result = await _dispatcher.SendAsync(command, cancellationToken);

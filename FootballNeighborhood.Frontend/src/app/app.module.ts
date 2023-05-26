@@ -43,6 +43,7 @@ import { CustomNotificationComponent } from './common/custom-notification/custom
 import { LoginComponent } from './login/login.component';
 import { SignUpDialogComponent } from './login/sign-up-dialog/sign-up-dialog.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MatchesComponent } from './matches/matches.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -54,7 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomNotificationComponent,
     LoginComponent,
     SignUpDialogComponent,
-  ],
+    MatchesComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,

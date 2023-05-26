@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LoadingService } from '../sevices/communication/loading.service';
+import { LoadingState } from '../sevices/communication/loadingstate.interface';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,65 +12,52 @@ import { Subscription } from 'rxjs';
 export class SidebarComponent implements OnInit, OnDestroy {
   generalLinks: any[];
   otherLinks: any[];
-  // subscription: Subscription;
-  // dataLoading: boolean;
-  // activeDirectoryAuthentication: boolean;
-  // azureActiveDirectoryAuthentication: boolean;
+  subscription: Subscription;
+  dataLoading: boolean;
   // loggedInEmployeeDisplayName: string;
   // loggedInEmployeeId: number;
 
   constructor(
     private router: Router,
-    // private loadingService: LoadingService,
+    private loadingService: LoadingService,
   ) {
     this.generalLinks = [
       {
-        label: 'Dashboard',
-        path: './dashboard',
+        label: 'Spoktania',
+        path: './matches',
         icon: 'dashboard'
-      }, {
-        label: 'Cases',
-        path: './cases',
-        icon: 'work'
-      }, {
-        label: 'Documents',
-        path: './documents',
-        icon: 'description'
-      }, {
-        label: 'Processes',
-        path: './processes',
-        icon: 'account_tree'
-      }, {
-        label: 'Employees',
-        path: './employees',
-        icon: 'group'
+      },
+      {
+        label: 'Wyszukaj spotkanie',
+        path: './find-match',
+        icon: 'dashboard'
+      },
+      {
+        label: 'Inni gracze',
+        path: './players',
+        icon: 'dashboard'
       },
     ];
     this.otherLinks = [
       {
-        label: 'Configuration',
-        path: './configuration',
-        icon: 'settings'
-      }, {
-        label: 'Support',
+        label: 'Profil',
+        path: './matches',
+        icon: 'dashboard'
+      },
+      {
+        label: 'Pomoc',
         path: './logged-in-support',
         icon: 'comment'
       },
     ];
-    // this.activeDirectoryAuthentication = JSON.parse(sessionStorage.getItem('adauth')) === true;
-    // this.azureActiveDirectoryAuthentication = JSON.parse(sessionStorage.getItem('aadauth')) === true;
   }
 
    ngOnInit(): void {
-    // this.subscription = this.loadingService.loadingState.subscribe((state: LoadingState) => {
-    //   this.dataLoading = state.dataLoading;
-    // });
+    this.subscription = this.loadingService.loadingState.subscribe((state: LoadingState) => {
+      this.dataLoading = state.dataLoading;
+    });
     // this.loggedInEmployeeDisplayName = sessionStorage.getItem('loggedInEmployeeDisplayName');
     // this.loggedInEmployeeId = JSON.parse(sessionStorage.getItem('loggedInEmployeeId'));
-  }
-
-  displayEmployeeWritePage(): void {
-    // this.router.navigate(['/employees/employee_write', this.loggedInEmployeeId]);
   }
 
   logOut(): void {
@@ -81,6 +70,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
    ngOnDestroy(): void {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

@@ -2,6 +2,7 @@
 
 public class MatchDto
 {
+    public int MatchId { get; set; }
     public int OwnerId { get; set; }
 
     public string OwnerDisplayName { get; set; } = default!;

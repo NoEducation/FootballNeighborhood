@@ -13,10 +13,6 @@
     }
 }
 
-.mat-list-base .mat-list-item {
-    color: #525A6E;
-}
-
 .progress-bar {
     position: fixed;
     bottom: 0;
@@ -26,14 +22,23 @@
     width: 20%;
 }
 
-.logo-image-custom {
-    margin-bottom: 9vh;
-}
-
-.other-margin-top {
-    margin-top: 8vh;
-}
-
 .mat-select {
     width: initial;
+}
+
+.bottom-nav{
+  margin-top: 50px;
+}
+
+.logo{
+  max-width: 100px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px;
 }

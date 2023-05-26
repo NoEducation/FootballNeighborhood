@@ -67,7 +67,7 @@ public class UpdateMatchCommandHandler : ICommandHandler<UpdateMatchCommand, Suc
         }
 
         if (!await _userContext.UserHasPermission(Permissions.EditAnotherUserMatch)
-            || _userContext.CurrentUserId != match.OwnerId)
+            && _userContext.CurrentUserId != match.OwnerId)
             result.AddError(MatchesResources.InsufficientPrivileges_ErrorMessage);
 
         return result;
