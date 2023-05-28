@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,10 +18,12 @@ export class AppComponent {
   ];
 
   constructor(public router: Router,
-    private readonly translateService: TranslateService) {
+    private readonly translateService: TranslateService,
+    private readonly dateAdapter: DateAdapter<Date>) {
     const selectedLanguage = localStorage.getItem('selectedLanguage') || 'pl';
     translateService.setDefaultLang(selectedLanguage);
     translateService.use(selectedLanguage);
+    dateAdapter.setLocale(selectedLanguage);
    }
 
   checkUrlContainsRouteOutOfLayout(): boolean {

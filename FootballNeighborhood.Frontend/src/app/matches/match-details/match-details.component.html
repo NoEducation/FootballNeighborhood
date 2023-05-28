@@ -1,3 +1,81 @@
-<p>
-  match-details works!
-</p>
+<div class="w-100 d-flex flex-column p-5">
+  <div class="mt-5">
+    <div class="d-flex w-xl-100 justify-content-between">
+      <h3 class="color-green-light">{{title}}</h3>
+      <button (click)="saveChanges()" *ngIf="viewMode != viewModeValues.View" mat-raised-button color="accent"> Zapisz zmiany <mat-icon>save</mat-icon></button>
+      <button (click)="discardChnages()" *ngIf="viewMode == viewModeValues.Edit" mat-raised-button color="accent"> Odrzuć zmiany <mat-icon>save</mat-icon></button>
+    </div>
+    <hr>
+  </div>
+  <div class="d-flex">
+    <div class="w-50 d-flex flex-column font-set" *ngIf="match">
+      <mat-form-field>
+        <mat-label class="font-set">Nazwa</mat-label>
+        <input [(ngModel)]="match.name"  name="matchName" matInput required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="font-set">Miasto</mat-label>
+        <input [(ngModel)]="match.city" name="city" matInput required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="font-set">Dokładny adres</mat-label>
+        <input [(ngModel)]="match.addressLine" name="addressLine" matInput required/>
+      </mat-form-field>
+
+      <div class="d-flex">
+        <div class="w-50 left-datetime-picker">
+          <mat-form-field class="w-100 font-set">
+            <mat-label class="font-set">Data rozpoczęcia</mat-label>
+            <input  matInput [ngxMatDatetimePicker]="startDateTimepicker"
+                [(ngModel)]="match.startDateTime"  [disabled]="false" required>
+            <mat-datepicker-toggle  matSuffix [for]="$any(startDateTimepicker)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #startDateTimepicker [showSpinners]="true" [showSeconds]="false"
+              [stepHour]="1" [stepMinute]="1" [stepSecond]="1" [touchUi]="true"
+              [color]="'primary'" [enableMeridian]="false">
+            </ngx-mat-datetime-picker>
+          </mat-form-field>
+        </div>
+        <div class="w-50">
+          <mat-form-field class="w-100 font-set">
+            <mat-label class="font-set">Data zakończenia</mat-label>
+            <input  matInput [ngxMatDatetimePicker]="endDateTimepicker"
+                [(ngModel)]="match.endDateTime"  [disabled]="false" required>
+            <mat-datepicker-toggle  matSuffix [for]="$any(endDateTimepicker)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #endDateTimepicker [showSpinners]="true" [showSeconds]="false"
+              [stepHour]="1" [stepMinute]="1" [stepSecond]="1" [touchUi]="true"
+              [color]="'primary'" [enableMeridian]="false">
+            </ngx-mat-datetime-picker>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-form-field>
+        <mat-label class="font-set">Maksymalna ilość graczy</mat-label>
+        <input [(ngModel)]="match.allowedPlayers" name="allowedPlayers" type="number" matInput required/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="font-set">Minimalna ilość graczy</mat-label>
+        <input [(ngModel)]="match.minPlayers" name="minPlayers" type="number" matInput required/>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="font-set">Pokaż uczestikom email</mat-label>
+        <mat-select matNativeControl required [(ngModel)]="match.showEmailAddress" name="showEmailAddress">
+          <mat-option [value]="true" selected>Tak</mat-option>
+          <mat-option [value]="false">Nie</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="font-set">Pokaż uczestikom nr telefonu</mat-label>
+        <mat-select matNativeControl required [(ngModel)]="match.showPhoneNumber" name="showPhoneNumber">
+          <mat-option [value]="true" selected>Tak</mat-option>
+          <mat-option [value]="false">Nie</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="w-50 text-center">
+      <img  class="player-image"src="../../../assets/images/football-player-setting-ball.svg" />
+    </div>
+  </div>
+
+</div>

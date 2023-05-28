@@ -38,6 +38,14 @@ public class MatchesController : BaseController
         return await DispatchAsync(new GetUpcomingMatchesQuery(userId), cancellationToken);
     }
 
+    [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.ViewMatches })]
+    [HttpGet("getMatchById")]
+    public async Task<OperationResult<GetMatchByIdQueryResult>> GetMatchById([FromQuery] int matchId,
+        CancellationToken cancellationToken)
+    {
+        return await DispatchAsync(new GetMatchByIdQuery(matchId), cancellationToken);
+    }
+
     [HttpPost("createMatch")]
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.SaveMatch })]
     public async Task<OperationResult<SuccessMessageAndObjectId>> CreateMatch([FromBody] CreateMatchCommand command,
@@ -53,7 +61,6 @@ public class MatchesController : BaseController
     {
         return await DispatchAsync(command, cancellationToken);
     }
-
 
     [HttpPost("removeMatch")]
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.DeleteMatch })]

@@ -36,14 +36,7 @@ public class GetAllMatchesQueryHandler : IQueryHandler<GetAllMatchesQuery, GetAl
                 AddressLine = match.AddressLine,
                 AllowedPlayers = match.AllowedPlayers,
                 ShowEmailAddress = match.ShowEmailAddress,
-                ShowPhoneNumber = match.ShowPhoneNumber,
-                MatchPlayers = match!.MatchPlayers!.Select(matchPlayer => new MatchPlayerDto
-                {
-                    UserId = matchPlayer.UserId,
-                    MatchId = matchPlayer.MatchId,
-                    PlayerType = matchPlayer.PlayerType,
-                    UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
-                })
+                ShowPhoneNumber = match.ShowPhoneNumber
             })
             .ToListAsync(cancellationToken);
 

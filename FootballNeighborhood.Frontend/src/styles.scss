@@ -15,6 +15,11 @@ body {
   font-size: 14px;
 }
 
+.mat-mdc-form-field-input-control.mat-mdc-form-field-input-contro{
+  font-family: 'Kalam' !important;
+  font-size: 14px;
+}
+
 .base-background{
   background-color: $base-background ;
 }
@@ -64,7 +69,9 @@ body {
 .color-error{
   color: #A73636;
 }
-
+.mat-datepicker-toggle, .mat-datepicker-content .mat-calendar-next-button, .mat-datepicker-content .mat-calendar-previous-button {
+  color: #7b1fa2;
+}
 .warning-notification-style {
   color: $warning-color !important;
   background-color: #FFFAF1 !important;

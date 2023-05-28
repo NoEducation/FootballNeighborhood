@@ -8,12 +8,12 @@ export class Match{
     name: string;
     isFinished: boolean;
     startDateTime: Date;
-    EndDateTime: Date;
-    City: string;
-    AddressLine: string;
-    AllowedPlayers: number;
-    MinPlayers: number;
-    ShowEmailAddress: number;
-    ShowPhoneNumber: number;
-    MatchPlayers: Array<MatchPlayer>;
+    endDateTime: Date;
+    city: string;
+    addressLine: string;
+    allowedPlayers: number;
+    minPlayers: number;
+    showEmailAddress: boolean;
+    showPhoneNumber: boolean;
+    matchPlayers: Array<MatchPlayer>;
 }

@@ -6,9 +6,9 @@ import { GetAllMatchesResponse } from "../matches/models/get-all-matches-respons
 import { OperationResult } from "../models/infrastructure/operation-result.model";
 import { GetAvailableMatchesByCityResponse } from "../matches/models/get-available-matches-by-city-response.model";
 import { SuccessMessage } from "../models/infrastructure/success-message.model";
-import { CreateMatchRequest } from "../matches/models/create-match-request.model";
-import { UpdateMatchRequest } from "../matches/models/update-match-request.model";
 import { SuccessMessageAndObjectId } from "../models/infrastructure/success-message-and-object-id.model";
+import { GetMatchByIdResponse } from "../matches/models/get-match-by-id-response.model";
+import { CreateUpdateMatchRequestBase } from "../matches/models/create-update-match-request-base.model";
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +37,15 @@ export class MatchesService{
     return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getUpcomingMatches', { params});
   }
 
-  createMatch(request : CreateMatchRequest) : Observable<OperationResult<SuccessMessageAndObjectId>>{
+  getMatchById(matchId: number) : Observable<OperationResult<GetMatchByIdResponse>>{
+    return this.http.get<OperationResult<GetMatchByIdResponse>>(this.url + 'getMatchById?' + matchId);
+  }
+
+  createMatch(request : CreateUpdateMatchRequestBase) : Observable<OperationResult<SuccessMessageAndObjectId>>{
     return this.http.post<OperationResult<SuccessMessageAndObjectId>>(this.url + 'createMatch', request);
   }
 
-  updateMatch(request : UpdateMatchRequest) : Observable<OperationResult<SuccessMessage>>{
+  updateMatch(request : CreateUpdateMatchRequestBase) : Observable<OperationResult<SuccessMessage>>{
     return this.http.post<OperationResult<SuccessMessage>>(this.url + 'updateMatch', request);
   }
 

@@ -28,6 +28,8 @@ public class GetUpcomingMatchesQueryHandler : IQueryHandler<GetUpcomingMatchesQu
         var matches = await _context.Matches
             .Include(match => match.MatchPlayers)
             .ThenInclude(matchPLayer => matchPLayer.User)
+            .Where(match => match!.MatchPlayers!
+                .Any(matchPlayer => matchPlayer.UserId == userId))
             .Select(match => new MatchDto
             {
                 MatchId = match.Id,
@@ -41,17 +43,8 @@ public class GetUpcomingMatchesQueryHandler : IQueryHandler<GetUpcomingMatchesQu
                 AddressLine = match.AddressLine,
                 AllowedPlayers = match.AllowedPlayers,
                 ShowEmailAddress = match.ShowEmailAddress,
-                ShowPhoneNumber = match.ShowPhoneNumber,
-                MatchPlayers = match!.MatchPlayers!.Select(matchPlayer => new MatchPlayerDto
-                {
-                    UserId = matchPlayer.UserId,
-                    MatchId = matchPlayer.MatchId,
-                    PlayerType = matchPlayer.PlayerType,
-                    UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
-                })
+                ShowPhoneNumber = match.ShowPhoneNumber
             })
-            .Where(match => match!.MatchPlayers!
-                .Any(matchPlayer => matchPlayer.UserId == userId))
             .ToListAsync(cancellationToken);
 
         result.Result = new GetUpcomingMatchesQueryResult

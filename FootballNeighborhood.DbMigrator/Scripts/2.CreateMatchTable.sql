@@ -33,7 +33,7 @@ CREATE TABLE MatchPlayer(
 	PlayerType SMALLINT NOT NULL,
 	AddedDate DATETIMEOFFSET(7) NOT NULL,
 	AddedByUserId INT NULL,
-	ModifedDate DATETIMEOFFSET(7) NULL,
+	ModifiedDate DATETIMEOFFSET(7) NULL,
 	ModifiedByUserId INT NULL,
 
 	CONSTRAINT FK_Match_MatchPlayer FOREIGN KEY(MatchId) 

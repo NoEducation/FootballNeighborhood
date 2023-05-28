@@ -1,4 +1,5 @@
-export abstract class CreateUpdateMatchRequestBase{
+export class CreateUpdateMatchRequestBase{
+  matchId: number;
   name : string;
   startDateTime: Date;
   endDateTime: Date;

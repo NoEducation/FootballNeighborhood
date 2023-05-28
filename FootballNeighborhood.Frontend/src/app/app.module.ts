@@ -14,7 +14,7 @@ import { MAT_DATE_FORMATS, MatNativeDateModule, MatRippleModule } from '@angular
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -47,6 +47,22 @@ import { AuthenticationGuardService } from './sevices/authentication/authenticat
 import { AuthenticationInterceptorService } from './sevices/authentication/authentication.interceptor.service';
 import { CommunicationInterceptorService } from './sevices/communication/communication.interceptor.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MatchDetailsComponent } from './matches/match-details/match-details.component';
+import { NGX_MAT_DATE_FORMATS, NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+
+
+const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
+  parse: {
+    dateInput: "l, LTS"
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD HH:mm',
+    monthYearLabel: "MMM YYYY",
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  }
+};
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -58,7 +74,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomNotificationComponent,
     LoginComponent,
     SignUpDialogComponent,
-    MatchesComponent
+    MatchesComponent,
+    MatchDetailsComponent
    ],
   imports: [
     BrowserModule,
@@ -101,6 +118,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatAutocompleteModule,
     MatFormFieldModule,
     MatRippleModule,
+
+    NgxMatTimepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    NgxMatMomentModule,
+
     RouterModule.forRoot([
       { path: '', component: AppComponent }
     ]),
@@ -136,6 +159,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true
     },
     { provide: MAT_DATE_FORMATS, useValue: MAT_DATE_FORMATS },
+    { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
     MatDatepickerModule,
     MatNativeDateModule
   ],
