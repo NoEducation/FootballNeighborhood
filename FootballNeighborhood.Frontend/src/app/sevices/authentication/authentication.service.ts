@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  authenticationLink = environment.apiUrl + 'Authentication/';
+  authenticationLink = environment.apiUrl + 'authentication/';
 
   readonly helper : JwtHelperService;
 
@@ -23,11 +23,11 @@ export class AuthenticationService {
   }
 
   login(userCredentials: UserCredentials): Observable<OperationResult<UserLogged>> {
-    return this.http.post<OperationResult<UserLogged>>(this.authenticationLink + 'Login', userCredentials);
+    return this.http.post<OperationResult<UserLogged>>(this.authenticationLink + 'login', userCredentials);
   }
 
   register(registerUserRequest: RegisterUserRequest) : Observable<OperationResult<SuccessMessageAndObjectId>>{
-    return this.http.post<OperationResult<SuccessMessageAndObjectId>>(this.authenticationLink + 'Register', registerUserRequest);
+    return this.http.post<OperationResult<SuccessMessageAndObjectId>>(this.authenticationLink + 'register', registerUserRequest);
   }
 
   isAuthenticated(): boolean {

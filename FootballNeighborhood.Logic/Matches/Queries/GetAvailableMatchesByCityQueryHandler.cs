@@ -30,6 +30,7 @@ public class
                             && match.City.Contains(request.City))
             .Select(match => new MatchDto
             {
+                MatchId = match.Id,
                 OwnerId = match.OwnerId,
                 OwnerDisplayName = match!.Owner!.Name + " " + match!.Owner!.Surname,
                 Name = match.Name,

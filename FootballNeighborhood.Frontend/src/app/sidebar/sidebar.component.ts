@@ -25,12 +25,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
       {
         label: 'Spoktania',
         path: './matches',
-        icon: 'dashboard'
+        icon: 'groups'
       },
       {
         label: 'Wyszukaj spotkanie',
         path: './find-match',
-        icon: 'dashboard'
+        icon: 'search'
       },
       {
         label: 'Inni gracze',
@@ -41,7 +41,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.otherLinks = [
       {
         label: 'Profil',
-        path: './matches',
+        path: './profil',
         icon: 'dashboard'
       },
       {

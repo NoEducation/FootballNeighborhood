@@ -3,7 +3,12 @@ using FootballNeighborhood.Infrastructure.Cqrs;
 
 namespace FootballNeighborhood.Logic.Matches.Commands;
 
-public class RemoveMatchCommand : ICommand<SuccessMessage>
+public record RemoveMatchCommand : ICommand<SuccessMessage>
 {
-    public int MatchId { get; set; }
+    public RemoveMatchCommand(int matchId)
+    {
+        MatchId = matchId;
+    }
+
+    public int MatchId { get; }
 }

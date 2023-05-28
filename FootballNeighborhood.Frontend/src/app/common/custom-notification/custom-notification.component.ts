@@ -11,7 +11,5 @@ export class CustomNotificationComponent {
   snackBarRef = inject(MatSnackBarRef);
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
-    debugger;
   }
-
 }

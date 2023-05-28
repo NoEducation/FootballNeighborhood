@@ -55,11 +55,10 @@ export class LoginComponent implements OnInit {
         {
           next: (response) => {
             sessionStorage.setItem('token', response.result.token);
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/matches');
           },
-          error : (error) => {
-            console.log(error);
-            this.notificationService.displayNotification(error, NotificationType.SUCCESS);
+          error : (errorResponse) => {
+            this.notificationService.displayNotification(errorResponse.error.error.error, NotificationType.ERROR);
             this.dataFetched(false);
           }
         });

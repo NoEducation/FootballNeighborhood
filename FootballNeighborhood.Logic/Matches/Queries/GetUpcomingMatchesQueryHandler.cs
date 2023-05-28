@@ -2,23 +2,28 @@
 using FootballNeighborhood.Domain.Dtos.Matches;
 using FootballNeighborhood.Infrastructure.Cqrs;
 using FootballNeighborhood.Services.Contexts;
+using FootballNeighborhood.Services.UserContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace FootballNeighborhood.Logic.Matches.Queries;
 
-public class GetAllMatchesQueryHandler : IQueryHandler<GetAllMatchesQuery, GetAllMatchesQueryResult>
+public class GetUpcomingMatchesQueryHandler : IQueryHandler<GetUpcomingMatchesQuery, GetUpcomingMatchesQueryResult>
 {
     private readonly Context _context;
+    private readonly IUserContext _userContext;
 
-    public GetAllMatchesQueryHandler(Context context)
+    public GetUpcomingMatchesQueryHandler(Context context, IUserContext userContext)
     {
         _context = context;
+        _userContext = userContext;
     }
 
-    public async Task<OperationResult<GetAllMatchesQueryResult>> Handle(GetAllMatchesQuery request,
+    public async Task<OperationResult<GetUpcomingMatchesQueryResult>> Handle(GetUpcomingMatchesQuery request,
         CancellationToken cancellationToken)
     {
-        var result = new OperationResult<GetAllMatchesQueryResult>();
+        var result = new OperationResult<GetUpcomingMatchesQueryResult>();
+
+        var userId = request.UserId ?? _userContext.CurrentUserId;
 
         var matches = await _context.Matches
             .Include(match => match.MatchPlayers)
@@ -45,10 +50,11 @@ public class GetAllMatchesQueryHandler : IQueryHandler<GetAllMatchesQuery, GetAl
                     UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
                 })
             })
+            .Where(match => match!.MatchPlayers!
+                .Any(matchPlayer => matchPlayer.UserId == userId))
             .ToListAsync(cancellationToken);
 
-
-        result.Result = new GetAllMatchesQueryResult
+        result.Result = new GetUpcomingMatchesQueryResult
         {
             Matches = matches
         };

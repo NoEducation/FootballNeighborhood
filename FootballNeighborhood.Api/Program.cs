@@ -1,8 +1,6 @@
-using System.Text;
-using FootballNeighborhood.Domain.Options;
 using FootballNeighborhood.Infrastructure.Dependencies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using FootballNeighborhood.Infrastructure.Extensions;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +14,7 @@ builder.Services.AddCors(options =>
             .AllowAnyOrigin()
     );
 });
+
 builder.Services.AddOptions();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -25,8 +24,7 @@ builder.Services.AddContext(builder.Configuration);
 builder.Services.AddCqrs();
 builder.Services.ConfigureOptions(builder.Configuration);
 builder.Services.AddDomainServices();
-
-AddAuthentication();
+builder.Services.ConfigureAuthentication(builder.Configuration);
 
 var app = builder.Build();
 
@@ -37,56 +35,17 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors("CorsPolicy");
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
-
-void AddAuthentication()
+app.UseStaticFiles(new StaticFileOptions
 {
-    var tokenKey = builder.Configuration.GetSection(TokenOptions.Key)
-        .GetValue<string>("Secrete");
-
-    var key = Encoding.ASCII.GetBytes(tokenKey ??
-                                      throw new ArgumentException("In appsettings secret for token was not provided"));
-
-    builder.Services.AddAuthentication(x =>
+    OnPrepareResponse = context =>
     {
-        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    }).AddJwtBearer("Bearer", options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key),
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-        options.SaveToken = true;
-        options.RequireHttpsMetadata = true;
-        options.Events = new JwtBearerEvents
-        {
-            OnAuthenticationFailed = context =>
-            {
-                if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                    context.Response.Headers.Add("Token-Expired", "true");
-                return Task.CompletedTask;
-            },
-            OnMessageReceived = context =>
-            {
-                var token = context.Request.Query["access_token"];
+        context.Context.Response.Headers[HeaderNames.CacheControl]
+            = app.Configuration["StaticFiles:Headers:Cache-Control"];
+    }
+});
 
-                if (!string.IsNullOrWhiteSpace(token)
-                    && context.Request.Path.StartsWithSegments("/hubs"))
-                    context.Token = token;
-
-                return Task.CompletedTask;
-            }
-        };
-    });
-}
+app.ConfigureCustomExceptionMiddleware();
+app.UseAuthorization();
+app.MapControllers();
+app.Run();

@@ -18,7 +18,7 @@ public class AuthenticationController : BaseController
     }
 
     [AllowAnonymous]
-    [HttpPost("Login")]
+    [HttpPost("login")]
     public async Task<OperationResult<UserLoggedDto>> Login([FromBody] UserCredentialsDto credentials,
         CancellationToken cancellationToken)
     {
@@ -30,7 +30,7 @@ public class AuthenticationController : BaseController
     }
 
     [AllowAnonymous]
-    [HttpPost("Register")]
+    [HttpPost("register")]
     public async Task<OperationResult<SuccessMessageAndObjectId>> Register([FromBody] RegisterUserCommand command,
         CancellationToken cancellationToken)
     {

@@ -15,21 +15,14 @@ public class MatchesController : BaseController
     }
 
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.ViewMatches })]
-    [HttpGet("GetAllMatches")]
+    [HttpGet("getAllMatches")]
     public async Task<OperationResult<GetAllMatchesQueryResult>> GetAllMatches(CancellationToken cancellationToken)
     {
         return await DispatchAsync(new GetAllMatchesQuery(), cancellationToken);
     }
 
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.ViewMatches })]
-    [HttpGet("GetAssignedUpcommigMatches")]
-    public async Task<OperationResult<GetAllMatchesQueryResult>> GetUpcommigMatches(CancellationToken cancellationToken)
-    {
-        return await DispatchAsync(new GetAllMatchesQuery(), cancellationToken);
-    }
-
-    [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.ViewMatches })]
-    [HttpGet("GetAvailableMatchesByCity")]
+    [HttpGet("getAvailableMatchesByCity")]
     public async Task<OperationResult<GetAvailableMatchesByCityQueryResult>> GetAvailableMatchesByCity(
         [FromQuery] string city,
         CancellationToken cancellationToken)
@@ -37,7 +30,15 @@ public class MatchesController : BaseController
         return await DispatchAsync(new GetAvailableMatchesByCityQuery(city), cancellationToken);
     }
 
-    [HttpPost("CreateMatch")]
+    [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.ViewMatches })]
+    [HttpGet("getUpcomingMatches")]
+    public async Task<OperationResult<GetUpcomingMatchesQueryResult>> GetUpcomingMatches(
+        CancellationToken cancellationToken, [FromQuery] int? userId = null)
+    {
+        return await DispatchAsync(new GetUpcomingMatchesQuery(userId), cancellationToken);
+    }
+
+    [HttpPost("createMatch")]
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.SaveMatch })]
     public async Task<OperationResult<SuccessMessageAndObjectId>> CreateMatch([FromBody] CreateMatchCommand command,
         CancellationToken cancellationToken)
@@ -45,11 +46,20 @@ public class MatchesController : BaseController
         return await DispatchAsync(command, cancellationToken);
     }
 
-    [HttpPost("EditMatch")]
+    [HttpPost("editMatch")]
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.SaveMatch })]
     public async Task<OperationResult<SuccessMessage>> EditMatch([FromBody] UpdateMatchCommand command,
         CancellationToken cancellationToken)
     {
         return await DispatchAsync(command, cancellationToken);
+    }
+
+
+    [HttpPost("removeMatch")]
+    [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.DeleteMatch })]
+    public async Task<OperationResult<SuccessMessage>> RemoveMatch([FromBody] int matchId,
+        CancellationToken cancellationToken)
+    {
+        return await DispatchAsync(new RemoveMatchCommand(matchId), cancellationToken);
     }
 }

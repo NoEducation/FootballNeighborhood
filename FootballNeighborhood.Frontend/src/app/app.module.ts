@@ -1,6 +1,6 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -42,8 +42,11 @@ import { AppComponent } from './app.component';
 import { CustomNotificationComponent } from './common/custom-notification/custom-notification.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpDialogComponent } from './login/sign-up-dialog/sign-up-dialog.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatchesComponent } from './matches/matches.component';
+import { AuthenticationGuardService } from './sevices/authentication/authentication-guard.service';
+import { AuthenticationInterceptorService } from './sevices/authentication/authentication.interceptor.service';
+import { CommunicationInterceptorService } from './sevices/communication/communication.interceptor.service';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -117,7 +120,25 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignUpDialogComponent
   ],
   entryComponents: [],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptorService,
+      multi: true
+    },
+    {
+      provide: AuthenticationGuardService,
+      useClass: AuthenticationGuardService
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CommunicationInterceptorService,
+      multi: true
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_DATE_FORMATS },
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

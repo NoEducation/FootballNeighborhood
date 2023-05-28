@@ -1,12 +1,18 @@
-$base-background: #17202A;
+@import url('https://fonts.googleapis.com/css2?family=Kalam');
+@import "variables.scss";
 
 html,
 body {
     height: 100%;
     margin: 0;
-    font-family: Abel, "Helvetica Neue", sans-serif;
+    font-family: 'Kalam';
     font-size: 14px;
     background-color: $base-background ;
+}
+
+.font-set{
+  font-family: 'Kalam';
+  font-size: 14px;
 }
 
 .base-background{
@@ -31,10 +37,6 @@ body {
     background: #28A480 ;
 }
 
-body{
-  background-color: #17202A ;
-}
-
 .color-orange{
   color: #a8602a;
 }
@@ -51,19 +53,31 @@ body{
   color: #7b1fa2;
 }
 
+.color-warning{
+  color: $warning-color;
+}
+
+.color-info{
+  color: #2952CC;
+}
+
+.color-error{
+  color: #A73636;
+}
+
 .warning-notification-style {
-  color: #F2A10D !important;
+  color: $warning-color !important;
   background-color: #FFFAF1 !important;
-  border: 1px solid #F2A10D !important;
+  border: 1px solid $warning-color !important;
 }
 
 .warning-notification-style .mat-simple-snackbar-action {
-  color: #F2A10D !important;
+  color: $warning-color !important;
 }
 
 .error-notification-style {
-  color: #A73636 !important;
-  background-color: #FDF4F4 !important;
+  color: #FDF4F4 !important;
+  background-color: #A73636  !important;
   border: 1px solid #A73636 !important;
 }
 
@@ -110,6 +124,22 @@ body{
 
 .check_circle-notification-style .mat-simple-snackbar-action {
   color: #28A480 !important;
+}
+
+.mat-mdc-snack-bar-container{
+  &.error-notification-style{
+    --mat-mdc-snack-bar-button-color: #FDF4F4;
+    --mdc-snackbar-container-color: #A73636;
+    --mdc-snackbar-supporting-text-color: #FDF4F4;
+  }
+}
+
+.mat-mdc-snack-bar-container{
+  &.warning-notification-style{
+    --mat-mdc-snack-bar-button-color: #FDF4F4;
+    --mdc-snackbar-container-color: $warning-color;
+    --mdc-snackbar-supporting-text-color: #FDF4F4;
+  }
 }
 
 .mat-mdc-snack-bar-container {
