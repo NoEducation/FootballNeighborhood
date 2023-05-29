@@ -26,6 +26,10 @@ export class MatchesComponent implements OnInit {
   }
 
   addNewMatch() : void {
-    this.router.navigateByUrl('matchDetails/0')
+    this.router.navigateByUrl('matches/matchDetails/0');
+  }
+
+  findMatches(): void {
+    this.router.navigateByUrl('find-matches');
   }
 }

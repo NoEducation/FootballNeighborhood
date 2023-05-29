@@ -25,7 +25,7 @@ export class MatchesService{
   }
 
   getAvailableMatchesByCity(city : string) : Observable<OperationResult<GetAvailableMatchesByCityResponse>> {
-    return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getAvailableMatchesByCity?' + city);
+    return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getAvailableMatchesByCity?city=' + city);
   }
 
   getUpcomingMatches(userId : number | any = undefined) : Observable<OperationResult<GetAvailableMatchesByCityResponse>> {
@@ -38,7 +38,7 @@ export class MatchesService{
   }
 
   getMatchById(matchId: number) : Observable<OperationResult<GetMatchByIdResponse>>{
-    return this.http.get<OperationResult<GetMatchByIdResponse>>(this.url + 'getMatchById?' + matchId);
+    return this.http.get<OperationResult<GetMatchByIdResponse>>(this.url + 'getMatchById?matchId=' + matchId);
   }
 
   createMatch(request : CreateUpdateMatchRequestBase) : Observable<OperationResult<SuccessMessageAndObjectId>>{

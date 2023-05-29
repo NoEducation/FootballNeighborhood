@@ -2,6 +2,7 @@
 using FootballNeighborhood.Domain.Dtos.Matches;
 using FootballNeighborhood.Infrastructure.Cqrs;
 using FootballNeighborhood.Services.Contexts;
+using FootballNeighborhood.Services.UserContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace FootballNeighborhood.Logic.Matches.Queries;
@@ -11,10 +12,13 @@ public class
         GetAvailableMatchesByCityQueryResult>
 {
     private readonly Context _context;
+    private readonly IUserContext _userContext;
 
-    public GetAvailableMatchesByCityQueryHandler(Context context)
+    public GetAvailableMatchesByCityQueryHandler(Context context, 
+        IUserContext userContext)
     {
         _context = context;
+        _userContext = userContext;
     }
 
     public async Task<OperationResult<GetAvailableMatchesByCityQueryResult>> Handle(
@@ -23,11 +27,13 @@ public class
         var result = new OperationResult<GetAvailableMatchesByCityQueryResult>();
 
         var matches = await _context.Matches
+            .Include(match => match.Owner)
             .Include(match => match.MatchPlayers)
             .ThenInclude(matchPLayer => matchPLayer.User)
             .Where(match => match.IsFinished == false
-                            && match.EndDateTime < DateTimeOffset.Now
-                            && match.City.Contains(request.City))
+                            && match.MatchPlayers.All(matchPlayer => matchPlayer.UserId != _userContext.CurrentUserId)
+                            && match.EndDateTime > DateTimeOffset.Now
+                            && match.City.ToLower().Contains(request.City.ToLower()))
             .Select(match => new MatchDto
             {
                 MatchId = match.Id,

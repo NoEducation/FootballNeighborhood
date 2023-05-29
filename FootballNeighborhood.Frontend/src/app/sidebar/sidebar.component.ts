@@ -29,7 +29,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       },
       {
         label: 'Wyszukaj spotkanie',
-        path: './find-match',
+        path: './find-matches',
         icon: 'search'
       },
       {

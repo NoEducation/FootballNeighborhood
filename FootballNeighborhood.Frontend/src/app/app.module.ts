@@ -50,6 +50,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
 import { NGX_MAT_DATE_FORMATS, NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+import { FindMatchesComponent } from './find-matches/find-matches.component';
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
@@ -75,7 +76,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     SignUpDialogComponent,
     MatchesComponent,
-    MatchDetailsComponent
+    MatchDetailsComponent,
+      FindMatchesComponent
    ],
   imports: [
     BrowserModule,
@@ -118,7 +120,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatAutocompleteModule,
     MatFormFieldModule,
     MatRippleModule,
-
     NgxMatTimepickerModule,
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,

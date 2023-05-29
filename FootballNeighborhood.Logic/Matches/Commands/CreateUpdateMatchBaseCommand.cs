@@ -1,6 +1,6 @@
 ﻿namespace FootballNeighborhood.Logic.Matches.Commands;
 
-public abstract record CreateUpdateMatchBaseCommand
+public record CreateUpdateMatchBaseCommand
 {
     public string Name { get; protected set; } = string.Empty;
     public DateTimeOffset StartDateTime { get; protected set; }

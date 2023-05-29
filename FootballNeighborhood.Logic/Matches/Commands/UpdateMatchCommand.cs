@@ -5,7 +5,7 @@ namespace FootballNeighborhood.Logic.Matches.Commands;
 
 public record UpdateMatchCommand : CreateUpdateMatchBaseCommand, ICommand<SuccessMessage>
 {
-    protected UpdateMatchCommand(string name, DateTimeOffset startDateTime, DateTimeOffset endDateTime, string city,
+    public UpdateMatchCommand(string name, DateTimeOffset startDateTime, DateTimeOffset endDateTime, string city,
         string addressLine, short allowedPlayers, short minPlayers, bool showEmailAddress, bool showPhoneNumber,
         int matchId)
     {

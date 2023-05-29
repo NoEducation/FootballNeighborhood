@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { MatchesComponent } from './matches/matches.component';
 import { AuthenticationGuardService } from './sevices/authentication/authentication-guard.service';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
+import { FindMatchesComponent } from './find-matches/find-matches.component';
 
 const routes: Routes = [
   {
@@ -12,8 +13,13 @@ const routes: Routes = [
     canActivate: [AuthenticationGuardService]
   },
   {
-    path: 'matchDetails/:id',
+    path: 'matches/matchDetails/:id',
     component: MatchDetailsComponent,
+    canActivate: [AuthenticationGuardService]
+  },
+  {
+    path: 'find-matches',
+    component: FindMatchesComponent,
     canActivate: [AuthenticationGuardService]
   },
   { path: 'login', component: LoginComponent },

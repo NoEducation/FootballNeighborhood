@@ -43,6 +43,10 @@ export class MatchDetailsComponent implements OnInit {
     this.loadMatchDetails();
   }
 
+  back() : void{
+    this.location.back()
+  }
+
   saveChanges() : void {
 
     let request : CreateUpdateMatchRequestBase= {

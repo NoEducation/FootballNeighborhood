@@ -2,8 +2,12 @@
   <div class="mt-5">
     <div class="d-flex w-xl-100 justify-content-between">
       <h3 class="color-green-light">{{title}}</h3>
-      <button (click)="saveChanges()" *ngIf="viewMode != viewModeValues.View" mat-raised-button color="accent"> Zapisz zmiany <mat-icon>save</mat-icon></button>
-      <button (click)="discardChnages()" *ngIf="viewMode == viewModeValues.Edit" mat-raised-button color="accent"> Odrzuć zmiany <mat-icon>save</mat-icon></button>
+      <div>
+        <button (click)="back()" class="action-button" mat-stroked-button color="primary"> Powrót <mat-icon>keyboard_arrow_left</mat-icon></button>
+        <button (click)="saveChanges()" class="action-button" *ngIf="viewMode != viewModeValues.View" mat-raised-button color="primary"> Zapisz zmiany <mat-icon>save</mat-icon></button>
+        <button (click)="discardChnages()" class="action-button" *ngIf="viewMode == viewModeValues.Edit" mat-raised-button color="primary"> Odrzuć zmiany <mat-icon>save</mat-icon></button>
+      </div>
+
     </div>
     <hr>
   </div>
