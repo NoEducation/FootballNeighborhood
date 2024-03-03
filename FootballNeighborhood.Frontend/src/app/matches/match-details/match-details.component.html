@@ -3,14 +3,16 @@
     <div class="d-flex w-xl-100 justify-content-between">
       <h3 class="color-green-light">{{title}}</h3>
       <div>
-        <button (click)="back()" class="action-button" mat-stroked-button color="primary"> Powrót <mat-icon>keyboard_arrow_left</mat-icon></button>
-        <button (click)="saveChanges()" class="action-button" *ngIf="viewMode != viewModeValues.View" mat-raised-button color="primary"> Zapisz zmiany <mat-icon>save</mat-icon></button>
+        <button (click)="back()" class="action-button" *ngIf="viewMode == viewModeValues.View" mat-stroked-button color="primary"> Powrót <mat-icon>keyboard_arrow_left</mat-icon></button>
+        <button (click)="edit()" class="action-button" *ngIf="viewMode == viewModeValues.View" mat-raised-button color="primary"> Edytuj <mat-icon>edit</mat-icon></button>
+        <button (click)="saveChanges()" class="action-button" *ngIf="viewMode != viewModeValues.View" mat-raised-button color="accent"> Zapisz zmiany <mat-icon>save</mat-icon></button>
         <button (click)="assingToMatch()" class="action-button" *ngIf="viewMode != viewModeValues.Add && !alreadyAssigned" mat-raised-button color="primary"> Przypisz do spotkania <mat-icon>unarchive</mat-icon></button>
-        <button (click)="discardChnages()" class="action-button" *ngIf="viewMode == viewModeValues.Edit" mat-raised-button color="primary"> Odrzuć zmiany <mat-icon>save</mat-icon></button>
+        <button (click)="discardChanges()" class="action-button" *ngIf="viewMode == viewModeValues.Edit" mat-raised-button color="primary"> Odrzuć zmiany <mat-icon>save</mat-icon></button>
+        <button (click)="delete()" class="action-button" *ngIf="viewMode != viewModeValues.Add" mat-raised-button color="warn"> Usuń <mat-icon>restore_from_trash</mat-icon></button>
       </div>
 
     </div>
-    <hr>
+    <hr>  
   </div>
   <div class="d-flex">
     <div class="w-50 d-flex flex-column font-set" *ngIf="match">

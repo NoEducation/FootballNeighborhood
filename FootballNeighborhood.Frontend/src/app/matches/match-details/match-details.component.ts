@@ -48,7 +48,7 @@ export class MatchDetailsComponent implements OnInit {
     )
   }
 
-  discardChnages() : void {
+  discardChanges() : void {
     this.loadMatchDetails();
   }
 
@@ -65,6 +65,20 @@ export class MatchDetailsComponent implements OnInit {
       next: (response) => {
         this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
         this.loadMatchDetails();
+      }
+    });
+  }
+
+  edit() : void{
+    // Admin lub super user trzeba dodać !
+    this.viewMode = this.viewModeValues.Edit;
+  }
+
+  delete(): void{
+    this.matchService.removeMatch(this.matchId).subscribe( {
+      next: (response) => {
+        this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
+        this.location.back()
       }
     });
   }
@@ -90,7 +104,7 @@ export class MatchDetailsComponent implements OnInit {
           this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
           this.location.back()
         }
-      })
+      });
     }
     else{
       this.matchService.updateMatch(request).subscribe( {
@@ -98,7 +112,7 @@ export class MatchDetailsComponent implements OnInit {
           this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
           this.location.back()
         }
-      })
+      });
     }
   }
 
