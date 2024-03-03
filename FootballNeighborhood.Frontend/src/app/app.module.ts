@@ -51,6 +51,7 @@ import { MatchDetailsComponent } from './matches/match-details/match-details.com
 import { NGX_MAT_DATE_FORMATS, NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { FindMatchesComponent } from './find-matches/find-matches.component';
+import { GetPlayerTypeNamePipe } from './sevices/pipes/get-player-type-name.pipe';
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
@@ -77,7 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignUpDialogComponent,
     MatchesComponent,
     MatchDetailsComponent,
-      FindMatchesComponent
+    FindMatchesComponent,  
    ],
   imports: [
     BrowserModule,
@@ -124,7 +125,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
     NgxMatMomentModule,
-
+    GetPlayerTypeNamePipe,
     RouterModule.forRoot([
       { path: '', component: AppComponent }
     ]),
@@ -144,6 +145,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignUpDialogComponent
   ],
   entryComponents: [],
+  // declarations: [ 
+  //   CurrConvertPipe
+  // ],
+  // exports: [
+  //   CurrConvertPipe
+  // ]
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

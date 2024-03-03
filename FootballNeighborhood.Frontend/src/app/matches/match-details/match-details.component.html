@@ -5,6 +5,7 @@
       <div>
         <button (click)="back()" class="action-button" mat-stroked-button color="primary"> Powrót <mat-icon>keyboard_arrow_left</mat-icon></button>
         <button (click)="saveChanges()" class="action-button" *ngIf="viewMode != viewModeValues.View" mat-raised-button color="primary"> Zapisz zmiany <mat-icon>save</mat-icon></button>
+        <button (click)="assingToMatch()" class="action-button" *ngIf="viewMode != viewModeValues.Add && !alreadyAssigned" mat-raised-button color="primary"> Przypisz do spotkania <mat-icon>unarchive</mat-icon></button>
         <button (click)="discardChnages()" class="action-button" *ngIf="viewMode == viewModeValues.Edit" mat-raised-button color="primary"> Odrzuć zmiany <mat-icon>save</mat-icon></button>
       </div>
 
@@ -15,37 +16,37 @@
     <div class="w-50 d-flex flex-column font-set" *ngIf="match">
       <mat-form-field>
         <mat-label class="font-set">Nazwa</mat-label>
-        <input [(ngModel)]="match.name"  name="matchName" matInput required>
+        <input [disabled]="viewMode == viewModeValues.View" [(ngModel)]="match.name"  name="matchName" matInput required>
       </mat-form-field>
       <mat-form-field>
         <mat-label class="font-set">Miasto</mat-label>
-        <input [(ngModel)]="match.city" name="city" matInput required>
+        <input [disabled]="viewMode == viewModeValues.View" [(ngModel)]="match.city" name="city" matInput required>
       </mat-form-field>
       <mat-form-field>
         <mat-label class="font-set">Dokładny adres</mat-label>
-        <input [(ngModel)]="match.addressLine" name="addressLine" matInput required/>
+        <input [disabled]="viewMode == viewModeValues.View" [(ngModel)]="match.addressLine" name="addressLine" matInput required/>
       </mat-form-field>
 
       <div class="d-flex">
         <div class="w-50 left-datetime-picker">
           <mat-form-field class="w-100 font-set">
             <mat-label class="font-set">Data rozpoczęcia</mat-label>
-            <input  matInput [ngxMatDatetimePicker]="startDateTimepicker"
+            <input [disabled]="viewMode == viewModeValues.View"  matInput [ngxMatDatetimePicker]="startDateTimepicker"
                 [(ngModel)]="match.startDateTime"  [disabled]="false" required>
-            <mat-datepicker-toggle  matSuffix [for]="$any(startDateTimepicker)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #startDateTimepicker [showSpinners]="true" [showSeconds]="false"
+            <mat-datepicker-toggle [disabled]="viewMode == viewModeValues.View" matSuffix [for]="$any(startDateTimepicker)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker [disabled]="viewMode == viewModeValues.View" #startDateTimepicker [showSpinners]="true" [showSeconds]="false"
               [stepHour]="1" [stepMinute]="1" [stepSecond]="1" [touchUi]="true"
               [color]="'primary'" [enableMeridian]="false">
             </ngx-mat-datetime-picker>
           </mat-form-field>
         </div>
         <div class="w-50">
-          <mat-form-field class="w-100 font-set">
+          <mat-form-field class="w-100 font-set" >
             <mat-label class="font-set">Data zakończenia</mat-label>
-            <input  matInput [ngxMatDatetimePicker]="endDateTimepicker"
+            <input [disabled]="viewMode == viewModeValues.View"  matInput [ngxMatDatetimePicker]="endDateTimepicker"
                 [(ngModel)]="match.endDateTime"  [disabled]="false" required>
-            <mat-datepicker-toggle  matSuffix [for]="$any(endDateTimepicker)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #endDateTimepicker [showSpinners]="true" [showSeconds]="false"
+            <mat-datepicker-toggle [disabled]="viewMode == viewModeValues.View"  matSuffix [for]="$any(endDateTimepicker)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker [disabled]="viewMode == viewModeValues.View" #endDateTimepicker [showSpinners]="true" [showSeconds]="false"
               [stepHour]="1" [stepMinute]="1" [stepSecond]="1" [touchUi]="true"
               [color]="'primary'" [enableMeridian]="false">
             </ngx-mat-datetime-picker>
@@ -54,22 +55,22 @@
       </div>
       <mat-form-field>
         <mat-label class="font-set">Maksymalna ilość graczy</mat-label>
-        <input [(ngModel)]="match.allowedPlayers" name="allowedPlayers" type="number" matInput required/>
+        <input [disabled]="viewMode == viewModeValues.View" [(ngModel)]="match.allowedPlayers" name="allowedPlayers" type="number" matInput required/>
       </mat-form-field>
       <mat-form-field>
         <mat-label class="font-set">Minimalna ilość graczy</mat-label>
-        <input [(ngModel)]="match.minPlayers" name="minPlayers" type="number" matInput required/>
+        <input [disabled]="viewMode == viewModeValues.View" [(ngModel)]="match.minPlayers" name="minPlayers" type="number" matInput required/>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label class="font-set">Pokaż uczestikom email</mat-label>
+      <mat-form-field *ngIf="viewMode !== viewModeValues.View">
+        <mat-label class="font-set">Pokaż uczestnikom email</mat-label>
         <mat-select matNativeControl required [(ngModel)]="match.showEmailAddress" name="showEmailAddress">
           <mat-option [value]="true" selected>Tak</mat-option>
           <mat-option [value]="false">Nie</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field  *ngIf="viewMode !== viewModeValues.View">
         <mat-label class="font-set">Pokaż uczestikom nr telefonu</mat-label>
         <mat-select matNativeControl required [(ngModel)]="match.showPhoneNumber" name="showPhoneNumber">
           <mat-option [value]="true" selected>Tak</mat-option>
@@ -79,6 +80,53 @@
     </div>
     <div class="w-50 text-center">
       <img  class="player-image"src="../../../assets/images/football-player-setting-ball.svg" />
+    </div>
+  </div>
+
+  <div class="d-flex" *ngIf="viewMode != viewModeValues.Add">
+    <div class="w-100 d-flex flex-column">
+      <h3 class="color-green-light">Zawodnicy</h3>
+      <hr>
+      <div>
+        <table mat-table [dataSource]="match.matchPlayers" 
+          class="mat-elevation-z8" 
+          *ngIf="match.matchPlayers && match.matchPlayers.length > 0; else noData">
+          <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef>Numer</th>
+            <td mat-cell *matCellDef="let match;let i = index"> {{i +1}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="userDisplayName">
+            <th mat-header-cell *matHeaderCellDef>Gracz</th>
+            <td mat-cell *matCellDef="let match"> {{match.userDisplayName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="playerType">
+            <th mat-header-cell *matHeaderCellDef>Rodzaj</th>
+            <td mat-cell *matCellDef="let match"> {{match.playerType | getPlayerTypeName}} </td>
+          </ng-container>
+ 
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Akcje</th>
+            <td mat-cell *matCellDef="let match">
+    
+              <!-- <button (click)="details(match.matchId)"
+               mat-raised-button color="primary"> Szczegóły
+                <mat-icon>assignment_turned_in</mat-icon>
+              </button> -->
+    
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <ng-template #noData>
+          <div class="no-data">
+            <h4 class="color-purple mt-2">Aktualnie nie ma żadnych przypisanych zawodników!</h4>
+          </div>
+      </ng-template>
+      </div>
     </div>
   </div>
 

@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using FootballNeighborhood.Domain.Dtos.Authentications;
 using FootballNeighborhood.Domain.Dtos.Common;
+using FootballNeighborhood.Domain.Entities.Users;
 using FootballNeighborhood.Resources;
 using FootballNeighborhood.Services.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -29,11 +30,14 @@ public class LoginService : ILoginService
 
         if (!result.Success) return result;
 
-        var claims = await GetClaims(credentials.Login, cancellationToken);
+        var user = await _context.Users
+          .SingleAsync(user => user.Login == credentials.Login, cancellationToken);
+
+        var claims = GetClaims(user, cancellationToken);
 
         var token = _tokenService.GenerateAccessToken(claims);
 
-        result.Result = new UserLoggedDto(token);
+        result.Result = new UserLoggedDto(token, user.Id);
 
         return result;
     }
@@ -59,12 +63,9 @@ public class LoginService : ILoginService
         return result;
     }
 
-    private async Task<IEnumerable<Claim>> GetClaims(string login, CancellationToken cancellationToken)
+    private IEnumerable<Claim> GetClaims(User user, CancellationToken cancellationToken)
     {
         var result = new List<Claim>();
-
-        var user = await _context.Users
-            .SingleAsync(user => user.Login == login, cancellationToken);
 
         var nameIdentifier = new Claim(ClaimTypes.NameIdentifier, user.Id.ToString());
         result.Add(nameIdentifier);

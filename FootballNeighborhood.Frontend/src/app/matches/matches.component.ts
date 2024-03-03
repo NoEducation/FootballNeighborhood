@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class MatchesComponent implements OnInit {
 
-  readonly displayedColumns: string[] = ['name', 'ownerDisplayName', 'city', 'date','startTime', 'endTime', 'addressLine'];
+  readonly displayedColumns: string[] = ['name', 'ownerDisplayName', 'city', 'date','startTime', 'endTime', 'addressLine', 'actions'];
 
   matches: Array<Match> = [];
 
@@ -31,5 +31,9 @@ export class MatchesComponent implements OnInit {
 
   findMatches(): void {
     this.router.navigateByUrl('find-matches');
+  }
+
+  details(matchId: number) : void{
+    this.router.navigateByUrl(`matches/matchDetails/${matchId}`);
   }
 }

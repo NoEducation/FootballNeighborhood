@@ -11,6 +11,9 @@ public static class OptionsModule
         services.Configure<TokenOptions>(options
             => configuration.GetSection(TokenOptions.Key).Bind(options));
 
+        services.Configure<EmailOptions>(options
+            => configuration.GetSection(EmailOptions.Key).Bind(options));
+
         return services;
     }
 }

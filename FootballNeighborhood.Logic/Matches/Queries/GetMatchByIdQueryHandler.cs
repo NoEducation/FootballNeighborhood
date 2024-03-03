@@ -1,5 +1,6 @@
 ﻿using FootballNeighborhood.Domain.Dtos.Common;
 using FootballNeighborhood.Domain.Dtos.Matches;
+using FootballNeighborhood.Domain.Enums.Match;
 using FootballNeighborhood.Infrastructure.Cqrs;
 using FootballNeighborhood.Resources;
 using FootballNeighborhood.Services.Contexts;
@@ -23,7 +24,8 @@ public class GetMatchByIdQueryHandler : IQueryHandler<GetMatchByIdQuery, GetMatc
 
         var match = await _context.Matches
             .Include(match => match.MatchPlayers)
-            .ThenInclude(matchPLayer => matchPLayer.User)
+                .ThenInclude(matchPLayer => matchPLayer.User)
+            .Include(match => match.Owner)
             .SingleOrDefaultAsync(match => match.Id == request.MatchId, cancellationToken);
 
         if (match is null)
@@ -48,13 +50,16 @@ public class GetMatchByIdQueryHandler : IQueryHandler<GetMatchByIdQuery, GetMatc
                 AllowedPlayers = match.AllowedPlayers,
                 ShowEmailAddress = match.ShowEmailAddress,
                 ShowPhoneNumber = match.ShowPhoneNumber,
-                MatchPlayers = match!.MatchPlayers!.Select(matchPlayer => new MatchPlayerDto
+                MatchPlayers = match!.MatchPlayers?.Any() == true ? match!.MatchPlayers
+                    .OrderBy(player => player.PlayerType == PlayerType.Playing)
+                        .ThenBy(player => player.AddedDate)
+                    .Select(matchPlayer => new MatchPlayerDto
                 {
                     UserId = matchPlayer.UserId,
                     MatchId = matchPlayer.MatchId,
                     PlayerType = matchPlayer.PlayerType,
                     UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
-                })
+                }) : new List<MatchPlayerDto>()
             }
         };
 

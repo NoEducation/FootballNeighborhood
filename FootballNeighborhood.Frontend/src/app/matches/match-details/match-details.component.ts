@@ -7,6 +7,11 @@ import { CreateUpdateMatchRequestBase } from '../models/create-update-match-requ
 import { NotificationService } from 'src/app/sevices/communication/notification.service';
 import { NotificationType } from 'src/app/models/common/notification-type.constraint';
 import { Location } from '@angular/common'
+import { MatchPlayer } from 'src/app/models/matches/match-player.model';
+import { PlayerType } from 'src/app/models/matches/player-type.enum';
+import { MatchPlayersService } from 'src/app/sevices/match-players-service';
+import { AssignToMatchRequest } from '../models/assign-to-match-request.model';
+import { AuthenticationService } from 'src/app/sevices/authentication/authentication.service';
 
 @Component({
   selector: 'app-match-details',
@@ -15,20 +20,24 @@ import { Location } from '@angular/common'
 })
 export class MatchDetailsComponent implements OnInit {
 
-
+  // DODAĆ nowy tryb pogldau owner i user
   viewMode : MatchDetailsViewMode = MatchDetailsViewMode.View;
-
+  
   matchId : number = 0;
   match: Match;
-
   title: string = '';
+  
+  alreadyAssigned = false;
 
+  readonly displayedColumns: string[] = ['number', 'userDisplayName', 'playerType', 'actions'];
   readonly viewModeValues = MatchDetailsViewMode;
 
   constructor(private readonly activatedRoute : ActivatedRoute,
     private readonly matchService: MatchesService,
     private readonly notificationService: NotificationService,
-    private readonly location : Location) { }
+    private readonly authenticationService: AuthenticationService,
+    private readonly location : Location,
+    private readonly matchPlayersService: MatchPlayersService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
@@ -45,6 +54,19 @@ export class MatchDetailsComponent implements OnInit {
 
   back() : void{
     this.location.back()
+  }
+
+  assingToMatch() : void{
+    const request: AssignToMatchRequest = {
+      matchId : this.matchId 
+    }; 
+
+    this.matchPlayersService.assignToMatch(request).subscribe({
+      next: (response) => {
+        this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
+        this.loadMatchDetails();
+      }
+    });
   }
 
   saveChanges() : void {
@@ -94,15 +116,22 @@ export class MatchDetailsComponent implements OnInit {
   private loadMatchDetails() : void {
     this.matchService.getMatchById(this.matchId).subscribe({
       next: (response) =>{
-        this.match = response.result.match;
+        this.mapResponse(response.result.match);
         this.viewMode = MatchDetailsViewMode.View;
         this.setTitle();
       }
-    })
+    });
   }
 
   private setTitle() : void{
     this.title = this.viewMode == MatchDetailsViewMode.Add ? 'Dodawanie spotkania' : this.match.name;
   }
 
+  private mapResponse(match : Match) : void{
+    this.match = match;
+
+    const userId = this.authenticationService.getUserId();
+
+    this.alreadyAssigned = !!this.match.matchPlayers.find(player => player.userId == userId);
+  }
 }

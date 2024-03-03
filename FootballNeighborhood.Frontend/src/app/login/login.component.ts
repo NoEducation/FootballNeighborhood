@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
         {
           next: (response) => {
             sessionStorage.setItem('token', response.result.token);
+            sessionStorage.setItem('userId', response.result.userId.toString());
             this.router.navigateByUrl('/matches');
           },
           error : (errorResponse) => {

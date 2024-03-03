@@ -34,4 +34,12 @@ export class AuthenticationService {
     const token = sessionStorage.getItem('token');
     return !this.helper.isTokenExpired(token);
   }
+
+  getUserId() : number{
+    const userId = sessionStorage.getItem('userId');
+
+    if(!userId) throw new Error('User is not logged');
+
+    return +userId;
+  }
 }

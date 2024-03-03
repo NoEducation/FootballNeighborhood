@@ -22,23 +22,34 @@
       </ng-container>
 
       <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Data </th>
-        <td mat-cell *matCellDef="let match"> {{match.startTime | date:'yyyy-MM-dd'}} </td>
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let match"> {{match.startDateTime | date:'dd-MM-yyyy'}} </td>
       </ng-container>
+
 
       <ng-container matColumnDef="startTime">
         <th mat-header-cell *matHeaderCellDef> Start </th>
-        <td mat-cell *matCellDef="let match"> {{match.startTime | date:'hh-mm'}} </td>
+        <td mat-cell *matCellDef="let match"> {{match.startDateTime | date:'hh:mm'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="endTime">
         <th mat-header-cell *matHeaderCellDef> Koniec </th>
-        <td mat-cell *matCellDef="let match"> {{match.endTime | date:'hh-mm'}} </td>
+        <td mat-cell *matCellDef="let match"> {{match.endDateTime | date:'hh:mm'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="addressLine">
         <th mat-header-cell *matHeaderCellDef> Adres </th>
         <td mat-cell *matCellDef="let match"> {{match.addressLine}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Akcje</th>
+        <td mat-cell *matCellDef="let match">
+          <button (click)="details(match.matchId)"
+          mat-raised-button color="primary"> Szczegóły
+           <mat-icon>assignment_turned_in</mat-icon>
+         </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

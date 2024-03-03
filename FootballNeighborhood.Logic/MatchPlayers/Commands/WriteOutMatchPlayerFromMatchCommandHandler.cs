@@ -29,6 +29,11 @@ public class WriteOutMatchPlayerFromMatchCommandHandler
                                         && matchPlayer.MatchId == request.MatchId, cancellationToken);
 
         _context.MatchPlayers.Remove(matchPlayer);
+
+
+        // TODO.DA tutja spawdz czy nie trzeba przesucnia innego użhtykoniwak z rezwerwy.
+
+
         await _context.SaveChangesAsync(cancellationToken);
 
         return result;
