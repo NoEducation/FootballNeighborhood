@@ -21,8 +21,8 @@ export class AppComponent {
     private readonly translateService: TranslateService,
     private readonly dateAdapter: DateAdapter<Date>) {
     const selectedLanguage = localStorage.getItem('selectedLanguage') || 'pl';
-    translateService.setDefaultLang(selectedLanguage);
-    translateService.use(selectedLanguage);
+    // translateService.setDefaultLang(selectedLanguage);
+    // translateService.use(selectedLanguage);
     dateAdapter.setLocale(selectedLanguage);
    }
 

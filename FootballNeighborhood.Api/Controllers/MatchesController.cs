@@ -54,7 +54,7 @@ public class MatchesController : BaseController
         return await DispatchAsync(command, cancellationToken);
     }
 
-    [HttpPost("editMatch")]
+    [HttpPost("updateMatch")]
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.SaveMatch })]
     public async Task<OperationResult<SuccessMessage>> EditMatch([FromBody] UpdateMatchCommand command,
         CancellationToken cancellationToken)

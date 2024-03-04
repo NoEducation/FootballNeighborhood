@@ -101,8 +101,9 @@ export class MatchDetailsComponent implements OnInit {
     if(this.matchId == 0){
       this.matchService.createMatch(request).subscribe( {
         next: (response) => {
+          this.matchId = response.result.objectId;
           this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
-          this.location.back()
+          this.loadMatchDetails();
         }
       });
     }
@@ -110,8 +111,7 @@ export class MatchDetailsComponent implements OnInit {
       this.matchService.updateMatch(request).subscribe( {
         next: (response) => {
           this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
-          this.location.back()
-        }
+          this.loadMatchDetails()        }
       });
     }
   }
