@@ -70,6 +70,15 @@ namespace FootballNeighborhood.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spotkanie zostało usunięte.
+        /// </summary>
+        public static string MatchDeleted_Message {
+            get {
+                return ResourceManager.GetString("MatchDeleted_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Spotkanie nie istnieje.
         /// </summary>
         public static string MatchDoesNotExists_ErrorMessage {

@@ -112,4 +112,7 @@
   <data name="InsufficientPrivileges_ErrorMessage" xml:space="preserve">
     <value>Nie posiadasz praw do edycji tego spotkanie</value>
   </data>
+  <data name="MatchDeleted_Message" xml:space="preserve">
+    <value>Spotkanie zostało usunięte</value>
+  </data>
 </root>

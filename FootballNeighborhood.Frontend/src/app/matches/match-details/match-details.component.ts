@@ -76,7 +76,7 @@ export class MatchDetailsComponent implements OnInit {
     this.matchService.removeMatch(this.matchId).subscribe( {
       next: (response) => {
         this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
-        this.location.back()
+        this.location.back();
       }
     });
   }
