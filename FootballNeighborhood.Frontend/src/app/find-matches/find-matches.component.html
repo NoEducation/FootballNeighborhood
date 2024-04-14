@@ -32,17 +32,17 @@
 
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> Data </th>
-        <td mat-cell *matCellDef="let match"> {{match.startTime | date:'yyyy-MM-dd'}} </td>
+        <td mat-cell *matCellDef="let match"> {{match.startDateTime | date:'yyyy-MM-dd'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="startTime">
         <th mat-header-cell *matHeaderCellDef> Start </th>
-        <td mat-cell *matCellDef="let match"> {{match.startTime | date:'hh-mm'}} </td>
+        <td mat-cell *matCellDef="let match"> {{match.startDateTime | date:'hh-mm'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="endTime">
         <th mat-header-cell *matHeaderCellDef> Koniec </th>
-        <td mat-cell *matCellDef="let match"> {{match.endTime | date:'hh-mm'}} </td>
+        <td mat-cell *matCellDef="let match"> {{match.endDateTime | date:'hh-mm'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="addressLine">

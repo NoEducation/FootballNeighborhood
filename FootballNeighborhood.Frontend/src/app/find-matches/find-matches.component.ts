@@ -30,14 +30,13 @@ export class FindMatchesComponent implements OnInit {
   }
 
   cityChanged($event: any) : void {
-    debugger;
-
     if(this.city){
       this.loading = true;
       this.matchesService.getAvailableMatchesByCity(this.city).pipe(
         debounceTime(1000)
       ).subscribe({
         next: (response) => {
+          debugger;
           this.availableMatches = response.result.matches;
           this.loading = false;
           this.cityNotification = this.city;
@@ -53,8 +52,6 @@ export class FindMatchesComponent implements OnInit {
 
   }
 
-
-  
   back() : void{
     this.location.back()
   }

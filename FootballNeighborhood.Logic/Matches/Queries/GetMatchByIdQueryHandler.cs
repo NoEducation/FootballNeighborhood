@@ -55,6 +55,7 @@ public class GetMatchByIdQueryHandler : IQueryHandler<GetMatchByIdQuery, GetMatc
                         .ThenBy(player => player.AddedDate)
                     .Select(matchPlayer => new MatchPlayerDto
                 {
+                    MatchPlayerId = matchPlayer.Id,
                     UserId = matchPlayer.UserId,
                     MatchId = matchPlayer.MatchId,
                     PlayerType = matchPlayer.PlayerType,

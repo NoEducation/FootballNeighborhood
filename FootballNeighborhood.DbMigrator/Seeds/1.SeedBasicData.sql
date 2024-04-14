@@ -7,6 +7,7 @@ INSERT INTO [dbo].[Permission]
            ('ViewMatches','View matches'),
            ('DeleteMatch','Remove match'),
            ('AssignToMatch','Assign to match'),
+           ('UnassignFromMatch','Unassign to match'),
            ('SaveUser','Eidt and update user'),
            ('DeleteUser','Delete user'),
            ('ViewUsers','View users');
@@ -41,10 +42,12 @@ INSERT INTO [dbo].[RolePermission]
            (@AdminId ,(SELECT Id FROM Permission WHERE [Name] = 'SaveUser')),
            (@AdminId ,(SELECT Id FROM Permission WHERE [Name] = 'DeleteUser')),
            (@AdminId ,(SELECT Id FROM Permission WHERE [Name] = 'ViewUsers')),
+           (@AdminId ,(SELECT Id FROM Permission WHERE [Name] = 'UnassignFromMatch')),
            (@PlayerId ,(SELECT Id FROM Permission WHERE [Name] = 'ViewMatches')),
            (@PlayerId ,(SELECT Id FROM Permission WHERE [Name] = 'AssignToMatch')),
 		   (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'ViewMatches')),
            (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'AssignToMatch')),
+           (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'UnassignFromMatch')),
 		   (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'SaveMatch'));
 
 

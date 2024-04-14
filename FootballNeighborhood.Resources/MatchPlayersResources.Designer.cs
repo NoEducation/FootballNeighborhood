@@ -86,5 +86,14 @@ namespace FootballNeighborhood.Resources {
                 return ResourceManager.GetString("UserIsNotAssignedToMatch_ErrorMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gracz został usunięty ze spotkania..
+        /// </summary>
+        public static string UserWriteOutFromMatch_Message {
+            get {
+                return ResourceManager.GetString("UserWriteOutFromMatch_Message", resourceCulture);
+            }
+        }
     }
 }

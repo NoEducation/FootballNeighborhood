@@ -106,4 +106,7 @@
   <data name="UserHasBeenAssignedToMatch" xml:space="preserve">
     <value>Zostałeś przypisany do tego spotkania</value>
   </data>
+  <data name="UserWriteOutFromMatch_Message" xml:space="preserve">
+    <value>Gracz został usunięty ze spotkania.</value>
+  </data>
 </root>

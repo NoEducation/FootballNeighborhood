@@ -30,12 +30,15 @@ public class WriteOutMatchPlayerFromMatchCommandHandler
 
         _context.MatchPlayers.Remove(matchPlayer);
 
-
         // TODO.DA tutja spawdz czy nie trzeba przesucnia innego użhtykoniwak z rezwerwy.
-
 
         await _context.SaveChangesAsync(cancellationToken);
 
+        result.Result = new SuccessMessage()
+        {
+            Message = MatchPlayersResources.UserWriteOutFromMatch_Message
+        };
+        
         return result;
     }
 

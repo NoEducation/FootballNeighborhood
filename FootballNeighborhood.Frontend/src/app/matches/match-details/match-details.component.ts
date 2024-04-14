@@ -1,17 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Match } from 'src/app/models/matches/match.model';
-import { MatchesService } from 'src/app/sevices/matches-service';
-import { MatchDetailsViewMode } from '../models/match-details-view-mode.enum';
-import { CreateUpdateMatchRequestBase } from '../models/create-update-match-request-base.model';
-import { NotificationService } from 'src/app/sevices/communication/notification.service';
 import { NotificationType } from 'src/app/models/common/notification-type.constraint';
-import { Location } from '@angular/common'
-import { MatchPlayer } from 'src/app/models/matches/match-player.model';
-import { PlayerType } from 'src/app/models/matches/player-type.enum';
-import { MatchPlayersService } from 'src/app/sevices/match-players-service';
-import { AssignToMatchRequest } from '../models/assign-to-match-request.model';
+import { Match } from 'src/app/models/matches/match.model';
 import { AuthenticationService } from 'src/app/sevices/authentication/authentication.service';
+import { NotificationService } from 'src/app/sevices/communication/notification.service';
+import { MatchPlayersService } from 'src/app/sevices/match-players-service';
+import { MatchesService } from 'src/app/sevices/matches-service';
+import { AssignToMatchRequest } from '../models/assign-to-match-request.model';
+import { CreateUpdateMatchRequestBase } from '../models/create-update-match-request-base.model';
+import { MatchDetailsViewMode } from '../models/match-details-view-mode.enum';
 
 @Component({
   selector: 'app-match-details',
@@ -111,9 +109,27 @@ export class MatchDetailsComponent implements OnInit {
       this.matchService.updateMatch(request).subscribe( {
         next: (response) => {
           this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
-          this.loadMatchDetails()        }
+          this.loadMatchDetails();        
+        }
       });
     }
+  }
+
+  details(userId: number) : void{
+    //TODO.DA navigate to user details
+  }
+
+  removePlayer(userId: number, matchId: number) : void{
+    this.matchPlayersService.unassingFromMatch({
+      matchId: matchId,
+      userId: userId
+    }).subscribe({
+      next: (response) => {
+        debugger;
+        this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
+        this.loadMatchDetails();    
+      }
+    });
   }
 
   private initializate() : void {

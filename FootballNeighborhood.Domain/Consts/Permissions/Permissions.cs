@@ -10,6 +10,7 @@ public class Permissions
         AssignToMatch = "AssignToMatch",
         UnassignFromMatch = "UnassignFromMatch",
 
+        DeleteUser = "DeleteUser",
         SaveUsers = "SaveUsers",
         ViewUsers = "ViewUsers";
 }
