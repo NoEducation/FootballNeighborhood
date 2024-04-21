@@ -105,26 +105,38 @@
 
           <ng-container matColumnDef="playerType">
             <th mat-header-cell *matHeaderCellDef>Status Gracza</th>
-            <td mat-cell *matCellDef="let player"> {{player.playerType | getPlayerTypeName}} </td>
+            <td mat-cell *matCellDef="let player"> 
+              <div class="d-flex algin">
+                <div [ngClass]="{
+                  'box-info-success': player.playerType === playerTypes.Playing,
+                  'box-info-warning': player.playerType === playerTypes.Reserve
+                  }">
+                  {{player.playerType | getPlayerTypeName}} 
+                </div>
+              </div>
+            
+            </td>
           </ng-container>
  
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let player">
     
-              <button 
-                (click)="details(player.userId)"
-                mat-icon-button
-                color="primary"
-                class="mr-2">
-                <mat-icon>open_in_new</mat-icon>
-              </button>
+              <div class="d-flex mb-2 justify-content-end align-items-center">
+                <button 
+                  (click)="details(player.userId)"
+                  mat-icon-button
+                  color="primary"
+                  class="mr-2">
+                  <mat-icon>open_in_new</mat-icon>
+               </button>
 
-              <button (click)="removePlayer(player.userId, player.matchId)"
-                mat-icon-button color="warn">
-                <mat-icon>delete</mat-icon>
-              </button>
-  
+                <button (click)="removePlayer(player.userId, player.matchId)"
+                  mat-icon-button color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+
             </td>
           </ng-container>
     

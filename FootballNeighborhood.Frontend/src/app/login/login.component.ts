@@ -8,6 +8,7 @@ import { AuthenticationService } from '../sevices/authentication/authentication.
 import { NotificationService } from '../sevices/communication/notification.service';
 import { UserCredentials } from './models/user-credentials.model';
 import { NotificationType } from '../models/common/notification-type.constraint';
+import { CurrentUserService } from '../sevices/current-user.service';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private notificationService: NotificationService,
+    private currentUserService: CurrentUserService,
     private dialog: MatDialog,
     private router: Router,
   ) { }
@@ -54,8 +56,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(reqest).subscribe(
         {
           next: (response) => {
-            sessionStorage.setItem('token', response.result.token);
-            sessionStorage.setItem('userId', response.result.userId.toString());
+            this.currentUserService.setCurrentUser(response.result.token, response.result.userId);
             this.router.navigateByUrl('/matches');
           },
           error : (errorResponse) => {

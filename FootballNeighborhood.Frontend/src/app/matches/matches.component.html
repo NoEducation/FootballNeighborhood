@@ -43,12 +43,18 @@
       </ng-container>
 
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Akcje</th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let match">
-          <button (click)="details(match.matchId)"
-          mat-raised-button color="primary"> Szczegóły
-           <mat-icon>assignment_turned_in</mat-icon>
-         </button>
+
+          <div class="d-flex mb-2 justify-content-end align-items-center">
+            <button 
+              (click)="details(match.matchId)"
+              mat-icon-button
+              color="primary"
+              class="mr-2">
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+          </div>
         </td>
       </ng-container>
 

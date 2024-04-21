@@ -31,7 +31,7 @@ public class
             .Include(match => match.MatchPlayers)
             .ThenInclude(matchPLayer => matchPLayer.User)
             .Where(match => match.IsFinished == false
-                            && match.MatchPlayers.All(matchPlayer => matchPlayer.UserId != _userContext.CurrentUserId)
+                            //&& match.MatchPlayers.All(matchPlayer => matchPlayer.UserId != _userContext.CurrentUserId)
                             && match.EndDateTime > DateTimeOffset.Now
                             && match.City.ToLower().Contains(request.City.ToLower()))
             .Select(match => new MatchDto

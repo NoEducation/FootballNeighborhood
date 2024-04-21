@@ -10,6 +10,7 @@ import { MatchesService } from 'src/app/sevices/matches-service';
 import { AssignToMatchRequest } from '../models/assign-to-match-request.model';
 import { CreateUpdateMatchRequestBase } from '../models/create-update-match-request-base.model';
 import { MatchDetailsViewMode } from '../models/match-details-view-mode.enum';
+import { PlayerType } from 'src/app/models/matches/player-type.enum';
 
 @Component({
   selector: 'app-match-details',
@@ -29,6 +30,7 @@ export class MatchDetailsComponent implements OnInit {
 
   readonly displayedColumns: string[] = ['number', 'userDisplayName', 'playerType', 'actions'];
   readonly viewModeValues = MatchDetailsViewMode;
+  readonly playerTypes = PlayerType;
 
   constructor(private readonly activatedRoute : ActivatedRoute,
     private readonly matchService: MatchesService,

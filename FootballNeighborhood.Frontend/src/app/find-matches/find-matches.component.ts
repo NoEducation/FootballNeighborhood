@@ -5,6 +5,9 @@ import { Match } from '../models/matches/match.model';
 import { debounceTime } from 'rxjs';
 import { Location } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UserService } from '../sevices/user.service';
+import { AuthenticationService } from '../sevices/authentication/authentication.service';
+import { CurrentUserService } from '../sevices/current-user.service';
 
 @Component({
   selector: 'app-find-matches',
@@ -24,6 +27,7 @@ export class FindMatchesComponent implements OnInit {
   constructor(private readonly matchesService : MatchesService,
     private readonly router: Router,
     private readonly location: Location,
+    private readonly currentUserService: CurrentUserService
     ) { }
 
   ngOnInit() {
@@ -36,7 +40,6 @@ export class FindMatchesComponent implements OnInit {
         debounceTime(1000)
       ).subscribe({
         next: (response) => {
-          debugger;
           this.availableMatches = response.result.matches;
           this.loading = false;
           this.cityNotification = this.city;
@@ -58,6 +61,17 @@ export class FindMatchesComponent implements OnInit {
 
   details(matchId: number) : void{
     this.router.navigateByUrl(`matches/matchDetails/${matchId}`);
+  }
+
+  checkUserIsAssinged(matchId: number) : boolean {
+    const match = this.availableMatches.find(match => match.matchId == matchId);
+
+    if(match == undefined) return false;
+
+    const userAssigned = match.matchPlayers
+      .find(player => player.userId == this.currentUserService.getCurrentUserId())
+
+    return !!userAssigned;
   }
 
 }
