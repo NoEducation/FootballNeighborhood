@@ -67,7 +67,6 @@ public class AssignToMatchCommandHandler : ICommandHandler<AssignToMatchCommand,
 
         if (userIsAssignedToMatch) result.AddError(MatchPlayersResources.UserAlreadyAssignedToMatch_ErrorMessage);
 
-
         return result;
     }
 }

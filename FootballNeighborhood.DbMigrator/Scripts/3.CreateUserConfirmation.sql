@@ -1,0 +1,18 @@
+CREATE TABLE UserConfirmation(
+	Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	UserId INT NOT NULL,
+	Code NVARCHAR(256) NOT NULL,
+	IsUsed BIT NOT NULL,
+	UsedDate DATETIMEOFFSET(7) NULL,
+	AddedDate DATETIMEOFFSET(7) NOT NULL,
+	AddedByUserId INT NULL,
+	ModifiedDate DATETIMEOFFSET(7) NULL,
+	ModifiedByUserId INT NULL,
+
+	CONSTRAINT FK_User_UserConfirmation FOREIGN KEY(UserId)
+		REFERENCES [User](Id),
+	CONSTRAINT FK_User_User_AddedByUserId FOREIGN KEY(AddedByUserId) 
+		REFERENCES [User](Id),
+	CONSTRAINT FK_User_User_ModifiedByUserId FOREIGN KEY(ModifiedByUserId) 
+		REFERENCES [User](Id),
+);

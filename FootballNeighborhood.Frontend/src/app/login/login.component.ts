@@ -90,8 +90,8 @@ export class LoginComponent implements OnInit {
 
   openSignUpDialog(): void {
     this.dialog.open(SignUpDialogComponent, {
-      height: '24rem',
-      width: '23rem',
+      height: '30rem',
+      width: '40rem',
     });
   }
 

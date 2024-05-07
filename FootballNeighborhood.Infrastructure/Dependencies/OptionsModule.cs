@@ -14,6 +14,12 @@ public static class OptionsModule
         services.Configure<EmailOptions>(options
             => configuration.GetSection(EmailOptions.Key).Bind(options));
 
+        services.Configure<FrontendOptions>(options
+            => configuration.GetSection(FrontendOptions.Key).Bind(options));
+
+        services.Configure<ConfirmationOptions>(options
+            => configuration.GetSection(ConfirmationOptions.Key).Bind(options));
+
         return services;
     }
 }

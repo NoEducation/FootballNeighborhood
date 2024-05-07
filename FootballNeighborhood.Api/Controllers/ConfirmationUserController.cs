@@ -1,18 +1,31 @@
 ﻿using FootballNeighborhood.Domain.Dtos.Common;
 using FootballNeighborhood.Infrastructure.Cqrs;
 using FootballNeighborhood.Logic.ConfirmUsers.Commands;
+using FootballNeighborhood.Logic.ConfirmUsers.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FootballNeighborhood.Api.Controllers;
 
+[AllowAnonymous]
 public class ConfirmationUserController : BaseController
 {
     public ConfirmationUserController(IDispatcher dispatcher) : base(dispatcher)
     {
     }
 
-    [AllowAnonymous]
+    [HttpGet]
+    public async Task<OperationResult<CheckUserHasActiveConfirmationQueryResult>> IsConfirmationActive([FromQuery] int userId)
+    {
+        var result = await DispatchAsync(
+          new CheckUserHasActiveConfirmationQuery()
+          {
+              UserId = userId
+          });
+
+        return result;
+    }
+
     [HttpPost("ConfirmUser")]
     public async Task<OperationResult> ConfirmUser([FromBody] ConfirmUserCommand confirmUserCommand)
     {

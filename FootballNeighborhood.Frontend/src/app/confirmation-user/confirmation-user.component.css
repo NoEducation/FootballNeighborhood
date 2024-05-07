@@ -1,0 +1,21 @@
+.login-image-style {
+    max-height: 98vh;
+    max-width: 70vw;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    /* iOS Safari */
+  }
+  
+  .logo {
+    max-width: 8rem;
+  }
+  
+  mat-card {
+    max-width: 400px;
+    margin: 19em auto;
+    text-align: center;
+  }
+  
+  mat-form-field {
+    display: block;
+  }

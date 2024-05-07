@@ -23,7 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddContext(builder.Configuration);
 builder.Services.AddCqrs();
 builder.Services.ConfigureOptions(builder.Configuration);
-builder.Services.AddDomainServices();
+builder.Services.AddServices();
 builder.Services.ConfigureAuthentication(builder.Configuration);
 
 var app = builder.Build();

@@ -7,19 +7,19 @@
   <h2 class="color-green-light text-center font-weight-bold">Witaj ponownie ! <span class="wave">👋</span></h2>
   <form class="d-flex flex-column justify-content-center align-items-center" [formGroup]="loginForm" (ngSubmit)="logIn()" #formDirective="ngForm" >
     <mat-form-field floatLabel="always" class="my-2 w-25">
-      <input #usernameInput="matInput" matInput
-          placeholder="{{ 'Username' | translate }}" formControlName="username" required autofocus>
+      <input #usernameInput="matInput" matInput  autocomplete="one-time-code"
+          placeholder="Nazwa użytkownika" formControlName="username" required autofocus>
       <mat-error>
-          {{ 'UsernameIsRequired' | translate }}
+        Nazwa użytkownika musi zawierać co najmniej 3 znaki
       </mat-error>
       <mat-icon matSuffix [color]="usernameInput.errorState ? 'warn' : ''">person
       </mat-icon>
     </mat-form-field>
     <mat-form-field floatLabel="always" class="mt-2 w-25">
-      <input #usernameInput="matInput" matInput type="password"
+      <input #usernameInput="matInput" matInput type="password"  autocomplete="one-time-code"
           placeholder="{{ 'Password' | translate }}" formControlName="password" required autofocus>
       <mat-error>
-          {{ 'PasswordIsRequired' | translate }}
+        Hasło jest wymagane
       </mat-error>
 
       <mat-icon matSuffix
@@ -29,11 +29,11 @@
       Nie pamiętasz hasła ?
     </strong>
     <button class="w-25 my-2" type="submit" mat-stroked-button color="accent" [disabled]="dataLoading || !loginForm.valid">
-      <mat-icon mat-icon class="material-symbols-outlined">lock</mat-icon>{{ 'Login' | translate }}
+      <mat-icon mat-icon class="material-symbols-outlined">lock</mat-icon>Zaloguj się
     </button>
 
-    <button class="w-25 my-2 " color="primary"  mat-stroked-button [disabled]="dataLoading">
-        <mat-icon class="material-symbols-outlined">assignment_ind</mat-icon>{{ 'Register' | translate }}
+    <button class="w-25 my-2 " color="primary"  mat-stroked-button [disabled]="dataLoading" (click)="openSignUpDialog()">
+        <mat-icon class="material-symbols-outlined">assignment_ind</mat-icon>Zarejestruj się
     </button>
 
   </form>

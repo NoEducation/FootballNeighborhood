@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Update="UserConfirmationsResource.Designer.cs">
+      <DependentUpon>UserConfirmationsResource.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="EmailsRescource.Designer.cs">
+      <DependentUpon>EmailsRescource.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="AuthenticationsRescource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -25,6 +35,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="UserConfirmationsResource.resx">
+      <LastGenOutput>UserConfirmationsResource.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EmailsRescource.resx">
+      <LastGenOutput>EmailsRescource.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="AuthenticationsRescource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AuthenticationsRescource.Designer.cs</LastGenOutput>

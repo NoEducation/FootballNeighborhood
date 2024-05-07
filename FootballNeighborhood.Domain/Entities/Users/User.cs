@@ -23,4 +23,5 @@ public class User : EntityWithAdditionalUserInfo
     public string? Description { get; set; }
     public virtual Role? Role { get; set; }
     public virtual ICollection<Match>? Matches { get; set; }
+    public virtual ICollection<UserConfirmation>? UserConfirmations { get; set; }
 }
