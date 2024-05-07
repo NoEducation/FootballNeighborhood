@@ -1,28 +1,40 @@
-<h1 mat-dialog-title>{{'CreateAccount' | translate}}</h1>
-<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+<h1 mat-dialog-title>Utwórz konto</h1>
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="d-flex flex-column sign-up-dialog-wrapper">
   <mat-form-field class="mt-1">
-    <input matInput class="color-dark-blue" placeholder="{{'Username' | translate}}" formControlName="username"
+    <input matInput class="color-dark-blue" placeholder="Nazwa użytkownika" 
+      formControlName="username" autocomplete="one-time-code"
       required>
     <mat-error>
-      {{'UsernameValidation' | translate}}
+      Nazwa użytkownika musi zawierać co najmniej 3 znaki
     </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input matInput type="password" placeholder="{{'Password' | translate}}" formControlName="password" required>
+  <mat-form-field class="mt-1">
+    <input matInput type="password" placeholder="Hasło" 
+      formControlName="password" required autocomplete="one-time-code">
     <mat-error>
-      {{'PasswordValidation' | translate}}
+      Hasła muszą być identyczne
     </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input matInput type="email" placeholder="{{'Email' | translate}}" formControlName="emailAddress" required>
+  <mat-form-field class="mt-1">
+    <input matInput type="email" placeholder="Adres email" 
+      formControlName="emailAddress" required autocomplete="one-time-code">
     <mat-error>
-      {{'EmailValidation' | translate}}
+      Proszę podać poprawny adres email
     </mat-error>
   </mat-form-field>
+  <div class="mt-1 mb-1" >
+    <mat-radio-group formControlName="userRole">
+      <mat-radio-button  *ngFor="let userRole of userRoles" [value]="userRole.id">
+        {{userRole.name}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
   <div mat-dialog-actions class="button-spacing">
-    <button mat-button mat-dialog-close class="background-color-gray" [disabled]="dataLoading"
-      (click)="closeSignUpDialog()">{{'Close' | translate}}</button>
-    <button mat-raised-button [disabled]="dataLoading || !signUpForm.valid" color="primary">{{'SignUp' |
-      translate}}</button>
+    <div class="d-flex flex-row-reverse w-100">
+      <button mat-raised-button [disabled]="dataLoading || !signUpForm.valid" 
+        color="primary">Zarejestruj się</button>
+      <button mat-button mat-dialog-close class="mx-1 background-color-gray" [disabled]="dataLoading"
+      (click)="closeSignUpDialog()">Zamknij</button> 
+    </div>
   </div>
 </form>

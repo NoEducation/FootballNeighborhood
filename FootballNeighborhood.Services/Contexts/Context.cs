@@ -28,6 +28,7 @@ public class Context : DbContext
     public DbSet<Match> Matches { get; protected set; }
     public DbSet<MatchPlayer> MatchPlayers { get; protected set; }
     public DbSet<Permission> Permissions { get; protected set; }
+    public DbSet<UserConfirmation> UserConfirmations { get; protected set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

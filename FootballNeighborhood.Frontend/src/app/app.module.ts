@@ -52,6 +52,7 @@ import { NGX_MAT_DATE_FORMATS, NgxMatDateFormats, NgxMatDatetimePickerModule, Ng
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { FindMatchesComponent } from './find-matches/find-matches.component';
 import { GetPlayerTypeNamePipe } from './sevices/pipes/get-player-type-name.pipe';
+import { ConfirmationUserComponent } from './confirmation-user/confirmation-user.component';
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
@@ -79,6 +80,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatchesComponent,
     MatchDetailsComponent,
     FindMatchesComponent,  
+    ConfirmationUserComponent
    ],
   imports: [
     BrowserModule,

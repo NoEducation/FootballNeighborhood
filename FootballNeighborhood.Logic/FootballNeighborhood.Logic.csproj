@@ -18,8 +18,4 @@
     <ProjectReference Include="..\FootballNeighborhood.Services\FootballNeighborhood.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ConfirmUsers\Queries\" />
-  </ItemGroup>
-
 </Project>

@@ -5,6 +5,7 @@ import { MatchesComponent } from './matches/matches.component';
 import { AuthenticationGuardService } from './sevices/authentication/authentication-guard.service';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
 import { FindMatchesComponent } from './find-matches/find-matches.component';
+import { ConfirmationUserComponent } from './confirmation-user/confirmation-user.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     canActivate: [AuthenticationGuardService]
   },
   { path: 'login', component: LoginComponent },
+  { path: 'confirmation-user', component: ConfirmationUserComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];
