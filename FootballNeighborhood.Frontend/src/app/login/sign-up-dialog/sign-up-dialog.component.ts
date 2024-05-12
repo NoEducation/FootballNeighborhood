@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from 'src/app/sevices/authentication/authentication.service';
 import { RegisterUserRequest } from '../models/register-user-request.model';
@@ -40,9 +40,10 @@ export class SignUpDialogComponent implements OnInit {
     this.signUpForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[$@$!%*?&]).{11,}')]],
+      confirmPassword: ['', [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[$@#!%*?&^-`~]).{8,}')]],
       emailAddress: ['', [Validators.required, Validators.email]],
       userRole: [RolesEnum.MatchOrganizer, [Validators.required]],
-    });
+    }, { validators: passwordMatchingValidator });
   }
 
   onSubmit(): void {
@@ -82,4 +83,14 @@ export class SignUpDialogComponent implements OnInit {
   closeSignUpDialog(): void {
     this.signUpDialogReference.close();
   }
+
 }
+
+export const passwordMatchingValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
+
+  password?.value === confirmPassword?.value ? null : confirmPassword!.setErrors({ notmatched: true })
+
+  return null;
+};

@@ -4,6 +4,7 @@ using FootballNeighborhood.Domain.Entities.Roles;
 using FootballNeighborhood.Domain.Entities.Users;
 using FootballNeighborhood.Domain.EntityTypeConfigurations.Roles;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FootballNeighborhood.Services.Contexts;
 
@@ -11,8 +12,6 @@ public class Context : DbContext
 {
     private readonly string _connectionString;
     private readonly bool _inMemoryDatabase;
-
-
     public Context(string connectionString, bool inMemoryDatabase = false)
     {
         if (inMemoryDatabase == false && string.IsNullOrWhiteSpace(connectionString))

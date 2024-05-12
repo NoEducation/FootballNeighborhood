@@ -1,4 +1,4 @@
-CREATE TABLE UserConfirmation(
+CREATE TABLE [UserConfirmation](
 	Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	UserId INT NOT NULL,
 	Code NVARCHAR(256) NOT NULL,
@@ -11,8 +11,8 @@ CREATE TABLE UserConfirmation(
 
 	CONSTRAINT FK_User_UserConfirmation FOREIGN KEY(UserId)
 		REFERENCES [User](Id),
-	CONSTRAINT FK_User_User_AddedByUserId FOREIGN KEY(AddedByUserId) 
+	CONSTRAINT FK_UserConfirmation_User_AddedByUserId FOREIGN KEY(AddedByUserId) 
 		REFERENCES [User](Id),
-	CONSTRAINT FK_User_User_ModifiedByUserId FOREIGN KEY(ModifiedByUserId) 
+	CONSTRAINT FK_UserConfirmation_User_ModifiedByUserId FOREIGN KEY(ModifiedByUserId) 
 		REFERENCES [User](Id),
 );

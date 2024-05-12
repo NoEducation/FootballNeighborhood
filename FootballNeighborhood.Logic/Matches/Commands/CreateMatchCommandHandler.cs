@@ -44,6 +44,7 @@ public class CreateMatchCommandHandler : ICommandHandler<CreateMatchCommand, Suc
             ShowPhoneNumber = request.ShowPhoneNumber
         };
 
+        match.SetAdditionInfo(_userContext.CurrentUserId);
         _context.Matches.Attach(match);
         await _context.SaveChangesAsync(cancellationToken);
 

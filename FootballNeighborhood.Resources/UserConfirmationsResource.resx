@@ -129,4 +129,16 @@
   <data name="EmailAddressSuccessfullyConfirmed" xml:space="preserve">
     <value>Adres email został potwierdzony</value>
   </data>
+  <data name="UserHasActiveConfirmation_ErrorMessage" xml:space="preserve">
+    <value>Użytkownik posiada aktywne potwierdzenie</value>
+  </data>
+  <data name="EmailCannotBeSend_ErrorMessage" xml:space="preserve">
+    <value>Nie udało się wysłać emailu na podanym adres.</value>
+  </data>
+  <data name="UserConfirmationHasBeenSendAgain_SuccessMessage" xml:space="preserve">
+    <value>Wiadmość z linkiem potwierdzającym została wysłana ponownie.</value>
+  </data>
+  <data name="UserConfirmationEmailTitle" xml:space="preserve">
+    <value>Potwierdż adres email</value>
+  </data>
 </root>

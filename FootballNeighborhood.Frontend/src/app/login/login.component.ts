@@ -90,9 +90,11 @@ export class LoginComponent implements OnInit {
 
   openSignUpDialog(): void {
     this.dialog.open(SignUpDialogComponent, {
-      height: '30rem',
+      height: '35rem',
       width: '40rem',
     });
+
+
   }
 
   showForgotPasswordForm(): void {

@@ -3,7 +3,6 @@
     max-width: 70vw;
     user-select: none !important;
     -webkit-user-select: none !important;
-    /* iOS Safari */
   }
   
   .logo {
@@ -19,3 +18,10 @@
   mat-form-field {
     display: block;
   }
+
+.login-footer-style{
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}

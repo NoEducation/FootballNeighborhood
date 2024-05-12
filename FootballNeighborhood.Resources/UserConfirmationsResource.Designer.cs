@@ -70,6 +70,15 @@ namespace FootballNeighborhood.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie udało się wysłać emailu na podanym adres..
+        /// </summary>
+        public static string EmailCannotBeSend_ErrorMessage {
+            get {
+                return ResourceManager.GetString("EmailCannotBeSend_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie poprawny link wygenerowany..
         /// </summary>
         public static string InvalidCode_ErrorMessage {
@@ -93,6 +102,33 @@ namespace FootballNeighborhood.Resources {
         public static string UserAlreadyConfirmed_ErrorMessage {
             get {
                 return ResourceManager.GetString("UserAlreadyConfirmed_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potwierdż adres email.
+        /// </summary>
+        public static string UserConfirmationEmailTitle {
+            get {
+                return ResourceManager.GetString("UserConfirmationEmailTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wiadmość z linkiem potwierdzającym została wysłana ponownie..
+        /// </summary>
+        public static string UserConfirmationHasBeenSendAgain_SuccessMessage {
+            get {
+                return ResourceManager.GetString("UserConfirmationHasBeenSendAgain_SuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Użytkownik posiada aktywne potwierdzenie.
+        /// </summary>
+        public static string UserHasActiveConfirmation_ErrorMessage {
+            get {
+                return ResourceManager.GetString("UserHasActiveConfirmation_ErrorMessage", resourceCulture);
             }
         }
     }

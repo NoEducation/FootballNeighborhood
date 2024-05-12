@@ -8,6 +8,10 @@ public class MatchEntityTypeConfiguration : IEntityTypeConfiguration<Match>
 {
     public void Configure(EntityTypeBuilder<Match> builder)
     {
+        builder.ToTable("Match", "dbo");
+
+        builder.HasKey(x => x.Id);
+
         builder.HasOne(x => x.Owner)
             .WithMany(x => x.Matches)
             .OnDelete(DeleteBehavior.Restrict);

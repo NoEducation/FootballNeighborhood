@@ -33,5 +33,16 @@ public class ConfirmationUserController : BaseController
 
         return result;
     }
+
+    [HttpPost("CreateConfirmation")]
+    public async Task<OperationResult<SuccessMessage>> ConfirmUser([FromBody] int userId)
+    {
+        var result = await DispatchAsync(new CreateConfirmationCommand()
+        {
+            UserId = userId
+        });
+
+        return result;
+    }
 }
 

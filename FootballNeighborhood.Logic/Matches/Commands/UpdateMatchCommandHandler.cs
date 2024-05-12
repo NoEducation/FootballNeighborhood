@@ -52,6 +52,8 @@ public class UpdateMatchCommandHandler : ICommandHandler<UpdateMatchCommand, Suc
         match.MinPlayers = command.MinPlayers;
         match.ShowEmailAddress = command.ShowEmailAddress;
         match.ShowPhoneNumber = command.ShowPhoneNumber;
+
+        match.SetModificationInfo(_userContext.CurrentUserId);
     }
 
     private async Task<OperationResult<SuccessMessage>> Validate(UpdateMatchCommand command)

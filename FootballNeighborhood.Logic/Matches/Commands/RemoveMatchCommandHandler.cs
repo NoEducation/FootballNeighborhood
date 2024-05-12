@@ -18,6 +18,7 @@ namespace FootballNeighborhood.Logic.Matches.Commands
         public async Task<OperationResult<SuccessMessage>> Handle(RemoveMatchCommand request, CancellationToken cancellationToken)
         {
             var result = new OperationResult<SuccessMessage>();
+
             // Tutaj trzeba sprawdzić czy spotkanie sie jeszcze nie rozpoczeło
 
             var match = await _context.Matches

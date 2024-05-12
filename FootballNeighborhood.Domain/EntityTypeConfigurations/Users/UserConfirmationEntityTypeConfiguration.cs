@@ -8,9 +8,12 @@ public class UserConfirmationEntityTypeConfiguration : IEntityTypeConfiguration<
 {
     public void Configure(EntityTypeBuilder<UserConfirmation> builder)
     {
+        builder.ToTable("UserConfirmation", "dbo");
+        builder.HasKey(x => x.Id);
         builder.HasOne(x => x.User)
             .WithMany(x => x.UserConfirmations)
             .OnDelete(DeleteBehavior.Restrict);
+
     }
 }
 

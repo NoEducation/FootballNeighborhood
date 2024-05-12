@@ -11,7 +11,7 @@ public abstract class EntityWithAdditionalUserInfo<T> : Entity<T>
     public int? ModifiedByUserId { get; private set; }
     public DateTimeOffset? ModifiedDate { get; private set; }
 
-    public void SetModificationInfo(int modifiedByUserId, DateTimeOffset? modificationDateTime = null)
+    public void SetModificationInfo(int? modifiedByUserId = null, DateTimeOffset? modificationDateTime = null)
     {
         ModifiedByUserId = modifiedByUserId;
         ModifiedDate = modificationDateTime ?? DateTimeOffset.Now;

@@ -17,12 +17,10 @@ public class EmailService : IEmailService
 
     public async Task SendEmailAsync(MessageInfoDto email)
     {
-        MailMessage mail = new MailMessage();
-
         using var smtpClient = GetSmtpClient();
         using var mailMessage = PrepareMailMessage(email);
 
-        await smtpClient.SendMailAsync(mail);
+        await smtpClient.SendMailAsync(mailMessage);
     }
 
     private SmtpClient GetSmtpClient()
@@ -46,6 +44,7 @@ public class EmailService : IEmailService
 
         mailMessage.Subject = email.Title;
         mailMessage.Body = email.Message;
+        mailMessage.IsBodyHtml = true;
 
         AddAttachments(email, mailMessage);
 

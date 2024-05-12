@@ -8,6 +8,8 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
+        builder.ToTable("User", "dbo");
+        builder.HasKey(x => x.Id);
         builder.HasOne(x => x.Role)
             .WithMany(x => x.Users)
             .OnDelete(DeleteBehavior.Restrict);

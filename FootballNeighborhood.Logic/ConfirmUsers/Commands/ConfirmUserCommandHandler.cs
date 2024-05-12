@@ -1,4 +1,5 @@
 ﻿using FootballNeighborhood.Domain.Dtos.Common;
+using FootballNeighborhood.Domain.Entities.Users;
 using FootballNeighborhood.Domain.Options;
 using FootballNeighborhood.Infrastructure.Cqrs;
 using FootballNeighborhood.Resources;
@@ -45,7 +46,7 @@ public class ConfirmUserCommandHandler : ICommandHandler<ConfirmUserCommand, Suc
         var currentConfirmation = await _context
             .UserConfirmations.SingleAsync(x => x.UserId == request.UserId
                 && x.IsUsed == false
-                && validTill < x.CreatedDate);
+                && validTill < x.AddedDate);
 
         currentConfirmation.Code = WebUtility.UrlDecode(currentConfirmation.Code);
 
@@ -63,10 +64,7 @@ public class ConfirmUserCommandHandler : ICommandHandler<ConfirmUserCommand, Suc
             return result;
         }
 
-        user.IsConfirmed = true;
-
-        currentConfirmation.IsUsed = true;
-        currentConfirmation.UsedDate = DateTime.UtcNow;
+        SetProperites(currentConfirmation, user);
 
         await _context.SaveChangesAsync();
 
@@ -76,5 +74,15 @@ public class ConfirmUserCommandHandler : ICommandHandler<ConfirmUserCommand, Suc
         };
 
         return result;
+    }
+
+    private void SetProperites(UserConfirmation currentConfirmation, User user)
+    {
+        user.IsConfirmed = true;
+        user.SetModificationInfo();
+
+        currentConfirmation.IsUsed = true;
+        currentConfirmation.UsedDate = DateTime.UtcNow;
+        currentConfirmation.SetModificationInfo();
     }
 }

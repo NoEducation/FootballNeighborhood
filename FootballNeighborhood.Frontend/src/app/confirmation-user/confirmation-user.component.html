@@ -1,43 +1,41 @@
-<div fxFill fxLayout="column">
-  <div fxLayout="row" fxFlex>
-    <div fxFill fxFlex="30" fxLayoutAlign="center">
-      <div class="w-75 flex-container">
-        <img src="./assets/images/logo.svg" class="logo-image mt-2" alt="CaseFlowLogo" draggable="false">
-        <div class="mb-auto mt-auto">
-          <div *ngIf="isConfirmationActive">
-            <div *ngIf="verificationInProgress">
-              <h2 class="color-dark-blue text-center"> {{'ConfirmationEmailVerificationIsOngoing' | translate}}</h2>
-            </div>
-            <div *ngIf="success" class="text-center">
-              <h2 class="color-dark-blue">{{'ConfirmationEmailCongratulation' | translate}}</h2>
-              <small class="color-gray">{{'ConfirmationEmailAccountActivation' | translate}}</small>
-            </div>
+<div fxLayout="row" fxFlex>
+  <div fxFill fxLayoutAlign="center">
+    <div class="flex-container">
+      <div class="text-center">
+        <img src="./assets/images/logo.svg" class="logo-image mt-2" alt="Football Neighborhood" draggable="false">
+      </div>
+      <div class="mb-auto mt-auto">
+        <div *ngIf="isConfirmationActive">
+          <div *ngIf="verificationInProgress">
+            <h4 class="color-green-light text-center"> Twoje konto jest weryfikowane...</h4>
           </div>
-          <div *ngIf="!isConfirmationActive && verificationInProgress === false">
-            <h2 class="color-dark-blue text-center">{{'ConfirmationEmailInvalidTime' | translate}}</h2>
-            <button class="w-100" mat-raised-button color="primary" (click)="resendConfirmation()">
-              <mat-icon class="material-symbols-outlined">replay</mat-icon>&nbsp;{{ 'ConfirmationEmailSendAgain' | translate }}
+          <div *ngIf="success" class="text-center">
+            <h4 class="color-green-light ">Twoje konto zostało aktywowane!</h4>
+            <small class="color-green-light">Możesz zalogować się do aplikacji</small>
+          </div>
+        </div>
+        <div *ngIf="!isConfirmationActive && verificationInProgress === false">
+          <h4 class="mt-3 color-green-light  text-center">Link aktywacjny werfikacyjny stracił ważność</h4>
+          <div class="d-flex justify-content-center">
+            <button class="mt-3 text-center" mat-raised-button color="primary" (click)="resendConfirmation()">
+              <mat-icon class="material-symbols-outlined">replay</mat-icon>&nbsp;Wyślij ponownie link aktywacyjny
             </button>
           </div>
         </div>
-        <div *ngIf="success || !verificationInProgress">
-          <small class="color-indigo hover-cyan" (click)="redirectToLoginPage()">
-            <b class="center-vertically justify-content-center"><mat-icon
-                class="scaled-icon">arrow_back</mat-icon>&nbsp;{{ 'ConfirmationEmailBackToLogin' | translate }}</b>
-          </small>
-        </div>
-        <div class="login-footer-style color-gray text-center">
-          <p>
-            <span class="mr-1" (click)="utilityService.openSupportPage()">{{ 'Support' | translate }}</span>
-            <span class="mr-1" (click)="utilityService.openPrivacyPolicyPage()">{{ 'PrivacyPolicy' | translate }}</span>
-            <mat-icon class="scaled-icon" (click)="utilityService.switchLanguage()">translate</mat-icon>
-          </p>
-          <p><small class="user-select-none">Copyright © CaseFlow {{year}}</small></p>
-        </div>
       </div>
-    </div>
-    <div fxFlex="70" fxLayoutAlign="end none" class="background-color-dark-blue border-radius m-05">
-      <img class="border-radius login-image-style" draggable="false" src="./assets/login/login.svg" draggable="false">
+      <div *ngIf="success || !verificationInProgress" class="mt-3 d-flex align-items-center justify-content-center">
+        <button class="color-green-light" mat-icon-button (click)="redirectToLoginPage()">
+          <mat-icon class="color-green-light">arrow_back</mat-icon>
+        </button>
+        <b class="color-green-light">
+
+          &nbsp;Powrót do logowania
+        </b>
+
+      </div>
+      <div class="login-footer-style ">
+        <p><small class="text-center user-select-none color-green-light">Dominik Atrasik Praca Inżynieryjska {{year}}</small></p>
+      </div>
     </div>
   </div>
 </div>

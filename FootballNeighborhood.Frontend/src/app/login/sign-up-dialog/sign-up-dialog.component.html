@@ -12,6 +12,13 @@
     <input matInput type="password" placeholder="Hasło" 
       formControlName="password" required autocomplete="one-time-code">
     <mat-error>
+      Hasło musi posiadać duża liter oraz znak sepcjalny
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="mt-1">
+    <input matInput type="password" placeholder="Powtórz hasło" 
+      formControlName="confirmPassword" required autocomplete="one-time-code">
+    <mat-error>
       Hasła muszą być identyczne
     </mat-error>
   </mat-form-field>

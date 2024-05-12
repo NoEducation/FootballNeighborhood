@@ -8,6 +8,7 @@ public class MatchPlayerEntityTypeConfiguration : IEntityTypeConfiguration<Match
 {
     public void Configure(EntityTypeBuilder<MatchPlayer> builder)
     {
+        builder.ToTable("MatchPlayer", "dbo");
         builder.HasKey(x => x.Id);
     }
 }

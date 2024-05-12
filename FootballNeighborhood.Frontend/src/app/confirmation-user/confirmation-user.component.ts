@@ -32,6 +32,7 @@ export class ConfirmationUserComponent implements OnInit {
       this.userId = params[`userId`];
       this.code = params[`code`];
 
+      debugger;
       this.checkQueryParams();
       this.checkIsActiveConfirmation();
     });
@@ -44,22 +45,18 @@ export class ConfirmationUserComponent implements OnInit {
   resendConfirmation(): void {
     this.userConfirmationService.createConfirmation(this.userId).subscribe({
       next: (response) => {
-        this.translateService.get('ConfirmationHasBeenSent').subscribe(message => {
-          this.notificationService.displayNotification(message, NotificationType.SUCCESS);
-          this.redirectToLoginPage();
-        });
+        this.notificationService.displayNotification(response.result.message, NotificationType.SUCCESS);
       },
       error: (errorResponse) => {
         this.verificationInProgress = false;
       }
-    }
-    );
+    });
   }
 
   private checkIsActiveConfirmation(): void {
     this.userConfirmationService.isConfirmationActive(this.userId).subscribe({
       next: (response) => {
-        this.isConfirmationActive = response.result.IsConfirmationActive;
+        this.isConfirmationActive = response.result.isConfirmationActive;
         if (this.isConfirmationActive) {
           this.confirmUser();
         }

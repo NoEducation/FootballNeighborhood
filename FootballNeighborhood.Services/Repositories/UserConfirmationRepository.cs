@@ -27,7 +27,7 @@ public class UserConfirmationRepository : IUserConfirmationRepository
         var isConfirmationActive = await _context.UserConfirmations
             .AnyAsync(x => x.UserId == userId
                 && x.IsUsed == false
-                && validTill < x.CreatedDate);
+                && validTill < x.AddedDate);
 
         return isConfirmationActive;
     }

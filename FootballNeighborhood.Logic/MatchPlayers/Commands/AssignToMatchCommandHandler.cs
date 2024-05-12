@@ -41,6 +41,7 @@ public class AssignToMatchCommandHandler : ICommandHandler<AssignToMatchCommand,
             UserId = _userContext.CurrentUserId
         };
 
+        matchPlayer.SetAdditionInfo(_userContext.CurrentUserId);
         _context.MatchPlayers.Attach(matchPlayer);
         await _context.SaveChangesAsync(cancellationToken);
 

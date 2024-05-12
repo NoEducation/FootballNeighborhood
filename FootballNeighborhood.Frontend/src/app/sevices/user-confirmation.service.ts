@@ -6,12 +6,11 @@ import { SuccessMessage } from "../models/infrastructure/success-message.model";
 import { Observable } from "rxjs";
 import { CheckUserHasActiveConfirmationResponse } from "../confirmation-user/models/check-user-has-active-confirmation-response.model";
 
-
 @Injectable({
     providedIn: 'root'
 })
 export class UserConfirmationService{
-    url = environment.apiUrl + 'Matches/';
+    url = environment.apiUrl + 'ConfirmationUser/';
 
     constructor(private readonly http : HttpClient){
     }
@@ -26,6 +25,10 @@ export class UserConfirmationService{
           code
         };
     
-        return this.http.post<OperationResult<SuccessMessage>>(`${this.url}/ConfirmUser`, JSON.stringify(body));
+        return this.http.post<OperationResult<SuccessMessage>>(`${this.url}ConfirmUser`, JSON.stringify(body));
+    }
+
+    createConfirmation(userId : number): Observable<OperationResult<SuccessMessage>> {
+        return this.http.post<OperationResult<SuccessMessage>>(`${this.url}CreateConfirmation`, JSON.stringify(userId));
     }
 }

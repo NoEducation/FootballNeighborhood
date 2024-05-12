@@ -70,11 +70,29 @@ namespace FootballNeighborhood.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Użytkownik został zarejestrowany.
+        ///   Looks up a localized string similar to Użytkownik został zarejestrowany. Sprawdż swoją skrzyne email żeby potwierdzić adres email.
         /// </summary>
         public static string UserRegistered_SuccessMessage {
             get {
                 return ResourceManager.GetString("UserRegistered_SuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Użytkownik o podanym loginie lub adresie emali już istnieje w systemie.
+        /// </summary>
+        public static string UserWithEmailOrLoginAlreadyExists_ErrorMessage {
+            get {
+                return ResourceManager.GetString("UserWithEmailOrLoginAlreadyExists_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Użytkownik o podanym identifikatorze nie istnieje w systemie..
+        /// </summary>
+        public static string UserWithIdDoesNotExists_ErrorMessage {
+            get {
+                return ResourceManager.GetString("UserWithIdDoesNotExists_ErrorMessage", resourceCulture);
             }
         }
     }
