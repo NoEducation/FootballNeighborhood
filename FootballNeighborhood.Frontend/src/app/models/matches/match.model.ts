@@ -1,7 +1,7 @@
 import { MatchPlayer } from "./match-player.model";
+import { PlayerMatchStatusEnum } from "./player-match-status-enum";
 
 export class Match{
-
     matchId : number;
     ownerId : number;
     ownerDisplayName : string;
@@ -15,5 +15,6 @@ export class Match{
     minPlayers: number;
     showEmailAddress: boolean;
     showPhoneNumber: boolean;
+    playerMatchStatus: PlayerMatchStatusEnum;
     matchPlayers: Array<MatchPlayer>;
 }

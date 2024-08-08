@@ -58,7 +58,7 @@ public class GetUserAssingedMatchesQueryHandler : IQueryHandler<GetUserAssingedM
         return result;
     }
 
-    private PlayerMatchStatusType? GetPlayerStatus(Match match, int currentUserId)
+    private static PlayerMatchStatusType? GetPlayerStatus(Match match, int currentUserId)
     {
         var currentTime = DateTimeOffset.UtcNow;
         var player = match.MatchPlayers
@@ -72,11 +72,11 @@ public class GetUserAssingedMatchesQueryHandler : IQueryHandler<GetUserAssingedM
         }
         else
         {
-            if (match.EndDateTime < currentTime && match.StartDateTime < currentTime)
+            if (currentTime < match.EndDateTime && currentTime < match.StartDateTime)
                 return PlayerMatchStatusType.Upcoming;
-            if (match.EndDateTime < currentTime && match.StartDateTime > currentTime)
+            if (currentTime < match.EndDateTime && currentTime > match.StartDateTime)
                 return PlayerMatchStatusType.Ongoing;
-            if (match.EndDateTime > currentTime)
+            if (currentTime > match.EndDateTime)
                 return PlayerMatchStatusType.Expired;
         }
 

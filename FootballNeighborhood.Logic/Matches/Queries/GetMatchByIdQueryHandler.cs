@@ -57,7 +57,6 @@ public class GetMatchByIdQueryHandler : IQueryHandler<GetMatchByIdQuery, GetMatc
                 {
                     MatchPlayerId = matchPlayer.Id,
                     UserId = matchPlayer.UserId,
-                    MatchId = matchPlayer.MatchId,
                     PlayerType = matchPlayer.PlayerType,
                     UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
                 }) : new List<MatchPlayerDto>()

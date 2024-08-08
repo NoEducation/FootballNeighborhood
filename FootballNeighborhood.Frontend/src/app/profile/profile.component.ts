@@ -93,14 +93,16 @@ export class ProfileComponent implements OnInit {
 
     let request : UpdateCurrentUserRequest = {
       userId: this.userId,
-      name: this.profileForm.controls['name'].value,
-      surname: this.profileForm.controls['surname'].value,
+      name: this.profileForm.controls['name'].value  ?? ''  ,
+      surname: this.profileForm.controls['surname'].value ?? ''  ,
       email: this.profileForm.controls['email'].value,
-      phone: this.profileForm.controls['phone'].value,
-      birthDate: this.profileForm.controls['birthDate'].value,
-      gender: this.profileForm.controls['gender'].value,
-      description: this.profileForm.controls['description'].value,
+      phone: this.profileForm.controls['phone'].value ?? '',
+      birthDate: this.profileForm.controls['birthDate'].value ?? null,
+      gender: this.profileForm.controls['gender'].value ?? null,
+      description: this.profileForm.controls['description'].value ?? '' ,
     }
+
+    debugger;
 
     this.userService.updateCurrentUser(request).subscribe({
       next: (response) => {

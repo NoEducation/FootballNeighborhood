@@ -43,13 +43,13 @@ public class GetUserOrganizedMatchesQueryHandler : IQueryHandler<GetUserOrganize
                 AllowedPlayers = match.AllowedPlayers,
                 ShowEmailAddress = match.ShowEmailAddress,
                 ShowPhoneNumber = match.ShowPhoneNumber,
-                MatchPlayers = match.MatchPlayers.Select(matchPlayer => new MatchPlayerDto()
+                MatchPlayers = match.MatchPlayers.Any() ? match.MatchPlayers.Select(matchPlayer => new MatchPlayerDto()
                 {
                     MatchPlayerId = matchPlayer.Id,
                     UserId = matchPlayer.UserId,
                     PlayerType = matchPlayer.PlayerType,
                     UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
-                })
+                }) : null
             })
             .ToListAsync(cancellationToken);
 

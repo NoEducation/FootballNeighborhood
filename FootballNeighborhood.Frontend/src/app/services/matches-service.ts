@@ -28,13 +28,13 @@ export class MatchesService{
     return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getAvailableMatchesByCity?city=' + city);
   }
 
-  getUpcomingMatches(userId : number | any = undefined) : Observable<OperationResult<GetAvailableMatchesByCityResponse>> {
+  getUserAssingedMatches(userId : number | any = undefined) : Observable<OperationResult<GetAvailableMatchesByCityResponse>> {
     let params = new HttpParams();
     if(userId){
       params = params.append('userId' ,userId)
     }
 
-    return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getUpcomingMatches', { params});
+    return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getUserAssingedMatches', { params});
   }
 
   getOrganizedMatches(userId : number | any = undefined) : Observable<OperationResult<GetAvailableMatchesByCityResponse>> {
@@ -43,7 +43,7 @@ export class MatchesService{
       params = params.append('userId' ,userId)
     }
 
-    return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getOrganizedMatches', { params});
+    return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getUserOrganizedMatches', { params});
   }
 
   getMatchById(matchId: number) : Observable<OperationResult<GetMatchByIdResponse>>{

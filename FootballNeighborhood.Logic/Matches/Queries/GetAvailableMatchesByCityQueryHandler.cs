@@ -51,7 +51,7 @@ public class
                 MatchPlayers = match!.MatchPlayers!.Select(matchPlayer => new MatchPlayerDto
                 {
                     UserId = matchPlayer.UserId,
-                    MatchId = matchPlayer.MatchId,
+                    MatchPlayerId = matchPlayer.Id,
                     PlayerType = matchPlayer.PlayerType,
                     UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
                 })

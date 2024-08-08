@@ -41,10 +41,10 @@ public class MatchesController : BaseController
 
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = [Permissions.ViewMatches])]
     [HttpGet("getUserOrganizedMatches")]
-    public async Task<OperationResult<GetUserAssingedMatchesQueryResult>> GetUserOrganizedMatches(
+    public async Task<OperationResult<GetUserOrganizedMatchesQueryResult>> GetUserOrganizedMatches(
         CancellationToken cancellationToken, [FromQuery] int? userId = null)
     {
-        //return await DispatchAsync(new GetUpcomingMatchesQuery(userId), cancellationToken);
+        return await DispatchAsync(new GetUserOrganizedMatchesQuery(userId), cancellationToken);
     }
 
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = [Permissions.ViewMatches])]

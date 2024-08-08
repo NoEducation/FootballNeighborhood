@@ -11,12 +11,7 @@
     <None Remove="Scripts\1.CreateUserTable.sql" />
     <None Remove="Scripts\2.CreateMatchTable.sql" />
     <None Remove="Scripts\3.CreateUserConfirmation.sql" />
-    <None Remove="Scripts\4.CreateMatchPlayerReview.sql" />
     <None Remove="Seeds\1.SeedBasicData.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Scripts\4.CreateMatchPlayerReview.sql" />
   </ItemGroup>
 
   <ItemGroup>

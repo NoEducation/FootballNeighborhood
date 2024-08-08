@@ -16,9 +16,9 @@ CREATE TABLE MatchPlayerReview(
 		REFERENCES [User](Id),
 	CONSTRAINT FK_Match_MatchPlayerReview FOREIGN KEY(MatchId) 
 		REFERENCES [Match](Id),
-	CONSTRAINT FK_User_MatchPlayer_AddedByUserId FOREIGN KEY(AddedByUserId) 
+	CONSTRAINT FK_User_MatchPlayerReview_AddedByUserId FOREIGN KEY(AddedByUserId) 
 		REFERENCES [User](Id),
-	CONSTRAINT FK_User_MatchPlayer_ModifiedByUserId FOREIGN KEY(ModifiedByUserId) 
+	CONSTRAINT FK_User_MatchPlayerReview_ModifiedByUserId FOREIGN KEY(ModifiedByUserId) 
 		REFERENCES [User](Id),
 );
 

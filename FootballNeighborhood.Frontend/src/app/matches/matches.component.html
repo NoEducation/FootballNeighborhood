@@ -1,7 +1,10 @@
 <div class="w-100 d-flex flex-column">
   <div class="mt-5 p-5">
     <div class="d-flex justify-content-between">
-      <h3 class="color-green-light">Mecze na które jesteś zapisany</h3>
+      <div class="d-flex">    
+        <mat-icon class="color-green-light">assignment</mat-icon>
+        <h3 class="color-green-light header-label">Mecze na które jesteś zapisany </h3> 
+      </div>
     </div>
     <hr>
     <table mat-table [dataSource]="matches" class="mat-elevation-z8" *ngIf="matches && matches.length > 0; else noData;">
@@ -12,17 +15,14 @@
 
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> Status </th>
-        <!-- <td mat-cell *matCellDef="let match" > 
-          
-          
-          
-          
-          {{getStatus(match)}} </td> -->
           <td  mat-cell *matCellDef="let match"> 
             <div class="d-flex algin">
               <div [ngClass]="{
-                'box-info-success': !matchExpired(match),
-                'box-info-warning': matchExpired(match)
+                'box-info-primary': match.playerMatchStatus == matchPlayerStatusValues.Upcoming,
+                'box-info-seconary': match.playerMatchStatus == matchPlayerStatusValues.Ongoing,
+                'box-info-warning': match.playerMatchStatus == matchPlayerStatusValues.Expired 
+                  || match.playerMatchStatus == matchPlayerStatusValues.Completed,
+                'box-info-success': match.playerMatchStatus == matchPlayerStatusValues.Reviewed
                 }">
                 {{getStatus(match)}}
               </div>
@@ -47,12 +47,12 @@
 
       <ng-container matColumnDef="startTime">
         <th mat-header-cell *matHeaderCellDef> Start </th>
-        <td mat-cell *matCellDef="let match"> {{match.startDateTime | date:'hh:mm'}} </td>
+        <td mat-cell *matCellDef="let match"> {{match.startDateTime | date:'HH:mm'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="endTime">
         <th mat-header-cell *matHeaderCellDef> Koniec </th>
-        <td mat-cell *matCellDef="let match"> {{match.endDateTime | date:'hh:mm'}} </td>
+        <td mat-cell *matCellDef="let match"> {{match.endDateTime | date:'HH:mm'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="addressLine">
@@ -93,7 +93,10 @@
 
     <ng-container *ngIf="isMatchOrganiser">
       <div class="d-flex justify-content-between">
-        <h3 class="color-green-light">Mecze których jesteś organizatorem</h3>
+        <div class="d-flex">
+          <mat-icon class="color-purple header-label">person</mat-icon>
+          <h3 class="color-purple">Mecze których jesteś organizatorem</h3>
+        </div>
         <button (click)="addNewMatch()" mat-raised-button color="accent">Dodaj spotkanie  <mat-icon >add</mat-icon></button>
       </div>
     </ng-container>

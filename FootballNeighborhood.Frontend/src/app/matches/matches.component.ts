@@ -4,6 +4,7 @@ import { MatchesService } from '../services/matches-service';
 import { Router } from '@angular/router';
 import { CurrentUserService } from '../services/current-user.service';
 import * as moment from 'moment';
+import { PlayerMatchStatusEnum } from '../models/matches/player-match-status-enum';
 
 @Component({
   selector: 'app-matches',
@@ -16,8 +17,9 @@ export class MatchesComponent implements OnInit {
 
   matches: Array<Match> = [];
   organizedMatches: Array<Match> = [];
-
   isMatchOrganiser = false;
+
+  readonly matchPlayerStatusValues = PlayerMatchStatusEnum; 
 
   constructor(private readonly matchesService : MatchesService,
     private readonly currentUserService: CurrentUserService,
@@ -27,7 +29,7 @@ export class MatchesComponent implements OnInit {
 
     this.isMatchOrganiser = this.currentUserService.isMatchOrganizer();
 
-    this.matchesService.getUpcomingMatches().subscribe({
+    this.matchesService.getUserAssingedMatches().subscribe({
       next: (response) => {
         this.matches = response.result.matches;
       }
@@ -55,8 +57,13 @@ export class MatchesComponent implements OnInit {
   }
 
   getStatus(match: Match) : string{
-    if(this.matchExpired(match)) return 'Spotkanie po upływanie...';
-    else return 'Nadchodzące spotkanie'
+    switch(match.playerMatchStatus){
+      case PlayerMatchStatusEnum.Upcoming: return "Nadchodzące spotkanie";
+      case PlayerMatchStatusEnum.Ongoing: return "Spotkanie trwa";
+      case PlayerMatchStatusEnum.Expired: return "Spotkanie zakończone ";
+      case PlayerMatchStatusEnum.Completed: return "Spotkanie zakończone przez organizatora";
+      case PlayerMatchStatusEnum.Reviewed: return "Spotkanie ocenione";
+    }
   }
 
   matchExpired(match: Match): boolean{
