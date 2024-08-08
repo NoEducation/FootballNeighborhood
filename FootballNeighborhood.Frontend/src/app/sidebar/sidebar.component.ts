@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LoadingService } from '../sevices/communication/loading.service';
-import { LoadingState } from '../sevices/communication/loadingstate.interface';
+import { LoadingService } from '../services/communication/loading.service';
+import { LoadingState } from '../services/communication/loadingstate.interface';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css'],
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   generalLinks: any[];
@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ) {
     this.generalLinks = [
       {
-        label: 'Spoktania',
+        label: 'Spotkania',
         path: './matches',
         icon: 'groups'
       },
@@ -41,12 +41,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.otherLinks = [
       {
         label: 'Profil',
-        path: './profil',
+        path: './profile',
         icon: 'dashboard'
       },
       {
         label: 'Pomoc',
-        path: './logged-in-support',
+        path: './help-info',
         icon: 'comment'
       },
     ];

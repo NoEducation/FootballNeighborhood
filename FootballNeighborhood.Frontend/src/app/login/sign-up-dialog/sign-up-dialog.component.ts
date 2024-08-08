@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AuthenticationService } from 'src/app/sevices/authentication/authentication.service';
-import { RegisterUserRequest } from '../models/register-user-request.model';
-import { Roles } from 'src/app/models/common/roles.enum';
-import { NotificationService } from 'src/app/sevices/communication/notification.service';
-import { NotificationType } from 'src/app/models/common/notification-type.constraint';
 import { IdAndName } from 'src/app/models/common/id-and-name.model';
-import { RolesEnum } from 'src/app/models/authentication/roles-enum';
+import { NotificationType } from 'src/app/models/common/notification-type.constraint';
+import { RolesEnum } from 'src/app/models/common/roles.enum';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { NotificationService } from 'src/app/services/communication/notification.service';
+import { RegisterUserRequest } from '../models/register-user-request.model';
 
 @Component({
   selector: 'app-sign-up-dialog',

@@ -9,5 +9,7 @@ public class UserConfirmation : EntityWithAdditionalUserInfo
     public DateTime? UsedDate { get; set; }
     public int UserId { get; set; }
     public virtual User? User { get; set; }
+
+
 }
 

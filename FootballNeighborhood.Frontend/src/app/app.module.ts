@@ -43,17 +43,19 @@ import { CustomNotificationComponent } from './common/custom-notification/custom
 import { LoginComponent } from './login/login.component';
 import { SignUpDialogComponent } from './login/sign-up-dialog/sign-up-dialog.component';
 import { MatchesComponent } from './matches/matches.component';
-import { AuthenticationGuardService } from './sevices/authentication/authentication-guard.service';
-import { AuthenticationInterceptorService } from './sevices/authentication/authentication.interceptor.service';
-import { CommunicationInterceptorService } from './sevices/communication/communication.interceptor.service';
+import { AuthenticationGuardService } from './services/authentication/authentication-guard.service';
+import { AuthenticationInterceptorService } from './services/authentication/authentication.interceptor.service';
+import { CommunicationInterceptorService } from './services/communication/communication.interceptor.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
 import { NGX_MAT_DATE_FORMATS, NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { FindMatchesComponent } from './find-matches/find-matches.component';
-import { GetPlayerTypeNamePipe } from './sevices/pipes/get-player-type-name.pipe';
+import { GetPlayerTypeNamePipe } from './services/pipes/get-player-type-name.pipe';
 import { ConfirmationUserComponent } from './confirmation-user/confirmation-user.component';
-
+import { ProfileComponent } from './profile/profile.component';
+import { HelpInfoComponent } from './help-info/help-info.component';
+import{ MAT_DATE_LOCALE } from '@angular/material/core';
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
@@ -71,7 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 @NgModule({
-  declarations: [
+  declarations: [		
     AppComponent,
     SidebarComponent,
     CustomNotificationComponent,
@@ -80,7 +82,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatchesComponent,
     MatchDetailsComponent,
     FindMatchesComponent,  
-    ConfirmationUserComponent
+    ConfirmationUserComponent,
+      ProfileComponent,
+      HelpInfoComponent
    ],
   imports: [
     BrowserModule,
@@ -169,6 +173,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true
     },
     { provide: MAT_DATE_FORMATS, useValue: MAT_DATE_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
     { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
     MatDatepickerModule,
     MatNativeDateModule

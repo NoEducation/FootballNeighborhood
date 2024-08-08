@@ -4,7 +4,6 @@ using FootballNeighborhood.Domain.Entities.Roles;
 using FootballNeighborhood.Domain.Entities.Users;
 using FootballNeighborhood.Domain.EntityTypeConfigurations.Roles;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FootballNeighborhood.Services.Contexts;
 
@@ -26,8 +25,10 @@ public class Context : DbContext
     public DbSet<Role> Roles { get; protected set; }
     public DbSet<Match> Matches { get; protected set; }
     public DbSet<MatchPlayer> MatchPlayers { get; protected set; }
+    public DbSet<MatchPlayerReview> MatchPlayerReviews { get; protected set; }
     public DbSet<Permission> Permissions { get; protected set; }
     public DbSet<UserConfirmation> UserConfirmations { get; protected set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

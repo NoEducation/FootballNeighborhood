@@ -1,4 +1,4 @@
-export enum MatchDetailsViewMode{
+export enum ComponentViewModeEnum{
   View = 1,
   Add = 2,
   Edit = 3

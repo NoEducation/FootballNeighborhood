@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationType } from 'src/app/models/common/notification-type.constraint';
 import { Match } from 'src/app/models/matches/match.model';
-import { AuthenticationService } from 'src/app/sevices/authentication/authentication.service';
-import { NotificationService } from 'src/app/sevices/communication/notification.service';
-import { MatchPlayersService } from 'src/app/sevices/match-players-service';
-import { MatchesService } from 'src/app/sevices/matches-service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { NotificationService } from 'src/app/services/communication/notification.service';
+import { MatchPlayersService } from 'src/app/services/match-players-service';
+import { MatchesService } from 'src/app/services/matches-service';
 import { AssignToMatchRequest } from '../models/assign-to-match-request.model';
 import { CreateUpdateMatchRequestBase } from '../models/create-update-match-request-base.model';
-import { MatchDetailsViewMode } from '../models/match-details-view-mode.enum';
+import { ComponentViewModeEnum } from '../../models/common/component-view-mode.enum';
 import { PlayerType } from 'src/app/models/matches/player-type.enum';
 
 @Component({
@@ -19,8 +19,8 @@ import { PlayerType } from 'src/app/models/matches/player-type.enum';
 })
 export class MatchDetailsComponent implements OnInit {
 
-  // DODAĆ nowy tryb pogldau owner i user
-  viewMode : MatchDetailsViewMode = MatchDetailsViewMode.View;
+  //TODO.DA DODAĆ nowy tryb pogldau owner i user
+  viewMode : ComponentViewModeEnum = ComponentViewModeEnum.View;
   
   matchId : number = 0;
   match: Match;
@@ -29,7 +29,7 @@ export class MatchDetailsComponent implements OnInit {
   alreadyAssigned = false;
 
   readonly displayedColumns: string[] = ['number', 'userDisplayName', 'playerType', 'actions'];
-  readonly viewModeValues = MatchDetailsViewMode;
+  readonly viewModeValues = ComponentViewModeEnum;
   readonly playerTypes = PlayerType;
 
   constructor(private readonly activatedRoute : ActivatedRoute,
@@ -139,7 +139,7 @@ export class MatchDetailsComponent implements OnInit {
       this.loadMatchDetails();
     }
     else{
-      this.viewMode = MatchDetailsViewMode.Add;
+      this.viewMode = ComponentViewModeEnum.Add;
       this.match = new Match();
       this.setTitle();
     }
@@ -149,14 +149,14 @@ export class MatchDetailsComponent implements OnInit {
     this.matchService.getMatchById(this.matchId).subscribe({
       next: (response) =>{
         this.mapResponse(response.result.match);
-        this.viewMode = MatchDetailsViewMode.View;
+        this.viewMode = ComponentViewModeEnum.View;
         this.setTitle();
       }
     });
   }
 
   private setTitle() : void{
-    this.title = this.viewMode == MatchDetailsViewMode.Add ? 'Dodawanie spotkania' : this.match.name;
+    this.title = this.viewMode == ComponentViewModeEnum.Add ? 'Dodawanie spotkania' : this.match.name;
   }
 
   private mapResponse(match : Match) : void{

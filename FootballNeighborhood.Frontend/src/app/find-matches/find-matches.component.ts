@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { MatchesService } from '../sevices/matches-service';
-import { Router } from '@angular/router';
-import { Match } from '../models/matches/match.model';
-import { debounceTime } from 'rxjs';
 import { Location } from '@angular/common';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { UserService } from '../sevices/user.service';
-import { AuthenticationService } from '../sevices/authentication/authentication.service';
-import { CurrentUserService } from '../sevices/current-user.service';
-import { MatchPlayersService } from '../sevices/match-players-service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
 import { AssignToMatchRequest } from '../matches/models/assign-to-match-request.model';
-import { NotificationService } from '../sevices/communication/notification.service';
 import { NotificationType } from '../models/common/notification-type.constraint';
+import { Match } from '../models/matches/match.model';
+import { NotificationService } from '../services/communication/notification.service';
+import { CurrentUserService } from '../services/current-user.service';
+import { MatchPlayersService } from '../services/match-players-service';
+import { MatchesService } from '../services/matches-service';
 
 @Component({
   selector: 'app-find-matches',

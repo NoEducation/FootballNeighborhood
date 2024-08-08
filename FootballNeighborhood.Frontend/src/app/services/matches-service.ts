@@ -37,6 +37,15 @@ export class MatchesService{
     return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getUpcomingMatches', { params});
   }
 
+  getOrganizedMatches(userId : number | any = undefined) : Observable<OperationResult<GetAvailableMatchesByCityResponse>> {
+    let params = new HttpParams();
+    if(userId){
+      params = params.append('userId' ,userId)
+    }
+
+    return this.http.get<OperationResult<GetAvailableMatchesByCityResponse>>(this.url + 'getOrganizedMatches', { params});
+  }
+
   getMatchById(matchId: number) : Observable<OperationResult<GetMatchByIdResponse>>{
     return this.http.get<OperationResult<GetMatchByIdResponse>>(this.url + 'getMatchById?matchId=' + matchId);
   }

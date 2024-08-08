@@ -6,7 +6,7 @@ namespace FootballNeighborhood.Logic.Authentications.Commands;
 
 public record RegisterUserCommand : ICommand<SuccessMessageAndObjectId>
 {
-    public RegisterUserCommand(string email, string login, string password, Roles role)
+    public RegisterUserCommand(string email, string login, string password, RolesEnum role)
     {
         Email = email;
         Login = login;
@@ -17,5 +17,5 @@ public record RegisterUserCommand : ICommand<SuccessMessageAndObjectId>
     public string Email { get; }
     public string Login { get; }
     public string Password { get; }
-    public Roles Role { get; }
+    public RolesEnum Role { get; }
 }

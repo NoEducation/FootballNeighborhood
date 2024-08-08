@@ -10,16 +10,16 @@ namespace FootballNeighborhood.Api.Controllers
     public class MatchPlayersController : BaseController
     {
         public MatchPlayersController(IDispatcher dispatcher) : base(dispatcher)
-        { }
+        {}
 
-        [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.AssignToMatch })]
+        [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = [Permissions.AssignToMatch])]
         [HttpPost("assingToMatch")]
         public async Task<OperationResult<SuccessMessage>> AssingToMatch([FromBody] AssignToMatchCommand command, CancellationToken cancellationToken)
         {
             return await DispatchAsync(command, cancellationToken);
         }
 
-        [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = new object[] { Permissions.UnassignFromMatch })]
+        [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = [Permissions.UnassignFromMatch])]
         [HttpPost("unassignFromMatch")]
         public async Task<OperationResult<SuccessMessage>> UnassignFromMatch(
             [FromBody] WriteOutMatchPlayerFromMatchCommand command,

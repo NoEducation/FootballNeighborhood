@@ -24,7 +24,7 @@ public class UserContext : IUserContext
     }
 
     public int CurrentUserId { get; private set; }
-    public Roles Role { get; private set; }
+    public RolesEnum Role { get; private set; }
 
     public async Task<bool> UserHasPermission(string target)
     {
@@ -58,6 +58,6 @@ public class UserContext : IUserContext
             _httpContextAccessor.HttpContext.User.Claims
                 .Single(claim => claim.Type == ClaimTypes.Role).Value;
 
-        Role = (Roles)int.Parse(role);
+        Role = (RolesEnum)int.Parse(role);
     }
 }

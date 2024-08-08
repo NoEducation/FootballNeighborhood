@@ -84,7 +84,7 @@ public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, S
             Login = request.Login,
             Password = _passwordHasherService.GenerateHash(request.Password),
             Email = request.Email,
-            IsActive = request.Role == Roles.Player,
+            IsActive = request.Role == RolesEnum.Player,
             IsConfirmed = false
         };
 

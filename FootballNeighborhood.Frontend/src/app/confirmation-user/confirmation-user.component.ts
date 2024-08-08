@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationType } from '../models/common/notification-type.constraint';
-import { NotificationService } from '../sevices/communication/notification.service';
-import { UserConfirmationService } from '../sevices/user-confirmation.service';
+import { NotificationService } from '../services/communication/notification.service';
+import { UserConfirmationService } from '../services/user-confirmation.service';
 
 @Component({
   selector: 'app-confirmation-user',
@@ -31,8 +31,6 @@ export class ConfirmationUserComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.userId = params[`userId`];
       this.code = params[`code`];
-
-      debugger;
       this.checkQueryParams();
       this.checkIsActiveConfirmation();
     });

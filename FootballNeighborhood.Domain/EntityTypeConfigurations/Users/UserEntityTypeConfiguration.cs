@@ -13,5 +13,8 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.HasOne(x => x.Role)
             .WithMany(x => x.Users)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Property(x => x.Gender)
+               .HasColumnType("smallint");
     }
 }

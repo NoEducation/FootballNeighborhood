@@ -1,0 +1,102 @@
+
+<div class="w-100 d-flex flex-column mt-5 p-5">
+  <div class="d-flex justify-content-between mb-3">
+    <h3 class="color-green-light">Twój profil</h3>
+    <div>
+      <button (click)="edit()" class="action-button" *ngIf="viewMode == viewModeValues.View" mat-raised-button color="primary"> Edytuj <mat-icon>edit</mat-icon></button> 
+      <button (click)="saveChanges()" class="action-button" *ngIf="viewMode != viewModeValues.View" mat-raised-button color="accent"> Zapisz zmiany <mat-icon>save</mat-icon></button>
+      <button (click)="discardChanges()" class="action-button" *ngIf="viewMode == viewModeValues.Edit" mat-raised-button color="primary"> Odrzuć zmiany <mat-icon>save</mat-icon></button>
+      <button (click)="back()" class="action-button" mat-stroked-button color="primary"> Powrót <mat-icon>keyboard_arrow_left</mat-icon></button>
+    </div>
+  </div>
+  <div class="d-flex" [formGroup]="profileForm">
+    <div class="d-flex flex-column w-50">
+      <mat-form-field>
+        <mat-label class="font-set">Imię</mat-label>
+        <input 
+            formControlName="name"
+            name="name" 
+            matInput
+            >
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="font-set">Nazwisko</mat-label>
+        <input 
+            formControlName="surname"
+            name="name" 
+            matInput
+            >
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="font-set">Email</mat-label>
+        <input 
+            formControlName="email"
+            name="name" 
+            type="email"
+            matInput
+            >
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label class="font-set">Rola</mat-label>
+        <mat-select  formControlName="role" >
+          <ng-container *ngFor="let userRole of  userRoles">
+            <mat-option [value]="userRole.id" >{{userRole.name}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="font-set">Telefon</mat-label>
+        <input 
+            formControlName="phone"
+            name="name" 
+            matInput
+            >
+
+        <mat-error>
+          Proszę podać prawidłowy nr telefonu
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="w-100 font-set" >
+        <mat-label class="font-set">Data urodzenia</mat-label>
+        <input  matInput [ngxMatDatetimePicker]="endDateTimepicker"
+
+          [max]="maxDate"
+        formControlName="birthDate">
+        <mat-datepicker-toggle  matSuffix [for]="$any(endDateTimepicker)"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker  #endDateTimepicker [showSeconds]="false" [hideTime]="true"
+          [color]="'accent'" [enableMeridian]="false">
+        </ngx-mat-datetime-picker>
+      </mat-form-field>
+
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button  *ngFor="let gender of genders" [value]="gender.id">
+          {{gender.name}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field class="mt-3">
+        <mat-label>Opis dodatkowy</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="w-50 d-flex justify-content-end">
+      <img  class="profile-image" src="../../../assets/images/user-svgrepo-com.svg" />
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex">
+    <div class="d-flex w-75 ">
+      TOODO.DA mecze rozegrane
+    </div>
+    <div class="w-25 d-flex justify-content-end">
+      <!--https://www.svgrepo.com/svg/210097/score-->
+      <img  class="score-image" src="../../../assets/images/score-svgrepo-com.svg" />
+    </div>
+  </div>
+</div>

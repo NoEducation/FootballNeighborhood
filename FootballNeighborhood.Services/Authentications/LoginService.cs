@@ -2,6 +2,7 @@
 using FootballNeighborhood.Domain.Dtos.Authentications;
 using FootballNeighborhood.Domain.Dtos.Common;
 using FootballNeighborhood.Domain.Entities.Users;
+using FootballNeighborhood.Domain.Enums.Roles;
 using FootballNeighborhood.Resources;
 using FootballNeighborhood.Services.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +38,7 @@ public class LoginService : ILoginService
 
         var token = _tokenService.GenerateAccessToken(claims);
 
-        result.Result = new UserLoggedDto(token, user.Id);
+        result.Result = new UserLoggedDto(token, user.Id, (RolesEnum)user.RoleId);
 
         return result;
     }

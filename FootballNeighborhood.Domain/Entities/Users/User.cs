@@ -6,7 +6,6 @@ using FootballNeighborhood.Domain.Enums.Users;
 
 namespace FootballNeighborhood.Domain.Entities.Users;
 
-[Table("User")]
 public class User : EntityWithAdditionalUserInfo
 {
     public string Login { get; set; } = default!;
@@ -18,8 +17,8 @@ public class User : EntityWithAdditionalUserInfo
     public bool IsConfirmed { get; set; }
     public string? Name { get; set; }
     public string? Surname { get; set; }
-    public DateTime? BirthDate { get; set; }
-    public Gender? Gender { get; set; }
+    public DateTimeOffset? BirthDate { get; set; }
+    public GenderEnum? Gender { get; set; }
     public string? Description { get; set; }
     public virtual Role? Role { get; set; }
     public virtual ICollection<Match>? Matches { get; set; }

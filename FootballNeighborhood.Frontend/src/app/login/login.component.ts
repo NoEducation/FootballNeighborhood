@@ -4,11 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Router } from '@angular/router';
 import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component';
-import { AuthenticationService } from '../sevices/authentication/authentication.service';
-import { NotificationService } from '../sevices/communication/notification.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
+import { NotificationService } from '../services/communication/notification.service';
 import { UserCredentials } from './models/user-credentials.model';
 import { NotificationType } from '../models/common/notification-type.constraint';
-import { CurrentUserService } from '../sevices/current-user.service';
+import { CurrentUserService } from '../services/current-user.service';
 
 @Component({
   selector: 'app-login',
@@ -48,15 +48,15 @@ export class LoginComponent implements OnInit {
         this.dataLoading = true;
         this.loginForm.disable();
 
-        const reqest : UserCredentials = {
+        const request : UserCredentials = {
           login : this.loginForm.get('username')?.value,
           password: this.loginForm.get('password')?.value
         }
 
-        this.authenticationService.login(reqest).subscribe(
+        this.authenticationService.login(request).subscribe(
         {
           next: (response) => {
-            this.currentUserService.setCurrentUser(response.result.token, response.result.userId);
+            this.currentUserService.setCurrentUser(response.result.token, response.result.userId, response.result.role);
             this.router.navigateByUrl('/matches');
           },
           error : (errorResponse) => {

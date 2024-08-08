@@ -7,29 +7,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FootballNeighborhood.Logic.Matches.Queries;
 
-public class GetUpcomingMatchesQueryHandler : IQueryHandler<GetUpcomingMatchesQuery, GetUpcomingMatchesQueryResult>
+public class GetUserOrganizedMatchesQueryHandler : IQueryHandler<GetUserOrganizedMatchesQuery, GetUserOrganizedMatchesQueryResult>
 {
     private readonly Context _context;
     private readonly IUserContext _userContext;
 
-    public GetUpcomingMatchesQueryHandler(Context context, IUserContext userContext)
+    public GetUserOrganizedMatchesQueryHandler(Context context, IUserContext userContext)
     {
         _context = context;
         _userContext = userContext;
     }
 
-    public async Task<OperationResult<GetUpcomingMatchesQueryResult>> Handle(GetUpcomingMatchesQuery request,
+    public async Task<OperationResult<GetUserOrganizedMatchesQueryResult>> Handle(GetUserOrganizedMatchesQuery request,
         CancellationToken cancellationToken)
     {
-        var result = new OperationResult<GetUpcomingMatchesQueryResult>();
+        var result = new OperationResult<GetUserOrganizedMatchesQueryResult>();
 
         var userId = request.UserId ?? _userContext.CurrentUserId;
 
         var matches = await _context.Matches
             .Include(match => match.MatchPlayers)
             .ThenInclude(matchPLayer => matchPLayer.User)
-            .Where(match => match!.MatchPlayers!
-                .Any(matchPlayer => matchPlayer.UserId == userId))
+            .Where(match => match.OwnerId == request.UserId)
             .Select(match => new MatchDto
             {
                 MatchId = match.Id,
@@ -43,11 +42,18 @@ public class GetUpcomingMatchesQueryHandler : IQueryHandler<GetUpcomingMatchesQu
                 AddressLine = match.AddressLine,
                 AllowedPlayers = match.AllowedPlayers,
                 ShowEmailAddress = match.ShowEmailAddress,
-                ShowPhoneNumber = match.ShowPhoneNumber
+                ShowPhoneNumber = match.ShowPhoneNumber,
+                MatchPlayers = match.MatchPlayers.Select(matchPlayer => new MatchPlayerDto()
+                {
+                    MatchPlayerId = matchPlayer.Id,
+                    UserId = matchPlayer.UserId,
+                    PlayerType = matchPlayer.PlayerType,
+                    UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
+                })
             })
             .ToListAsync(cancellationToken);
 
-        result.Result = new GetUpcomingMatchesQueryResult
+        result.Result = new GetUserOrganizedMatchesQueryResult
         {
             Matches = matches
         };
@@ -55,3 +61,4 @@ public class GetUpcomingMatchesQueryHandler : IQueryHandler<GetUpcomingMatchesQu
         return result;
     }
 }
+

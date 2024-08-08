@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using FootballNeighborhood.Domain.Entities.Common;
+﻿using FootballNeighborhood.Domain.Entities.Common;
 using FootballNeighborhood.Domain.Entities.Users;
 
 namespace FootballNeighborhood.Domain.Entities.Matches;
 
-[Table("Match")]
 public class Match : EntityWithAdditionalUserInfo
 {
     public int OwnerId { get; set; }

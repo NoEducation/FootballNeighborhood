@@ -1,4 +1,6 @@
-﻿namespace FootballNeighborhood.Domain.Dtos.Matches;
+﻿using FootballNeighborhood.Domain.Enums.Match;
+
+namespace FootballNeighborhood.Domain.Dtos.Matches;
 
 public class MatchDto
 {
@@ -10,6 +12,8 @@ public class MatchDto
     public string Name { get; set; } = default!;
 
     public bool IsFinished { get; set; }
+
+    public PlayerMatchStatusType? PlayerMatchStatus { get; set; }
 
     public DateTimeOffset StartDateTime { get; set; }
 

@@ -2,12 +2,13 @@
 
 namespace FootballNeighborhood.Logic.Matches.Queries;
 
-public record GetUpcomingMatchesQuery : IQuery<GetUpcomingMatchesQueryResult>
+public class GetUserOrganizedMatchesQuery : IQuery<GetUserOrganizedMatchesQueryResult>
 {
-    public GetUpcomingMatchesQuery(int? userId)
+    public GetUserOrganizedMatchesQuery(int? userId)
     {
         UserId = userId;
     }
 
     public int? UserId { get; }
 }
+
