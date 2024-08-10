@@ -46,7 +46,14 @@ public class GetUserAssingedMatchesQueryHandler : IQueryHandler<GetUserAssingedM
                 AllowedPlayers = match.AllowedPlayers,
                 ShowEmailAddress = match.ShowEmailAddress,
                 ShowPhoneNumber = match.ShowPhoneNumber,
-                PlayerMatchStatus = GetPlayerStatus(match, userId)
+                PlayerMatchStatus = GetPlayerStatus(match, userId),
+                MatchPlayers = match.MatchPlayers.Any() ? match.MatchPlayers.Select(matchPlayer => new MatchPlayerDto()
+                {
+                    MatchPlayerId = matchPlayer.Id,
+                    UserId = matchPlayer.UserId,
+                    PlayerType = matchPlayer.PlayerType,
+                    UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
+                }) : null
             })
             .ToListAsync(cancellationToken);
 

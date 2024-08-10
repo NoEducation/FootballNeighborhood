@@ -1,5 +1,7 @@
 ﻿using FootballNeighborhood.Domain.Dtos.Common;
 using FootballNeighborhood.Domain.Dtos.Matches;
+using FootballNeighborhood.Domain.Entities.Matches;
+using FootballNeighborhood.Domain.Enums.Match;
 using FootballNeighborhood.Infrastructure.Cqrs;
 using FootballNeighborhood.Services.Contexts;
 using FootballNeighborhood.Services.UserContext;
@@ -28,7 +30,7 @@ public class GetUserOrganizedMatchesQueryHandler : IQueryHandler<GetUserOrganize
         var matches = await _context.Matches
             .Include(match => match.MatchPlayers)
             .ThenInclude(matchPLayer => matchPLayer.User)
-            .Where(match => match.OwnerId == request.UserId)
+            .Where(match => match.OwnerId == userId)
             .Select(match => new MatchDto
             {
                 MatchId = match.Id,
@@ -43,6 +45,7 @@ public class GetUserOrganizedMatchesQueryHandler : IQueryHandler<GetUserOrganize
                 AllowedPlayers = match.AllowedPlayers,
                 ShowEmailAddress = match.ShowEmailAddress,
                 ShowPhoneNumber = match.ShowPhoneNumber,
+                PlayerMatchStatus = GetOganizedStatus(match),
                 MatchPlayers = match.MatchPlayers.Any() ? match.MatchPlayers.Select(matchPlayer => new MatchPlayerDto()
                 {
                     MatchPlayerId = matchPlayer.Id,
@@ -59,6 +62,22 @@ public class GetUserOrganizedMatchesQueryHandler : IQueryHandler<GetUserOrganize
         };
 
         return result;
+    }
+
+    private static PlayerMatchStatusType? GetOganizedStatus(Match match)
+    {
+        var currentTime = DateTimeOffset.UtcNow;
+
+        if (match.IsFinished)
+           return PlayerMatchStatusType.Completed;
+        if (currentTime < match.EndDateTime && currentTime < match.StartDateTime)
+            return PlayerMatchStatusType.Upcoming;
+        if (currentTime < match.EndDateTime && currentTime > match.StartDateTime)
+            return PlayerMatchStatusType.Ongoing;
+        if (currentTime > match.EndDateTime)
+            return PlayerMatchStatusType.Expired;
+       
+        return null;
     }
 }
 

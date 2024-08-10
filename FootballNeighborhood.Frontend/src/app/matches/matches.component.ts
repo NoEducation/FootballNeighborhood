@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { CurrentUserService } from '../services/current-user.service';
 import * as moment from 'moment';
 import { PlayerMatchStatusEnum } from '../models/matches/player-match-status-enum';
+import { MatDialog } from '@angular/material/dialog';
+import { MatchScoreDialogComponent } from './match-score-dialog/match-score-dialog.component';
 
 @Component({
   selector: 'app-matches',
@@ -13,7 +15,8 @@ import { PlayerMatchStatusEnum } from '../models/matches/player-match-status-enu
 })
 export class MatchesComponent implements OnInit {
 
-  readonly displayedColumns: string[] = ['name', 'status', 'ownerDisplayName', 'city', 'date','startTime', 'endTime', 'addressLine', 'actions'];
+  readonly displayedColumns: string[] = [ 'status', 'name', 'ownerDisplayName', 'city', 'date','startTime', 'endTime', 'addressLine', 'actions'];
+  readonly organizedColumns: string[] = [ 'status', 'name', 'date','startTime', 'endTime', 'addressLine', 'playersNumber', 'actions' ];
 
   matches: Array<Match> = [];
   organizedMatches: Array<Match> = [];
@@ -23,10 +26,10 @@ export class MatchesComponent implements OnInit {
 
   constructor(private readonly matchesService : MatchesService,
     private readonly currentUserService: CurrentUserService,
-    private readonly router: Router) { }
+    private readonly router: Router,
+    private readonly dialog: MatDialog) { }
 
   ngOnInit() {
-
     this.isMatchOrganiser = this.currentUserService.isMatchOrganizer();
 
     this.matchesService.getUserAssingedMatches().subscribe({
@@ -56,6 +59,18 @@ export class MatchesComponent implements OnInit {
     this.router.navigateByUrl(`matches/matchDetails/${matchId}`);
   }
 
+  reviewMatch(match: Match) : void{
+    const dialog = this.dialog.open(MatchScoreDialogComponent, {
+      height: '50rem',
+      width: '50rem',
+      data: match
+    });
+  }
+
+  completeMatch() : void{
+
+  }
+
   getStatus(match: Match) : string{
     switch(match.playerMatchStatus){
       case PlayerMatchStatusEnum.Upcoming: return "Nadchodzące spotkanie";
@@ -63,10 +78,18 @@ export class MatchesComponent implements OnInit {
       case PlayerMatchStatusEnum.Expired: return "Spotkanie zakończone ";
       case PlayerMatchStatusEnum.Completed: return "Spotkanie zakończone przez organizatora";
       case PlayerMatchStatusEnum.Reviewed: return "Spotkanie ocenione";
+      default: return '';
     }
   }
 
-  matchExpired(match: Match): boolean{
-    return moment(match.endDateTime) < moment(new Date())
+  getOrganizedStatus(match: Match) : string{
+    switch(match.playerMatchStatus){
+      case PlayerMatchStatusEnum.Upcoming: return "Nadchodzące spotkanie";
+      case PlayerMatchStatusEnum.Ongoing: return "Spotkanie trwa";
+      case PlayerMatchStatusEnum.Expired: return "Spotkanie po upływie";
+      case PlayerMatchStatusEnum.Completed: return "Potwierdzone zakończone pomyślnie";
+      default: return '';
+    }
   }
+
 }

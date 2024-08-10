@@ -12,5 +12,7 @@ public class Permissions
 
         DeleteUser = "DeleteUser",
         SaveUsers = "SaveUsers",
-        ViewUsers = "ViewUsers";
+        ViewUsers = "ViewUsers",
+
+        AddMatchPlayerReview = "AddMatchPlayerReview";
 }

@@ -43,12 +43,15 @@ INSERT INTO [dbo].[RolePermission]
            (@AdminId ,(SELECT Id FROM Permission WHERE [Name] = 'DeleteUser')),
            (@AdminId ,(SELECT Id FROM Permission WHERE [Name] = 'ViewUsers')),
            (@AdminId ,(SELECT Id FROM Permission WHERE [Name] = 'UnassignFromMatch')),
+           (@AdminId ,(SELECT Id FROM Permission WHERE [Name] = 'AddMatchPlayerReview')),
            (@PlayerId ,(SELECT Id FROM Permission WHERE [Name] = 'ViewMatches')),
            (@PlayerId ,(SELECT Id FROM Permission WHERE [Name] = 'AssignToMatch')),
+           (@PlayerId ,(SELECT Id FROM Permission WHERE [Name] = 'AddMatchPlayerReview')),
 		   (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'ViewMatches')),
            (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'AssignToMatch')),
            (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'UnassignFromMatch')),
-		   (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'SaveMatch'));
+		   (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'SaveMatch')),
+           (@MatchOrganizerId ,(SELECT Id FROM Permission WHERE [Name] = 'AddMatchPlayerReview'));
 
 
 INSERT INTO [dbo].[User]

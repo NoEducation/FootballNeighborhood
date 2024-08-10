@@ -10,6 +10,7 @@ public class MatchPlayer : EntityWithAdditionalUserInfo
     public int MatchId { get; set; }
     public PlayerType PlayerType { get; set; }
     public short? MatchReviewScore { get; set; }
+    public string? MatchReviewDescription { get; set; }
     public virtual User? User { get; set; }
     public virtual Match? Match { get; set; }
     public ICollection<MatchPlayerReview> MatchPlayerReviews { get; set; } = default!;

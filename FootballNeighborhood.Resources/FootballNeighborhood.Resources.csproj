@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Update="MatchPlayerReviewsResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MatchPlayerReviewsResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="UserConfirmationsResource.Designer.cs">
       <DependentUpon>UserConfirmationsResource.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -40,6 +45,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="MatchPlayerReviewsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MatchPlayerReviewsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="UserConfirmationsResource.resx">
       <LastGenOutput>UserConfirmationsResource.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -8,26 +8,28 @@
     </div>
     <hr>
     <table mat-table [dataSource]="matches" class="mat-elevation-z8" *ngIf="matches && matches.length > 0; else noData;">
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nazwa </th>
-        <td mat-cell *matCellDef="let match"> {{match.name}} </td>
-      </ng-container>
-
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> Status </th>
           <td  mat-cell *matCellDef="let match"> 
-            <div class="d-flex algin">
-              <div [ngClass]="{
-                'box-info-primary': match.playerMatchStatus == matchPlayerStatusValues.Upcoming,
-                'box-info-seconary': match.playerMatchStatus == matchPlayerStatusValues.Ongoing,
-                'box-info-warning': match.playerMatchStatus == matchPlayerStatusValues.Expired 
-                  || match.playerMatchStatus == matchPlayerStatusValues.Completed,
-                'box-info-success': match.playerMatchStatus == matchPlayerStatusValues.Reviewed
-                }">
-                {{getStatus(match)}}
+            <div [ngClass]="{
+              'box-info-primary': match.playerMatchStatus == matchPlayerStatusValues.Upcoming,
+              'box-info-seconary': match.playerMatchStatus == matchPlayerStatusValues.Ongoing,
+              'box-info-warning': match.playerMatchStatus == matchPlayerStatusValues.Expired 
+                || match.playerMatchStatus == matchPlayerStatusValues.Completed,
+              'box-info-success': match.playerMatchStatus == matchPlayerStatusValues.Reviewed
+              }">
+              <div class="d-flex align-items-center justify-content-center">
+                <span>{{getStatus(match)}} </span>
+                <mat-icon *ngIf="match.playerMatchStatus == matchPlayerStatusValues.Expired" matTooltip="Spotkanie po upływnie terminu. Organizator nie potwierdzil zakończenia spotkania">info</mat-icon>
+                <mat-icon *ngIf="match.playerMatchStatus == matchPlayerStatusValues.Completed" matTooltip="Możesz ocenić spotkanie">info</mat-icon>
               </div>
             </div>
           </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+        <td mat-cell *matCellDef="let match"> {{match.name}} </td>
       </ng-container>
 
       <ng-container matColumnDef="ownerDisplayName">
@@ -65,7 +67,20 @@
         <td mat-cell *matCellDef="let match">
 
           <div class="d-flex mb-2 justify-content-end align-items-center">
+            
             <button 
+              *ngIf="match.playerMatchStatus == matchPlayerStatusValues.Completed 
+                || match.playerMatchStatus ==  matchPlayerStatusValues.Reviewed"
+              (click)="reviewMatch(match)"
+              mat-icon-button
+              color="warning"
+              class="mr-2"
+              matTooltip="Oceń spotkanie">
+              <mat-icon>score</mat-icon>
+            </button>
+            
+            <button 
+              matTooltip="Szczegóły"
               (click)="details(match.matchId)"
               mat-icon-button
               color="primary"
@@ -82,7 +97,7 @@
 
     <ng-template #noData>
         <div class="no-data">
-          <h4 class="color-purple mt-2">Aktualnie nie jesteś zapisany na żadne spotkanie!</h4>
+          <h4 class="color-green mt-2">Aktualnie nie jesteś zapisany na żadne spotkanie!</h4>
           <button (click)="findMatches()" class="mx-2" color="primary"mat-raised-button color="primary">
             <mat-icon>search</mat-icon>{{ 'Wszukaj spotkanie' }}
           </button>
@@ -99,7 +114,89 @@
         </div>
         <button (click)="addNewMatch()" mat-raised-button color="accent">Dodaj spotkanie  <mat-icon >add</mat-icon></button>
       </div>
+
+      <table mat-table [dataSource]="organizedMatches" class="mat-elevation-z8 mt-3" 
+        *ngIf="organizedMatches && organizedMatches.length > 0; else noDataOrganizer;">
+      
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td  mat-cell *matCellDef="let match"> 
+              <div [ngClass]="{
+                'box-info-primary': match.playerMatchStatus == matchPlayerStatusValues.Upcoming,
+                'box-info-seconary': match.playerMatchStatus == matchPlayerStatusValues.Ongoing,
+                'box-info-warning': match.playerMatchStatus == matchPlayerStatusValues.Expired,
+                'box-info-success': match.playerMatchStatus == matchPlayerStatusValues.Completed
+                }">
+                <div class="d-flex align-items-center justify-content-center" >
+                  <span>{{getOrganizedStatus(match)}}</span>
+                  <mat-icon *ngIf="match.playerMatchStatus == matchPlayerStatusValues.Expired" matTooltip="Spotkanie po upływnie terminu. Organizator nie potwierdzil zakończenia spotkania">info</mat-icon>
+                </div>
+              </div>
+            </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+          <td mat-cell *matCellDef="let match"> {{match.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef> Miasto </th>
+          <td mat-cell *matCellDef="let match"> {{match.city}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Data spotkania </th>
+          <td mat-cell *matCellDef="let match"> {{match.startDateTime | date:'dd-MM-yyyy'}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="startTime">
+          <th mat-header-cell *matHeaderCellDef> Start </th>
+          <td mat-cell *matCellDef="let match"> {{match.startDateTime | date:'HH:mm'}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="endTime">
+          <th mat-header-cell *matHeaderCellDef> Koniec </th>
+          <td mat-cell *matCellDef="let match"> {{match.endDateTime | date:'HH:mm'}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="addressLine">
+          <th mat-header-cell *matHeaderCellDef> Adres </th>
+          <td mat-cell *matCellDef="let match"> {{match.addressLine}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="playersNumber">
+          <th mat-header-cell *matHeaderCellDef> Liczba graczny </th>
+          <td mat-cell *matCellDef="let match"> {{match.matchPlayers?.length ?? 0}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let match">
+  
+            <div class="d-flex mb-2 justify-content-end align-items-center">
+              <button 
+                (click)="details(match.matchId)"
+                mat-icon-button
+                color="primary"
+                class="mr-2">
+                <mat-icon>open_in_new</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="organizedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: organizedColumns;"></tr>
+      </table>
+
     </ng-container>
+
+    <ng-template #noDataOrganizer>
+      <div class="no-data">
+        <h4 class="color-purple mt-2">Aktualnie nie jesteś ogranizatorem żadnego spotkania!</h4>
+      </div>
+  </ng-template>
 
   </div>
   <div>

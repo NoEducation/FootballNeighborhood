@@ -11,6 +11,7 @@ import { AssignToMatchRequest } from '../models/assign-to-match-request.model';
 import { CreateUpdateMatchRequestBase } from '../models/create-update-match-request-base.model';
 import { ComponentViewModeEnum } from '../../models/common/component-view-mode.enum';
 import { PlayerType } from 'src/app/models/matches/player-type.enum';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'app-match-details',
@@ -25,8 +26,11 @@ export class MatchDetailsComponent implements OnInit {
   matchId : number = 0;
   match: Match;
   title: string = '';
+  isOrganizer = false;
+
   
   alreadyAssigned = false;
+  isUserOrganizer = false;
 
   readonly displayedColumns: string[] = ['number', 'userDisplayName', 'playerType', 'actions'];
   readonly viewModeValues = ComponentViewModeEnum;
@@ -37,7 +41,8 @@ export class MatchDetailsComponent implements OnInit {
     private readonly notificationService: NotificationService,
     private readonly authenticationService: AuthenticationService,
     private readonly location : Location,
-    private readonly matchPlayersService: MatchPlayersService) { }
+    private readonly matchPlayersService: MatchPlayersService,
+    private readonly currentUserService: CurrentUserService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
@@ -45,7 +50,9 @@ export class MatchDetailsComponent implements OnInit {
         this.matchId = params['id'];
         this.initializate();
       }
-    )
+    );
+
+    this.isOrganizer = this.currentUserService.isMatchOrganizer();
   }
 
   discardChanges() : void {
@@ -67,6 +74,10 @@ export class MatchDetailsComponent implements OnInit {
         this.loadMatchDetails();
       }
     });
+  }
+
+  unsubsriveFromMatch(): void{
+    this.removePlayer(this.currentUserService.getCurrentUserId(), this.matchId);
   }
 
   edit() : void{
@@ -150,6 +161,7 @@ export class MatchDetailsComponent implements OnInit {
       next: (response) =>{
         this.mapResponse(response.result.match);
         this.viewMode = ComponentViewModeEnum.View;
+        this.isUserOrganizer = response.result.match.ownerId == this.currentUserService.getCurrentUserId();
         this.setTitle();
       }
     });

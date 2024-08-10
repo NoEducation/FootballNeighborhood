@@ -24,3 +24,6 @@ CREATE TABLE MatchPlayerReview(
 
 ALTER TABLE MatchPlayer
 	ADD MatchReviewScore SMALLINT NULL;
+
+ALTER TABLE MatchPlayer
+	ADD MatchReviewDescription TEXT NULL;

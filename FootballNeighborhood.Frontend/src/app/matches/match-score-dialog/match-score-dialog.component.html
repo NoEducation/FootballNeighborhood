@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>Spotkanie</h1>
+<form [formGroup]="matchScoreForm" (ngSubmit)="onSubmit()" class="d-flex flex-column match-score-wrapper">
+
+  <hr>
+
+  <h5 class="color-green-light">Ocena spotkania</h5>
+
+  <div *ngIf="isReadonly" class="box-info">
+      Spotkanie zostało już ocenione. 
+  </div>
+
+  <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor" [isReadonly]="isReadonly"
+    (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
+
+  <mat-form-field class="mt-1">
+    <textarea matInput class="color-dark-blue" placeholder="Dodatkowy opis" formControlName="matchReviewDescription">
+    </textarea>
+  </mat-form-field>
+
+  <h4 class="color-green-light">Zawodnicy</h4>
+
+  <div class="d-flex flex-column mt-1 " *ngFor="let playerGroup of players.controls; let i = index">
+      <div class="d-flex w-100 justify-content-between player-box" [formGroup]="playerGroup">
+        <div class="mt-3 ">
+          <mat-icon class="color-purple">person_pin</mat-icon>
+          <strong class="color-purple player-lable">
+            {{name(playerGroup)?.value ?? 'Brak'}}
+          </strong>
+        </div>
+        <div>
+          <app-star-rating [rating]="score(playerGroup).value" [starCount]="starCount" [color]="starColorPrimary"
+            (ratingUpdated)="onRatingChanged($event, i)" [withoutInfo]="true">
+          </app-star-rating>
+        </div>
+      </div>
+  </div>
+
+  <div mat-dialog-actions class="button-spacing">
+    <div class="d-flex flex-row-reverse w-100">
+      <button mat-raised-button *ngIf="!isReadonly" [disabled]="dataLoading || !matchScoreForm.valid" color="primary" >Wyślij oceny</button>
+      <button mat-button mat-dialog-close class="mx-1 background-color-gray" [disabled]="dataLoading"
+        (click)="closeMatchScoreDialog()">Zamknij</button>
+    </div>
+  </div>
+</form>

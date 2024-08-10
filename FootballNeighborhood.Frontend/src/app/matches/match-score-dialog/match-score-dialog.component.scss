@@ -1,0 +1,23 @@
+@import "../../../variables.scss";
+
+
+.match-score-wrapper{
+    padding: 0px 15px 0px 15px;
+    color: white;
+}
+
+
+.player-box{
+    padding: 5px 10px 10px 10px;
+    border-radius: 5px;
+    border:  1px solid grey;
+    background-color: grey;
+}
+
+
+.box-info{
+    background-color: $warning-color;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}

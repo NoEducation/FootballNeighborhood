@@ -56,6 +56,8 @@ import { ConfirmationUserComponent } from './confirmation-user/confirmation-user
 import { ProfileComponent } from './profile/profile.component';
 import { HelpInfoComponent } from './help-info/help-info.component';
 import{ MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatchScoreDialogComponent } from './matches/match-score-dialog/match-score-dialog.component';
+import { StarRatingComponent } from './common/star-rating/star-rating.component';
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
@@ -79,12 +81,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomNotificationComponent,
     LoginComponent,
     SignUpDialogComponent,
+    MatchScoreDialogComponent,
     MatchesComponent,
     MatchDetailsComponent,
     FindMatchesComponent,  
     ConfirmationUserComponent,
-      ProfileComponent,
-      HelpInfoComponent
+    ProfileComponent,
+    HelpInfoComponent,
+    StarRatingComponent
    ],
   imports: [
     BrowserModule,
@@ -148,9 +152,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    SignUpDialogComponent
   ],
-  entryComponents: [],
+  entryComponents: [
+    SignUpDialogComponent,
+    MatchScoreDialogComponent
+  ],
   // declarations: [ 
   //   CurrConvertPipe
   // ],

@@ -1,0 +1,12 @@
+<button mat-icon-button [disabled]="isReadonly" [color]="color" *ngFor="let ratingId of ratingArr;index as i" [id]="'star_'+i" 
+  (click)="onClick(i+1)" [matTooltip]="(ratingId+1).toString()" matTooltipPosition="above">
+  <mat-icon>
+    {{showIcon(i)}}
+  </mat-icon>
+</button>
+<mat-error *ngIf="starCount == null || starCount == 0">
+  Musisz wybrać przynajmiej jedną gwiazdkę.
+</mat-error>
+<p class="color-green-light mt-1 " *ngIf="!withoutInfo">
+   Oceniłeś <span>{{rating}}</span> / <span >{{starCount}}</span>
+</p>
