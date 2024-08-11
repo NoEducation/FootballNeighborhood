@@ -43,6 +43,8 @@ public class GetMatchPlayerReviewsQueryHandler : IQueryHandler<GetMatchPlayerRev
                 )
             }
         };
+
+        return result;
     }
 }
 

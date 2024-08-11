@@ -3,6 +3,7 @@ using FootballNeighborhood.Domain.Dtos.Common;
 using FootballNeighborhood.Infrastructure.Cqrs;
 using FootballNeighborhood.Infrastructure.Filters;
 using FootballNeighborhood.Logic.MatchPlayerReviews.Commands;
+using FootballNeighborhood.Logic.MatchPlayerReviews.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FootballNeighborhood.Api.Controllers;

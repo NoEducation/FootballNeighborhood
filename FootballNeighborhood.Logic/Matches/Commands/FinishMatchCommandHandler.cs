@@ -9,10 +9,10 @@ namespace FootballNeighborhood.Logic.Matches.Commands;
 public class FinishMatchCommandHandler : ICommandHandler<FinishMatchCommand, SuccessMessage>
 {
     private readonly Context _context;
-    private readonly UserContext _userContext;
+    private readonly IUserContext _userContext;
 
     public FinishMatchCommandHandler(Context context,
-        UserContext userContext)
+        IUserContext userContext)
     {
         _context = context;
         _userContext = userContext;
