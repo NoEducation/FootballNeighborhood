@@ -1,5 +1,5 @@
-import { Match } from "src/app/models/matches/match.model";
+import { MatchDetails } from "src/app/models/matches/match-details.model";
 
 export class GetMatchByIdResponse{
-    match: Match;
+    match: MatchDetails;
 }

@@ -1,8 +1,7 @@
 CREATE TABLE MatchPlayerReview(
 	Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	MatchId INT NOT NULL,
-	ReviewedUserId INT NOT NULL,
-	ReviewedByUserId INT NOT NULL,
+	MatchPlayerId INT NOT NULL,
+	ReviewedPlayerId INT NOT NULL,
 	Score SMALLINT NOT NULL,
 	[Description] TEXT NULL,
 	AddedDate DATETIMEOFFSET(7) NOT NULL,
@@ -10,12 +9,10 @@ CREATE TABLE MatchPlayerReview(
 	ModifiedDate DATETIMEOFFSET(7) NULL,
 	ModifiedByUserId INT NULL,
 
-	CONSTRAINT FK_ReviewedUser_MatchPlayerReview FOREIGN KEY(ReviewedUserId) 
-		REFERENCES [User](Id),
-	CONSTRAINT FK_ReviewedByUser_MatchPlayerReview FOREIGN KEY(ReviewedByUserId) 
-		REFERENCES [User](Id),
-	CONSTRAINT FK_Match_MatchPlayerReview FOREIGN KEY(MatchId) 
-		REFERENCES [Match](Id),
+	CONSTRAINT FK_MatchPlayer_MatchPlayerReview FOREIGN KEY(MatchPlayerId) 
+		REFERENCES [MatchPlayer](Id),
+	CONSTRAINT FK_ReviewedPlayer_MatchPlayerReview FOREIGN KEY(ReviewedPlayerId) 
+		REFERENCES [MatchPlayer](Id),
 	CONSTRAINT FK_User_MatchPlayerReview_AddedByUserId FOREIGN KEY(AddedByUserId) 
 		REFERENCES [User](Id),
 	CONSTRAINT FK_User_MatchPlayerReview_ModifiedByUserId FOREIGN KEY(ModifiedByUserId) 
@@ -27,3 +24,6 @@ ALTER TABLE MatchPlayer
 
 ALTER TABLE MatchPlayer
 	ADD MatchReviewDescription TEXT NULL;
+
+ALTER TABLE MatchPlayer
+	ADD MatchOwnerReviewScore SMALLINT NULL;

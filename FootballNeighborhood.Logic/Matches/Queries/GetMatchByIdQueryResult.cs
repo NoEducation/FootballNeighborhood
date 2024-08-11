@@ -4,5 +4,5 @@ namespace FootballNeighborhood.Logic.Matches.Queries;
 
 public class GetMatchByIdQueryResult
 {
-    public MatchDto Match { get; set; } = default!;
+    public MatchDetailsDto Match { get; set; } = default!;
 }

@@ -7,6 +7,9 @@ import * as moment from 'moment';
 import { PlayerMatchStatusEnum } from '../models/matches/player-match-status-enum';
 import { MatDialog } from '@angular/material/dialog';
 import { MatchScoreDialogComponent } from './match-score-dialog/match-score-dialog.component';
+import { MatchScoreDialogData } from './models/match-score-dialog-data.model';
+import { NotificationService } from '../services/communication/notification.service';
+import { NotificationType } from '../models/common/notification-type.constraint';
 
 @Component({
   selector: 'app-matches',
@@ -21,24 +24,29 @@ export class MatchesComponent implements OnInit {
   matches: Array<Match> = [];
   organizedMatches: Array<Match> = [];
   isMatchOrganiser = false;
+  isLoading = false;
 
   readonly matchPlayerStatusValues = PlayerMatchStatusEnum; 
 
   constructor(private readonly matchesService : MatchesService,
     private readonly currentUserService: CurrentUserService,
+    private readonly notificaitonService: NotificationService,
     private readonly router: Router,
     private readonly dialog: MatDialog) { }
 
   ngOnInit() {
     this.isMatchOrganiser = this.currentUserService.isMatchOrganizer();
+    this.loadMatches();
+  }
 
+  private loadMatches() {
     this.matchesService.getUserAssingedMatches().subscribe({
       next: (response) => {
         this.matches = response.result.matches;
       }
     });
 
-    if(this.isMatchOrganiser){
+    if (this.isMatchOrganiser) {
       this.matchesService.getOrganizedMatches().subscribe({
         next: (response) => {
           this.organizedMatches = response.result.matches;
@@ -60,15 +68,42 @@ export class MatchesComponent implements OnInit {
   }
 
   reviewMatch(match: Match) : void{
-    const dialog = this.dialog.open(MatchScoreDialogComponent, {
+    const data : MatchScoreDialogData = {
+      match,
+      reviewByOrganizer : false
+    }
+
+    this.dialog.open(MatchScoreDialogComponent, {
       height: '50rem',
       width: '50rem',
-      data: match
+      data
     });
   }
 
-  completeMatch() : void{
+  completeMatch(match: Match) : void{
+    const isOrganizerPlaying = !!match.matchPlayers
+      .find(player => player.userId == this.currentUserService.getCurrentUserId());
 
+    if(isOrganizerPlaying){
+      const data : MatchScoreDialogData = {
+        match,
+        reviewByOrganizer : true
+      }
+  
+      this.dialog.open(MatchScoreDialogComponent, {
+          height: '50rem',
+          width: '50rem',
+          data,
+      });
+    }
+    else{
+        this.matchesService.finishMatch(match.matchId).subscribe({
+          next: (response) => {
+            this.loadMatches();
+            this.notificaitonService.displayNotification(response.result.message, NotificationType.SUCCESS);
+          }
+        });
+    }
   }
 
   getStatus(match: Match) : string{
@@ -86,8 +121,8 @@ export class MatchesComponent implements OnInit {
     switch(match.playerMatchStatus){
       case PlayerMatchStatusEnum.Upcoming: return "Nadchodzące spotkanie";
       case PlayerMatchStatusEnum.Ongoing: return "Spotkanie trwa";
-      case PlayerMatchStatusEnum.Expired: return "Spotkanie po upływie";
-      case PlayerMatchStatusEnum.Completed: return "Potwierdzone zakończone pomyślnie";
+      case PlayerMatchStatusEnum.Expired: return "Potwierdz zakończenie spotkania";
+      case PlayerMatchStatusEnum.Completed: return "Spotkanie zakończone";
       default: return '';
     }
   }

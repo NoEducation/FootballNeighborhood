@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Spotkanie</h1>
+<h1 mat-dialog-title> {{data.reviewByOrganizer ? 'Zakończenie spotkania' : 'Spotkanie'}}</h1>
 <form [formGroup]="matchScoreForm" (ngSubmit)="onSubmit()" class="d-flex flex-column match-score-wrapper">
 
   <hr>
@@ -9,13 +9,22 @@
       Spotkanie zostało już ocenione. 
   </div>
 
-  <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor" [isReadonly]="isReadonly"
+  <app-star-rating [rating]="this.matchScoreForm.get('matchReviewScore')?.value" [starCount]="starCount" [color]="starColor" [isReadonly]="isReadonly"
     (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
 
   <mat-form-field class="mt-1">
     <textarea matInput class="color-dark-blue" placeholder="Dodatkowy opis" formControlName="matchReviewDescription">
     </textarea>
   </mat-form-field>
+
+  <hr>
+
+  <h4 class="color-green-light">Organizator</h4>
+  <app-star-rating [rating]="this.matchScoreForm.get('matchOwnerReviewScore')?.value" [starCount]="starCount" [color]="starColor" [isReadonly]="isReadonly"
+       (ratingUpdated)="onOwnerRatingChanged($event)">
+  </app-star-rating>
+  
+  <hr>
 
   <h4 class="color-green-light">Zawodnicy</h4>
 
@@ -37,7 +46,9 @@
 
   <div mat-dialog-actions class="button-spacing">
     <div class="d-flex flex-row-reverse w-100">
-      <button mat-raised-button *ngIf="!isReadonly" [disabled]="dataLoading || !matchScoreForm.valid" color="primary" >Wyślij oceny</button>
+      <button mat-raised-button *ngIf="!isReadonly" [disabled]="dataLoading || !matchScoreForm.valid" color="primary">
+        {{data.reviewByOrganizer ? 'Zakończ spotkanie' : ' Wyślij oceny'}}
+        </button>
       <button mat-button mat-dialog-close class="mx-1 background-color-gray" [disabled]="dataLoading"
         (click)="closeMatchScoreDialog()">Zamknij</button>
     </div>

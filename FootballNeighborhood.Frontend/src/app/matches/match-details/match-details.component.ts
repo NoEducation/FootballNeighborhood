@@ -12,6 +12,7 @@ import { CreateUpdateMatchRequestBase } from '../models/create-update-match-requ
 import { ComponentViewModeEnum } from '../../models/common/component-view-mode.enum';
 import { PlayerType } from 'src/app/models/matches/player-type.enum';
 import { CurrentUserService } from 'src/app/services/current-user.service';
+import { MatchDetails } from 'src/app/models/matches/match-details.model';
 
 @Component({
   selector: 'app-match-details',
@@ -24,11 +25,10 @@ export class MatchDetailsComponent implements OnInit {
   viewMode : ComponentViewModeEnum = ComponentViewModeEnum.View;
   
   matchId : number = 0;
-  match: Match;
+  match: MatchDetails;
   title: string = '';
-  isOrganizer = false;
+  userId = 0;
 
-  
   alreadyAssigned = false;
   isUserOrganizer = false;
 
@@ -52,7 +52,8 @@ export class MatchDetailsComponent implements OnInit {
       }
     );
 
-    this.isOrganizer = this.currentUserService.isMatchOrganizer();
+    this.isUserOrganizer = this.currentUserService.isMatchOrganizer();
+    this.userId = this.currentUserService.getCurrentUserId();
   }
 
   discardChanges() : void {
@@ -151,7 +152,7 @@ export class MatchDetailsComponent implements OnInit {
     }
     else{
       this.viewMode = ComponentViewModeEnum.Add;
-      this.match = new Match();
+      this.match = new MatchDetails();
       this.setTitle();
     }
   }
@@ -171,7 +172,7 @@ export class MatchDetailsComponent implements OnInit {
     this.title = this.viewMode == ComponentViewModeEnum.Add ? 'Dodawanie spotkania' : this.match.name;
   }
 
-  private mapResponse(match : Match) : void{
+  private mapResponse(match : MatchDetails) : void{
     this.match = match;
 
     const userId = this.authenticationService.getUserId();

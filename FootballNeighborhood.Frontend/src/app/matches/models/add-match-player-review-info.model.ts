@@ -1,5 +1,5 @@
-export class AddMatchPlayerReview{
-    playerId: number;
+export class AddMatchPlayerReviewInfo{
+    userId: number;
     playerScore: number;
     playerScoreDescription?: string;
 }

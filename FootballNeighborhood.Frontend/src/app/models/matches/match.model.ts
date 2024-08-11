@@ -1,4 +1,5 @@
 import { MatchPlayer } from "./match-player.model";
+import { OwnerInfo } from "./owner-info.model";
 import { PlayerMatchStatusEnum } from "./player-match-status-enum";
 
 export class Match{

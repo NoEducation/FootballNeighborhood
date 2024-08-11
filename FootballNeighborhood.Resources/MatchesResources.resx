@@ -115,4 +115,10 @@
   <data name="MatchDeleted_Message" xml:space="preserve">
     <value>Spotkanie zostało usunięte</value>
   </data>
+  <data name="MatchFinished_SuccessMessage" xml:space="preserve">
+    <value>Spotkanie zostało zakończone</value>
+  </data>
+  <data name="MatchAlreadyFinished_ErrorMessage" xml:space="preserve">
+    <value>Spotkanie jest już zakończone</value>
+  </data>
 </root>

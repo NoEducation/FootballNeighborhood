@@ -11,8 +11,7 @@ namespace FootballNeighborhood.Api.Controllers;
 public class MatchesController : BaseController
 {
     public MatchesController(IDispatcher dispatcher) : base(dispatcher)
-    {
-    }
+    {}
 
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = [Permissions.ViewMatches])]
     [HttpGet("getAllMatches")]
@@ -37,7 +36,6 @@ public class MatchesController : BaseController
     {
         return await DispatchAsync(new GetUserAssingedMatchesQuery(userId), cancellationToken);
     }
-
 
     [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = [Permissions.ViewMatches])]
     [HttpGet("getUserOrganizedMatches")]
@@ -77,5 +75,13 @@ public class MatchesController : BaseController
         CancellationToken cancellationToken)
     {
         return await DispatchAsync(new RemoveMatchCommand(matchId), cancellationToken);
+    }
+
+    [HttpPost("finishMatch")]
+    [TypeFilter(typeof(PermissionAuthorizationAttribute), Arguments = [Permissions.SaveMatch])]
+    public async Task<OperationResult<SuccessMessage>> FinishMatch([FromBody] int matchId,
+        CancellationToken cancellationToken)
+    {
+        return await DispatchAsync(new FinishMatchCommand(matchId), cancellationToken);
     }
 }

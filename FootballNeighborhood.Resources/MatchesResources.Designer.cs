@@ -70,6 +70,15 @@ namespace FootballNeighborhood.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spotkanie jest już zakończone.
+        /// </summary>
+        public static string MatchAlreadyFinished_ErrorMessage {
+            get {
+                return ResourceManager.GetString("MatchAlreadyFinished_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Spotkanie zostało usunięte.
         /// </summary>
         public static string MatchDeleted_Message {
@@ -84,6 +93,15 @@ namespace FootballNeighborhood.Resources {
         public static string MatchDoesNotExists_ErrorMessage {
             get {
                 return ResourceManager.GetString("MatchDoesNotExists_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spotkanie zostało zakończone.
+        /// </summary>
+        public static string MatchFinished_SuccessMessage {
+            get {
+                return ResourceManager.GetString("MatchFinished_SuccessMessage", resourceCulture);
             }
         }
         

@@ -16,14 +16,30 @@
   </div>
   <div class="d-flex">
     <div class="w-50 d-flex flex-column font-set" *ngIf="match">
+
+      <div *ngIf="!isUserOrganizer && viewMode == viewModeValues.View " class="box-info">
+        <h5 class="color-purple">Organizator:</h5>
+        <div class="" >
+          {{match.ownerDisplayName}}
+        </div>
+        <div class="" *ngIf="match.showEmailAddress">
+          Email: {{match.ownerInfo.email}}
+        </div>
+        <div class="" *ngIf="match.showPhoneNumber">
+          Tel: {{match.ownerInfo.phone}}
+        </div>
+      </div>
+
       <mat-form-field>
         <mat-label class="font-set">Nazwa</mat-label>
         <input [disabled]="viewMode == viewModeValues.View" [(ngModel)]="match.name"  name="matchName" matInput required>
       </mat-form-field>
+
       <mat-form-field>
         <mat-label class="font-set">Miasto</mat-label>
         <input [disabled]="viewMode == viewModeValues.View" [(ngModel)]="match.city" name="city" matInput required>
       </mat-form-field>
+
       <mat-form-field>
         <mat-label class="font-set">Dokładny adres</mat-label>
         <input [disabled]="viewMode == viewModeValues.View" [(ngModel)]="match.addressLine" name="addressLine" matInput required/>
@@ -126,12 +142,14 @@
                   (click)="details(player.userId)"
                   mat-icon-button
                   color="primary"
-                  class="mr-2">
+                  class="mr-2"
+                  matTooltip="Szczegóły zawodnika">
                   <mat-icon>open_in_new</mat-icon>
                </button>
 
-                <button *ngIf="" (click)="removePlayer(player.userId, player.matchId)"
-                  mat-icon-button color="warn">
+                <button *ngIf="isUserOrganizer || player.userId == userId" (click)="removePlayer(player.userId, player.matchId)"
+                  mat-icon-button color="warn"
+                  matTooltip="{{player.userId == userId ? 'Wypisz sie z spotkania' : 'Usuń gracza z spotkania'}}">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>

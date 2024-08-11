@@ -18,5 +18,12 @@ public class MatchPlayerReviewsController : BaseController
     {
         return await DispatchAsync(command, cancellationToken);
     }
+
+ 
+    [HttpPost("getMatchPlayerReviews")]
+    public async Task<OperationResult<GetMatchPlayerReviewsQueryResult>> GetMatchPlayerReviews([FromQuery] int matchId, CancellationToken cancellationToken)
+    {
+        return await DispatchAsync(new GetMatchPlayerReviewsQuery(matchId), cancellationToken);
+    }
 }
 

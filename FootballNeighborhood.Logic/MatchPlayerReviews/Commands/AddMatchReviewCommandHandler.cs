@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FootballNeighborhood.Logic.MatchPlayerReviews.Commands;
 
-public class SaveMatchReviewCommandHandler : ICommandHandler<AddMatchReviewCommand, SuccessMessage>
+public class AddMatchReviewCommandHandler : ICommandHandler<AddMatchReviewCommand, SuccessMessage>
 {
     private readonly Context _context;
     private readonly IUserContext _userContext;
 
-    public SaveMatchReviewCommandHandler(Context context,
+    public AddMatchReviewCommandHandler(Context context,
         IUserContext userContext)
     {
         _context = context;
@@ -25,6 +25,7 @@ public class SaveMatchReviewCommandHandler : ICommandHandler<AddMatchReviewComma
         var result = new OperationResult<SuccessMessage>();
 
         var playerMatch = await _context.MatchPlayers
+                .Include(x => x.Match)
                 .SingleOrDefaultAsync(matchPlayer => matchPlayer.MatchId == request.MatchId
                     && matchPlayer.UserId == _userContext.CurrentUserId, cancellationToken);
 
@@ -34,7 +35,12 @@ public class SaveMatchReviewCommandHandler : ICommandHandler<AddMatchReviewComma
             return result;
         }
 
-        await Save(request, playerMatch, cancellationToken);
+        SaveReviews(request, playerMatch, cancellationToken);
+        FinishMatchWhenRequested(request, result, playerMatch);
+
+        if (!result.Success) return result;
+
+        await _context.SaveChangesAsync(cancellationToken);
 
         result.Result = new SuccessMessage()
         {
@@ -44,29 +50,46 @@ public class SaveMatchReviewCommandHandler : ICommandHandler<AddMatchReviewComma
         return result;
     }
 
-    private async Task Save(AddMatchReviewCommand request, MatchPlayer? playerMatch, CancellationToken cancellationToken)
+    private void FinishMatchWhenRequested(AddMatchReviewCommand request, OperationResult<SuccessMessage> result, MatchPlayer? playerMatch)
+    {
+        if (request.FinishMatch)
+        {
+            if (_userContext.CurrentUserId != playerMatch!.Match!.OwnerId)
+            {
+                result.AddError(MatchPlayerReviewsResources.OnlyMatchOwnerCanFinishMatch_ErrorMessage);
+                return;
+            }
+
+            if (playerMatch.Match!.IsFinished)
+            {
+                result.AddError(MatchesResources.MatchAlreadyFinished_ErrorMessage);
+                return;
+            }
+
+            playerMatch.Match.IsFinished = true;
+        }
+    }
+
+    private void SaveReviews(AddMatchReviewCommand request, MatchPlayer? playerMatch, CancellationToken cancellationToken)
     {
         playerMatch!.MatchReviewScore = request.MatchReviewScore;
         playerMatch.MatchReviewDescription = request.MatchReviewDescription;
+        playerMatch.MatchOwnerReviewScore = request.MatchOwnerReviewScore;
 
         if (request?.PlayerReviews is not null)
         {
-            foreach (var review in request.PlayerReviews)
-            {
-                var playerReview = new MatchPlayerReview()
+            var reviews = request.PlayerReviews.Select(review =>
+                new MatchPlayerReview()
                 {
-                    ReviewedUserId = review.PlayerId,
-                    ReviewedByUserId = this._userContext.CurrentUserId,
-                    MatchId = request.MatchId,
+                    ReviewedPlayerId = review.UserId,
+                    MatchPlayerId = playerMatch.Id,
                     Score = review.PlayerScore,
                     Description = review.PlayerScoreDescription
-                };
+                }
+            );
 
-                _context.MatchPlayerReviews.Attach(playerReview);
-            }
+            _context.MatchPlayerReviews.AttachRange(reviews);
         }
-
-        await _context.SaveChangesAsync(cancellationToken);
     }
 }
 

@@ -103,4 +103,7 @@
   <data name="ReviewAdded_SuccessMessage" xml:space="preserve">
     <value>Ocena spotkania została zapisana</value>
   </data>
+  <data name="OnlyMatchOwnerCanFinishMatch_ErrorMessage" xml:space="preserve">
+    <value>Tylko organizator spotkania może potwierdzić jego zakończenie.</value>
+  </data>
 </root>

@@ -17,7 +17,6 @@ export class MatchesService{
   url = environment.apiUrl + 'Matches/';
 
   constructor(private readonly http : HttpClient){
-
   }
 
   getAllMatches() : Observable<OperationResult<GetAllMatchesResponse>> {
@@ -60,6 +59,10 @@ export class MatchesService{
 
   removeMatch(matchId: number) : Observable<OperationResult<SuccessMessage>>{
     return this.http.post<OperationResult<SuccessMessage>>(this.url + 'removeMatch', matchId);
+  }
+
+  finishMatch(matchId: number) : Observable<OperationResult<SuccessMessage>>{
+    return this.http.post<OperationResult<SuccessMessage>>(this.url + 'finishMatch', matchId);
   }
 
 }

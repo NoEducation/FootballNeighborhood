@@ -1,8 +1,10 @@
-import { AddMatchPlayerReview } from "./add-match-player-review.model";
+import { AddMatchPlayerReviewInfo } from "./add-match-player-review-info.model";
 
 export class AddMatchPlayerReviewRequest{
     matchId: number;
     matchReviewScore: number;
+    matchOwnerReviewScore: number;
     matchReviewDescription: string;
-    playerReviews: Array<AddMatchPlayerReview>;
+    finishMatch: boolean;
+    playerReviews: Array<AddMatchPlayerReviewInfo>;
 }

@@ -129,7 +129,7 @@
                 }">
                 <div class="d-flex align-items-center justify-content-center" >
                   <span>{{getOrganizedStatus(match)}}</span>
-                  <mat-icon *ngIf="match.playerMatchStatus == matchPlayerStatusValues.Expired" matTooltip="Spotkanie po upływnie terminu. Organizator nie potwierdzil zakończenia spotkania">info</mat-icon>
+                  <mat-icon *ngIf="match.playerMatchStatus == matchPlayerStatusValues.Expired" matTooltip="Spotkanie po upływnie terminu. Potwierdz zakończenia spotkania">info</mat-icon>
                 </div>
               </div>
             </td>
@@ -175,10 +175,21 @@
           <td mat-cell *matCellDef="let match">
   
             <div class="d-flex mb-2 justify-content-end align-items-center">
+
+              <button  *ngIf="match.playerMatchStatus == matchPlayerStatusValues.Expired"
+                (click)="completeMatch(match)"
+                mat-icon-button
+                matTooltip="Zakończ spotkanie"
+                color="primary"
+                class="mr-2">
+                <mat-icon class="color-purple">check_circle</mat-icon>
+              </button>
+
               <button 
                 (click)="details(match.matchId)"
                 mat-icon-button
                 color="primary"
+                   matTooltip="Szczegóły"
                 class="mr-2">
                 <mat-icon>open_in_new</mat-icon>
               </button>

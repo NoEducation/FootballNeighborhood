@@ -36,7 +36,7 @@ public class GetMatchByIdQueryHandler : IQueryHandler<GetMatchByIdQuery, GetMatc
 
         result.Result = new GetMatchByIdQueryResult
         {
-            Match = new MatchDto
+            Match = new MatchDetailsDto
             {
                 MatchId = match.Id,
                 OwnerId = match.OwnerId,
@@ -59,7 +59,12 @@ public class GetMatchByIdQueryHandler : IQueryHandler<GetMatchByIdQuery, GetMatc
                     UserId = matchPlayer.UserId,
                     PlayerType = matchPlayer.PlayerType,
                     UserDisplayName = matchPlayer!.User!.Name + " " + matchPlayer!.User!.Surname
-                }) : new List<MatchPlayerDto>()
+                }) : new List<MatchPlayerDto>(),
+                OwnerInfo = new MatchOwnerInfoDto()
+                {
+                    Phone  = match.Owner.Phone!,
+                    Email = match.Owner.Email,
+                }
             }
         };
 

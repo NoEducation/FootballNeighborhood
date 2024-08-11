@@ -61,6 +61,15 @@ namespace FootballNeighborhood.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tylko organizator spotkania może potwierdzić jego zakończenie..
+        /// </summary>
+        public static string OnlyMatchOwnerCanFinishMatch_ErrorMessage {
+            get {
+                return ResourceManager.GetString("OnlyMatchOwnerCanFinishMatch_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ocena spotkania została zapisana.
         /// </summary>
         public static string ReviewAdded_SuccessMessage {
